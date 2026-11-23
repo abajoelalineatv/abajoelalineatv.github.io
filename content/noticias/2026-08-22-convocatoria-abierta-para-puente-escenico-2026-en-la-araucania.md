@@ -4,7 +4,7 @@ bajada: "La Organización Cultural En Tránsito invita a artistas a postular a P
 fecha: "2026-08-22T17:39"
 categoria: cultura
 imagen: "/assets/uploads/noticias/convocatoria-abierta-para-puente-escenico-2026-en-la-araucania.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcW5fT9OGDV/"
 ---

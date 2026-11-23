@@ -4,7 +4,7 @@ bajada: "La Fiscalía de La Araucanía confirmó la detención de dos Carabinero
 fecha: "2026-08-28T11:38"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/detienen-a-dos-carabineros-por-la-muerte-de-gabriel-utreras-en-padre-las-casas.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DclsrTNusPy/"
 ---

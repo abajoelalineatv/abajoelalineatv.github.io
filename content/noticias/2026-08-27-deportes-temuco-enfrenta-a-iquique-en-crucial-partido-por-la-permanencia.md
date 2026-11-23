@@ -4,7 +4,7 @@ bajada: "Las albiverdes necesitan ganar para asegurar su lugar en Primera Divisi
 fecha: "2026-08-27T15:05"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-enfrenta-a-iquique-en-crucial-partido-por-la-permanencia.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcjfzwojrjG/"
 ---

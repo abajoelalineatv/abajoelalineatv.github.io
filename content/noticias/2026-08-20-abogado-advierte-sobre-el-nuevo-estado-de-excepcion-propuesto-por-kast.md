@@ -4,7 +4,7 @@ bajada: "La iniciativa busca aumentar la seguridad, pero plantea riesgos para lo
 fecha: "2026-08-20T12:02"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/abogado-advierte-sobre-el-nuevo-estado-de-excepcion-propuesto-por-kast.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcRIrZ_uNGr/"
 ---

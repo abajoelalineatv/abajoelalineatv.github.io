@@ -4,7 +4,7 @@ bajada: "Deportes Antofagasta, Puerto Montt, O’Higgins y Everton avanzan a sem
 fecha: "2026-08-16T20:32"
 categoria: deportes
 imagen: "/assets/uploads/noticias/ascenso-femenino-los-cuatro-semifinalistas-definidos-tras-partidos-intensos.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcHwkSuoI7u/"
 ---

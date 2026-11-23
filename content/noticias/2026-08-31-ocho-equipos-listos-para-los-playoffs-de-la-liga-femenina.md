@@ -4,7 +4,7 @@ bajada: "Colo Colo, Universidad Católica y otros equipos aseguran su lugar en l
 fecha: "2026-08-30T20:31"
 categoria: deportes
 imagen: "/assets/uploads/noticias/ocho-equipos-listos-para-los-playoffs-de-la-liga-femenina.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dcrzkf8oLmA/"
 ---

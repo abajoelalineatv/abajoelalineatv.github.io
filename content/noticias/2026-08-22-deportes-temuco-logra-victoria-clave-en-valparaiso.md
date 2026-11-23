@@ -4,7 +4,7 @@ bajada: "Las albiverdes derrotaron 3-0 a Santiago Wanderers y se afianzan en la 
 fecha: "2026-08-22T12:53"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-logra-victoria-clave-en-valparaiso.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcWY0QEIJY3/"
 ---

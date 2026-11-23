@@ -4,7 +4,7 @@ bajada: "Los cuartos de final del Ascenso Femenino inician con cuatro emocionant
 fecha: "2026-08-06T19:27"
 categoria: deportes
 imagen: "/assets/uploads/noticias/comienza-la-lucha-por-las-semifinales-en-el-ascenso-femenino.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dbt5Id2ICRu/"
 ---

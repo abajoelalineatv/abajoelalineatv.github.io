@@ -4,7 +4,7 @@ bajada: "Alejandra Llaupe Llanquitur denuncia agresiones durante un procedimient
 fecha: "2026-08-14T14:04"
 categoria: pueblo-mapuche
 imagen: "/assets/uploads/noticias/querella-por-lesiones-a-hortalicera-mapuche-en-temuco.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcB6RSoT3uk/"
 ---

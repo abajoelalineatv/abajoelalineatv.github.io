@@ -4,7 +4,7 @@ bajada: "Deportes Temuco perdió 2-1 frente a las Dragonas Celestes y complica s
 fecha: "2026-08-28T13:18"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-cae-ante-dragonas-celestes-en-un-partido-decisivo.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dcl4X0fxC5U/"
 ---

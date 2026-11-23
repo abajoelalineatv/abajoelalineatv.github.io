@@ -4,7 +4,7 @@ bajada: "Deportes Temuco y Recoleta disputarán un crucial partido pendiente por
 fecha: "2026-08-24T16:33"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-y-recoleta-se-enfrentan-en-partido-clave-de-liga-femenina.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dcb7jaQMlxx/"
 ---

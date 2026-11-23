@@ -4,7 +4,7 @@ bajada: "Deportes Temuco se enfrenta a un primer tiempo intenso y cae ante su ri
 fecha: "2026-08-28T11:54"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-pierde-2-1-en-un-primer-tiempo-emocionante.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcluvBkO-88/"
 ---

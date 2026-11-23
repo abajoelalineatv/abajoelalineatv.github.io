@@ -4,7 +4,7 @@ bajada: "El equipo jugará tres partidos en siete días, poniendo a prueba su re
 fecha: "2026-08-23T20:00"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-enfrenta-semana-crucial-en-primera-division.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcZuay1iLIj/"
 ---

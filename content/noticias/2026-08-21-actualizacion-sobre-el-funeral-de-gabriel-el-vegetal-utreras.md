@@ -4,7 +4,7 @@ bajada: "La familia de Gabriel Utreras informa restricciones para su funeral tra
 fecha: "2026-08-21T00:46"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/actualizacion-sobre-el-funeral-de-gabriel-el-vegetal-utreras.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcSgxMtOfGi/"
 ---

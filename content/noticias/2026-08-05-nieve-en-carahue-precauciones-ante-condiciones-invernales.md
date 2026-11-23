@@ -4,7 +4,7 @@ bajada: "Se reporta caída de nieve en Carahue, La Araucanía, generando alertas
 fecha: "2026-08-05T15:57"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/nieve-en-carahue-precauciones-ante-condiciones-invernales.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/Dbq8P1CEh_7/"
 ---

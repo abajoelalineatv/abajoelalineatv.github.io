@@ -4,7 +4,7 @@ bajada: "Fernando Cerimedo, exasesor de Javier Milei, enfrenta cargos por tentat
 fecha: "2026-08-25T10:04"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/detencion-de-exasesor-de-milei-vinculado-a-la-ultraderecha-en-bolivia.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dcdzw60Rn4-/"
 ---

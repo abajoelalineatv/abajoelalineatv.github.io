@@ -4,7 +4,7 @@ bajada: "La mayoría de la población se opone al nuevo Estado de Excepción y l
 fecha: "2026-08-24T08:30"
 categoria: cultura
 imagen: "/assets/uploads/noticias/rechazo-al-estado-de-excepcion-propuesto-por-kast-crece-entre-la-poblacion.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcbEP22xzbi/"
 ---

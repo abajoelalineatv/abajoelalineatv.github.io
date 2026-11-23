@@ -4,7 +4,7 @@ bajada: "La jornada arranca con seis encuentros y una lucha intensa por la perma
 fecha: "2026-08-20T19:46"
 categoria: deportes
 imagen: "/assets/uploads/noticias/inicia-la-fecha-24-de-la-liga-femenina-con-partidos-decisivos.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcR-dUEoBPW/"
 ---

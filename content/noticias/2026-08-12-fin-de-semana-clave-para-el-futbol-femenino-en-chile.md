@@ -4,7 +4,7 @@ bajada: "La Liga Femenina y el Ascenso Femenino se disputan en un fin de semana 
 fecha: "2026-08-12T19:44"
 categoria: deportes
 imagen: "/assets/uploads/noticias/fin-de-semana-clave-para-el-futbol-femenino-en-chile.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Db9X1idoCqG/"
 ---

@@ -4,7 +4,7 @@ bajada: "Diversas organizaciones critican la falta de participación en la consu
 fecha: "2026-08-10T20:38"
 categoria: cultura
 imagen: "/assets/uploads/noticias/organizaciones-rechazan-consulta-del-sag-sobre-registro-de-semillas.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/Db4UKWmOBjr/"
 ---

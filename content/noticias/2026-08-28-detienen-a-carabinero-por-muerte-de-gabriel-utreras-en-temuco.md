@@ -4,7 +4,7 @@ bajada: "La PDI arrestó a un carabinero activo por su presunta participación e
 fecha: "2026-08-27T23:22"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/detienen-a-carabinero-por-muerte-de-gabriel-utreras-en-temuco.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DckYscOOKlv/"
 ---

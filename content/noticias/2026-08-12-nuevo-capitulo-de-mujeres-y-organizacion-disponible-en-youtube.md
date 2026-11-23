@@ -4,7 +4,7 @@ bajada: "Desde el Pueblo lanza un nuevo episodio y convoca a una actividad de fo
 fecha: "2026-08-12T11:50"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/nuevo-capitulo-de-mujeres-y-organizacion-disponible-en-youtube.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/Db8hZLvusSP/"
 ---

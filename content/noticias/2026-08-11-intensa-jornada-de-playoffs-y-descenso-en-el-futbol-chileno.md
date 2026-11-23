@@ -4,7 +4,7 @@ bajada: "Este miércoles se disputan cruciales partidos que definirán playoffs 
 fecha: "2026-08-11T19:00"
 categoria: deportes
 imagen: "/assets/uploads/noticias/intensa-jornada-de-playoffs-y-descenso-en-el-futbol-chileno.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Db6t_Svj0St/"
 ---

@@ -4,7 +4,7 @@ bajada: "Temuco logra su segunda victoria consecutiva y se acerca a Universidad 
 fecha: "2026-08-25T17:41"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/temuco-se-aferra-a-la-permanencia-tras-victoria-sobre-recoleta.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DceoGQPukr0/"
 ---

@@ -4,7 +4,7 @@ bajada: "Deportes Temuco se impone a Recoleta y acumula 14 puntos en su búsqued
 fecha: "2026-08-25T16:57"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-gana-2-1-a-recoleta-y-sigue-en-la-lucha-por-la-permanencia.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcejES1RKgI/"
 ---

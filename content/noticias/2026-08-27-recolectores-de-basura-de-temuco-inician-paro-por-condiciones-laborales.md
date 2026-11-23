@@ -4,7 +4,7 @@ bajada: "Los trabajadores rechazan la reducción de sus ingresos ante el cambio 
 fecha: "2026-08-27T10:45"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/recolectores-de-basura-de-temuco-inician-paro-por-condiciones-laborales.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcjCH_DOtLX/"
 ---

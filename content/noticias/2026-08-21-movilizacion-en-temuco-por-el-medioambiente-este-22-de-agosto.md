@@ -4,7 +4,7 @@ bajada: "Organizaciones locales convocan a una marcha para visibilizar problemá
 fecha: "2026-08-21T17:51"
 categoria: cultura
 imagen: "/assets/uploads/noticias/movilizacion-en-temuco-por-el-medioambiente-este-22-de-agosto.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcUWF4AoNiO/"
 ---

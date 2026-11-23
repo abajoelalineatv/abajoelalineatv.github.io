@@ -4,7 +4,7 @@ bajada: "El Festival Internacional de Cine de Valdivia lanza Taller Sur para pot
 fecha: "2026-08-24T22:20"
 categoria: cultura
 imagen: "/assets/uploads/noticias/abre-convocatoria-taller-sur-en-festival-internacional-de-cine-de-valdivia.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DccjOo7D-cE/"
 ---

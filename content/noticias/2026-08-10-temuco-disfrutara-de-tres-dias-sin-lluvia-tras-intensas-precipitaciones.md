@@ -4,7 +4,7 @@ bajada: "La ciudad tendrá un respiro de lluvias, permitiendo ventilar hogares y
 fecha: "2026-08-10T09:02"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/temuco-disfrutara-de-tres-dias-sin-lluvia-tras-intensas-precipitaciones.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Db3ExIODMy0/"
 ---

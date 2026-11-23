@@ -4,7 +4,7 @@ bajada: "Daniela Ceballos destacó la importancia del triunfo en la lucha por la
 fecha: "2026-08-26T13:34"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-celebra-victoria-clave-ante-recoleta.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcgwnuwEleh/"
 ---

@@ -4,7 +4,7 @@ bajada: "Everton y Deportes Antofagasta aseguran su ascenso a Primera División 
 fecha: "2026-08-30T19:47"
 categoria: deportes
 imagen: "/assets/uploads/noticias/everton-y-deportes-antofagasta-se-enfrentaran-en-la-final-del-ascenso-femenino.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dcruhe5oJel/"
 ---

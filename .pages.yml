@@ -60,7 +60,7 @@ content:
       - name: autor
         label: Autor/a
         type: string
-        default: "Abajo e' la Línea"
+        default: "Abajo'e la Línea"
       - name: destacada
         label: Destacar en portada (nota principal durante una semana)
         type: boolean

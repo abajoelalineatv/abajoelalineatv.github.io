@@ -4,7 +4,7 @@ bajada: "La Liga Femenina dejó resultados impactantes en la Fecha 23, con sorpr
 fecha: "2026-08-16T19:19"
 categoria: deportes
 imagen: "/assets/uploads/noticias/resultados-de-la-fecha-23-de-la-liga-femenina-goleadas-y-sorpresas.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcHoNMBjOeD/"
 ---

@@ -4,7 +4,7 @@ bajada: "Representantes mapuches entregaron una carta al Ministerio de Defensa s
 fecha: "2026-08-31T10:25"
 categoria: pueblo-mapuche
 imagen: "/assets/uploads/noticias/pueblo-mapuche-exige-renuncia-del-ministro-barros-por-declaraciones-sobre-derech.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DctTAWbOZmO/"
 ---

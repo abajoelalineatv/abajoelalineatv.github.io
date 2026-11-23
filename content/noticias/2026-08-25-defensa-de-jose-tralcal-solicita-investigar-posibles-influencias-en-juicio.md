@@ -4,7 +4,7 @@ bajada: "La defensa de Tralcal busca revisar chats que podrían evidenciar tráf
 fecha: "2026-08-25T13:31"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/defensa-de-jose-tralcal-solicita-investigar-posibles-influencias-en-juicio.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DceLfBNDrTp/"
 ---

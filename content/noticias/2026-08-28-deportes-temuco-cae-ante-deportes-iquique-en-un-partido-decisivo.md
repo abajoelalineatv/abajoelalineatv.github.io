@@ -4,7 +4,7 @@ bajada: "Deportes Temuco pierde en casa frente a Deportes Iquique en un encuentr
 fecha: "2026-08-28T18:04"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-cae-ante-deportes-iquique-en-un-partido-decisivo.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcmY6YfCkad/"
 ---

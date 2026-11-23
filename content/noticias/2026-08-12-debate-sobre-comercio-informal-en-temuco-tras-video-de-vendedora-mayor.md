@@ -4,7 +4,7 @@ bajada: "Un video en Temuco reaviva el debate sobre la fiscalización del comerc
 fecha: "2026-08-12T15:47"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/debate-sobre-comercio-informal-en-temuco-tras-video-de-vendedora-mayor.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/Db88sbkAOhY/"
 ---

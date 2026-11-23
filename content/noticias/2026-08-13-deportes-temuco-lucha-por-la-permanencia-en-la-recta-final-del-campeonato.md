@@ -4,7 +4,7 @@ bajada: "Las albiverdes enfrentan cinco partidos decisivos para evitar el descen
 fecha: "2026-08-13T13:00"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-lucha-por-la-permanencia-en-la-recta-final-del-campeonato.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Db_OYBXDa8C/"
 ---

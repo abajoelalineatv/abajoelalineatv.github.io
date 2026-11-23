@@ -4,7 +4,7 @@ bajada: "La futbolista Carla Guerrero anunció su retiro, marcando el fin de una
 fecha: "2026-08-20T20:40"
 categoria: deportes
 imagen: "/assets/uploads/noticias/carla-guerrero-se-despide-del-futbol-femenino-tras-23-anos-de-carrera.jpg"
-autor: "Abajo e' la Línea"
+autor: "Abajo'e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcSEpW8IOi9/"
 ---
