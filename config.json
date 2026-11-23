@@ -1,0 +1,96 @@
+{
+  "sitio": {
+    "nombre": "Abajo e' la Línea TV",
+    "lema": "La tele que se hace desde abajo",
+    "descripcion": "Canal de televisión comunitaria de Temuco. Señal abierta 35.1 y en vivo por internet: noticias locales, deporte, cultura y organizaciones sociales de La Araucanía.",
+    "url": "https://abajoelalinea.cl",
+    "canalTvd": "35.1",
+    "ciudad": "Temuco, Región de La Araucanía",
+    "email": "abajoelalinea.tv@gmail.com",
+    "whatsapp": ""
+  },
+
+  "envivo": {
+    "hls": "https://5ff3d9babae13.streamlock.net/ynfpncxxjg/ynfpncxxjg/playlist.m3u8"
+  },
+
+  "redes": {
+    "youtubeCanalId": "UCDFC2LfQ-hE11jUfX7MfrZQ",
+    "youtube": "https://www.youtube.com/@abajoelalineatv",
+    "instagram": "https://www.instagram.com/abajoelalinea.tv/",
+    "instagramUsuario": "abajoelalinea.tv",
+    "facebook": "https://www.facebook.com/abajoelalinea.tv",
+    "beholdFeedId": ""
+  },
+
+  "categorias": [
+    {
+      "id": "comunidad",
+      "nombre": "Comunidad",
+      "descripcion": "Movilizaciones, audiencias, organizaciones sociales y la actualidad de la región, contada desde los territorios.",
+      "palabras": ["marcha", "movilizaci", "recorte", "vecin", "junta", "dina", "memoria", "derechos", "salud", "comunidad"]
+    },
+    {
+      "id": "deportes",
+      "nombre": "Deportes",
+      "descripcion": "Fútbol femenino, clubes de barrio y el deporte local que no sale en los canales grandes.",
+      "palabras": ["fútbol", "futbol", "liga", "club", "campeonato", "partido", "deportes temuco", "playoff", "⚽", "bmx"]
+    },
+    {
+      "id": "cultura",
+      "nombre": "Cultura",
+      "descripcion": "Música, cine, artes y cultura mapuche. Las voces creativas de La Araucanía y el Wallmapu.",
+      "palabras": ["cine", "festival", "música", "musica", "canción", "cueca", "danza", "mural", "ficvaldivia", "🎬", "teatro", "libro"]
+    },
+    {
+      "id": "pueblo-mapuche",
+      "nombre": "Pueblo Mapuche",
+      "descripcion": "Derechos, territorio, lengua y vida de las comunidades mapuche del Wallmapu.",
+      "palabras": ["mapuche", "wallmapu", "lof", "machi", "lonko", "mapudungun", "indígena", "indigena"]
+    },
+    {
+      "id": "opinion",
+      "nombre": "Opinión",
+      "descripcion": "Columnas y cartas de la comunidad. Las opiniones son responsabilidad de quien las firma.",
+      "palabras": []
+    }
+  ],
+
+  "programas": [
+    {
+      "id": "caseta-femenina",
+      "nombre": "Caseta Femenina",
+      "categoria": "deportes",
+      "descripcion": "Fútbol femenino analizado y conversado: desde los clubes de barrio de Temuco hasta el campeonato profesional.",
+      "palabras": ["caseta"]
+    },
+    {
+      "id": "agora",
+      "nombre": "Ágora",
+      "categoria": "cultura",
+      "descripcion": "Conversaciones con músicos, artistas y gestores culturales que hacen la escena de La Araucanía.",
+      "palabras": ["ágora", "agora"]
+    },
+    {
+      "id": "cine-club",
+      "nombre": "Cine Club",
+      "categoria": "cultura",
+      "descripcion": "Cartelera, estrenos y conversación sobre cine chileno, independiente y latinoamericano.",
+      "palabras": ["cine club"]
+    },
+    {
+      "id": "desde-el-pueblo",
+      "nombre": "Desde el Pueblo",
+      "categoria": "comunidad",
+      "descripcion": "Historias de barrios y organizaciones que transforman su territorio con sus propias manos.",
+      "palabras": ["desde el pueblo"]
+    },
+    {
+      "id": "especiales",
+      "nombre": "Especiales y Transmisiones",
+      "categoria": "cultura",
+      "descripcion": "Festivales, eventos y transmisiones especiales en directo desde distintos puntos de la región.",
+      "palabras": ["en vivo", "kawin", "transmisión especial"]
+    }
+  ]
+}

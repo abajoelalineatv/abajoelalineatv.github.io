@@ -1,0 +1,144 @@
+# Configuración del administrador de notas (Pages CMS · https://app.pagescms.org)
+# El equipo entra con su cuenta de GitHub, escribe la nota y al guardar
+# la web se publica sola en 1-2 minutos.
+
+media:
+  input: assets/uploads
+  output: /assets/uploads
+  extensions: [jpg, jpeg, png, webp, gif]
+
+content:
+  - name: noticias
+    label: Noticias
+    type: collection
+    path: content/noticias
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [titulo, categoria, fecha, destacada]
+      primary: titulo
+      sort: [fecha, titulo]
+      default:
+        sort: fecha
+        order: desc
+      search: [titulo, bajada]
+    fields:
+      - name: titulo
+        label: Título
+        type: string
+        required: true
+      - name: bajada
+        label: Bajada (resumen de 1-2 líneas que aparece bajo el título)
+        type: text
+      - name: categoria
+        label: Sección
+        type: select
+        required: true
+        default: comunidad
+        options:
+          values:
+            - { name: comunidad, label: Comunidad }
+            - { name: deportes, label: Deportes }
+            - { name: cultura, label: Cultura }
+            - { name: pueblo-mapuche, label: Pueblo Mapuche }
+            - { name: opinion, label: Opinión }
+      - name: fecha
+        label: Fecha y hora de publicación
+        type: date
+        required: true
+        options:
+          time: true
+          format: "yyyy-MM-dd'T'HH:mm"
+      - name: imagen
+        label: Foto principal (ideal vertical 4:5, 1080×1350, igual que Instagram)
+        type: image
+      - name: pie_imagen
+        label: Pie de foto
+        type: string
+      - name: video
+        label: Video de YouTube (opcional, pega el link; reemplaza la foto arriba de la nota)
+        type: string
+      - name: autor
+        label: Autor/a
+        type: string
+        default: "Abajo e' la Línea"
+      - name: destacada
+        label: Destacar en portada (nota principal durante una semana)
+        type: boolean
+        default: false
+      - name: borrador
+        label: Borrador (no se publica todavía)
+        type: boolean
+        default: false
+      - name: fuente
+        label: Fuente / link original (opcional)
+        type: string
+      - name: body
+        label: Texto de la nota
+        type: rich-text
+
+  - name: textos
+    label: Textos del sitio
+    type: file
+    path: content/textos.json
+    format: json
+    fields:
+      - name: lema
+        label: Lema (título grande bajo la señal en vivo)
+        type: string
+      - name: etiqueta_envivo
+        label: Etiqueta sobre el lema
+        type: string
+      - name: descripcion
+        label: Descripción del canal (aparece en Google y en "Quiénes somos")
+        type: text
+      - name: canal_tvd
+        label: Canal TV abierta
+        type: string
+      - name: email
+        label: Correo de contacto
+        type: string
+      - name: whatsapp
+        label: WhatsApp para "Envía tu nota" (ej. 56912345678; vacío = usa el correo)
+        type: string
+      - name: sintonia_titulo
+        label: Título de la sección "Cómo vernos"
+        type: string
+      - name: sintonia
+        label: Formas de vernos (tarjetas)
+        type: object
+        list: true
+        fields:
+          - { name: destacado, label: "Texto grande (ej. 35.1)", type: string }
+          - { name: titulo, label: Título, type: string }
+          - { name: texto, label: Texto, type: text }
+      - name: envia_etiqueta
+        label: '"Envía tu nota" · etiqueta'
+        type: string
+      - name: envia_titulo
+        label: '"Envía tu nota" · título'
+        type: string
+      - name: envia_texto
+        label: '"Envía tu nota" · texto'
+        type: text
+      - name: envia_boton
+        label: '"Envía tu nota" · botón'
+        type: string
+      - name: instagram_texto
+        label: Texto de la invitación a Instagram
+        type: text
+      - name: nosotros_titulo
+        label: Quiénes somos · título
+        type: string
+      - name: nosotros_texto
+        label: Quiénes somos · texto
+        type: rich-text
+      - name: nosotros_datos
+        label: Quiénes somos · datos al costado
+        type: object
+        list: true
+        fields:
+          - { name: etiqueta, label: Etiqueta, type: string }
+          - { name: valor, label: Valor, type: string }
+      - name: pie_texto
+        label: Texto del pie de página
+        type: text

@@ -1,0 +1,40 @@
+{
+  "lema": "La tele que se hace desde abajo",
+  "etiqueta_envivo": "Señal en vivo · 24 horas",
+  "descripcion": "Canal de televisión comunitaria de Temuco. Señal abierta 35.1 y en vivo por internet: noticias locales, deporte, cultura y organizaciones sociales de La Araucanía.",
+  "canal_tvd": "35.1",
+  "email": "abajoelalinea.tv@gmail.com",
+  "whatsapp": "",
+  "sintonia_titulo": "Cómo vernos",
+  "sintonia": [
+    {
+      "destacado": "35.1",
+      "titulo": "TV abierta · 24 horas",
+      "texto": "Con un televisor con sello TVD o un decodificador digital, busca el canal 35.1 en Temuco y alrededores. Transmitimos todo el día."
+    },
+    {
+      "destacado": "En vivo",
+      "titulo": "Por internet",
+      "texto": "La misma señal, en vivo en la portada de esta web. Funciona en computador, celular y Smart TV."
+    },
+    {
+      "destacado": "@",
+      "titulo": "Escríbenos",
+      "texto": "¿Dudas con la señal o quieres mandarnos una nota desde tu territorio? Escribe a abajoelalinea.tv@gmail.com."
+    }
+  ],
+  "envia_etiqueta": "Periodismo desde el territorio",
+  "envia_titulo": "¿Pasa algo en tu barrio?",
+  "envia_texto": "Mándanos tu nota, denuncia o actividad. Las organizaciones y vecinos son nuestras principales fuentes.",
+  "envia_boton": "Envía tu nota",
+  "instagram_texto": "Notas del día, coberturas y lo que pasa en el territorio. Síguenos en Instagram.",
+  "nosotros_titulo": "Un canal hecho desde abajo",
+  "nosotros_texto": "<p><strong>Abajo e' la Línea TV</strong> es un canal de televisión comunitaria que transmite en señal abierta desde Temuco.</p>\n<p>Nacimos para dar voz a las organizaciones sociales, culturales y territoriales que rara vez aparecen en la pantalla de los canales tradicionales. Cubrimos deporte local, movilizaciones, cultura mapuche y la vida cotidiana del Wallmapu desde una mirada propia.</p>\n<p>Somos parte de la red de televisión comunitaria digital de Chile: proyectos autogestionados, con concesión del CNTV, que defienden el derecho de los barrios y territorios a contarse a sí mismos.</p>",
+  "nosotros_datos": [
+    { "etiqueta": "Sede", "valor": "Temuco, Región de La Araucanía" },
+    { "etiqueta": "Señal", "valor": "TV digital abierta · canal 35.1 · 24 horas" },
+    { "etiqueta": "Enfoque", "valor": "Noticias locales, deporte, cultura y organizaciones sociales" },
+    { "etiqueta": "Modelo", "valor": "Medio autogestionado y comunitario" }
+  ],
+  "pie_texto": "Televisión comunitaria desde Temuco, Región de La Araucanía. Señal abierta TVD 35.1 y en vivo por internet."
+}

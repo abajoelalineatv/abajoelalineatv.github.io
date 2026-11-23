@@ -1,0 +1,54 @@
+# Publica la web en GitHub Pages (gratis).
+# Corre: cada vez que se guarda una nota o un cambio, y cada 2 horas
+# para traer los videos nuevos de YouTube.
+name: Publicar web
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 */2 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Traer videos nuevos de YouTube
+        run: node scripts/update-videos.mjs || echo "YouTube no respondió; se publica con los videos que ya hay."
+      - name: Guardar videos nuevos
+        run: |
+          if ! git diff --quiet data/videos.json; then
+            git config user.name "actualizador-web"
+            git config user.email "actions@users.noreply.github.com"
+            git add data/videos.json
+            git commit -m "Videos nuevos de YouTube"
+            git push
+          fi
+
+      - run: node scripts/build.mjs
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deploy
+        uses: actions/deploy-pages@v4
