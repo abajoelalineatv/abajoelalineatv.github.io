@@ -394,7 +394,7 @@ const add = (archivo, opts) => { paginas[archivo] = pagina({ ...opts, cuerpo: op
     </div>
     <aside class="hero-side">
       <h2 class="side-title">Últimas noticias</h2>
-      <div class="side-list">${notas.slice(0, 6).map(nrow).join('')}</div>
+      <div class="side-list">${notas.slice(0, 5).map(nrow).join('')}</div>
       <a class="more" href="/noticias">Ver todas las noticias</a>
     </aside>
   </div>

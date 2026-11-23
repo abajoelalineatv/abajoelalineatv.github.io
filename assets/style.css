@@ -64,7 +64,8 @@ a.btn:active, .live-btn:active, .send-btn:active, .chip:active, .copy:active, .r
 .menu-btn[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
 
 /* ---------- hero / live ---------- */
-.hero { padding: 28px 0 36px; background:
+.front-block { padding-top: 32px; }
+.hero { padding: 24px 0 22px; background:
   radial-gradient(1200px 500px at 20% -10%, rgba(227, 20, 28, .22), transparent 60%),
   radial-gradient(900px 400px at 100% 0, rgba(79, 157, 45, .13), transparent 60%),
   radial-gradient(rgba(255, 255, 255, .045) 1px, transparent 1.4px) 0 0 / 20px 20px; }
@@ -211,8 +212,10 @@ img.fg.vert { width: auto; aspect-ratio: 9 / 16; margin: 0 auto; object-fit: cov
 .player:has(.player-frame.vertical) { width: auto; }
 
 /* ---------- lema como imagen ---------- */
-.lema-img { margin: 18px 0 0; }
-.lema-img img { width: 100%; height: auto; display: block; filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .45)); }
+/* Tamaño acotado para que la señal en vivo y el lema quepan en la primera pantalla */
+.lema-img { margin: 14px 0 0; }
+.lema-img img { width: min(100%, 600px, 66vh); height: auto; display: block; filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .45)); }
+@media (max-width: 720px) { .lema-img { margin: 12px 16px 0; } .lema-img img { width: 100%; } }
 
 /* ---------- publicidad ---------- */
 .ad-wrap { padding-top: 28px; }
