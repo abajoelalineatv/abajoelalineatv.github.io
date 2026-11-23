@@ -1,0 +1,76 @@
+[
+  {
+    "id": "comunidad",
+    "nombre": "Comunidad",
+    "descripcion": "Movilizaciones, audiencias, organizaciones sociales y la actualidad de la región, contada desde los territorios.",
+    "palabras": [
+      "marcha",
+      "movilizaci",
+      "recorte",
+      "vecin",
+      "junta",
+      "dina",
+      "memoria",
+      "derechos",
+      "salud",
+      "comunidad"
+    ]
+  },
+  {
+    "id": "deportes",
+    "nombre": "Deportes",
+    "descripcion": "Fútbol femenino, clubes de barrio y el deporte local que no sale en los canales grandes.",
+    "palabras": [
+      "fútbol",
+      "futbol",
+      "liga",
+      "club",
+      "campeonato",
+      "partido",
+      "deportes temuco",
+      "playoff",
+      "⚽",
+      "bmx"
+    ]
+  },
+  {
+    "id": "cultura",
+    "nombre": "Cultura",
+    "descripcion": "Música, cine, artes y cultura mapuche. Las voces creativas de La Araucanía y el Wallmapu.",
+    "palabras": [
+      "cine",
+      "festival",
+      "música",
+      "musica",
+      "canción",
+      "cueca",
+      "danza",
+      "mural",
+      "ficvaldivia",
+      "🎬",
+      "teatro",
+      "libro"
+    ]
+  },
+  {
+    "id": "pueblo-mapuche",
+    "nombre": "Pueblo Mapuche",
+    "descripcion": "Derechos, territorio, lengua y vida de las comunidades mapuche del Wallmapu.",
+    "palabras": [
+      "mapuche",
+      "wallmapu",
+      "lof",
+      "machi",
+      "lonko",
+      "mapudungun",
+      "indígena",
+      "indigena"
+    ]
+  },
+  {
+    "id": "opinion",
+    "nombre": "Opinión",
+    "descripcion": "Columnas y cartas de la comunidad. Las opiniones son responsabilidad de quien las firma.",
+    "palabras": []
+  }
+]

@@ -20,6 +20,17 @@ Para dar acceso a otra persona del equipo: necesita una cuenta de GitHub (gratis
 
 Las secciones de noticias son las mismas de la web: Comunidad, Deportes, Cultura, Pueblo Mapuche y Opinión. Para agregar o cambiar una sección, edita `categorias` en `config.json` y la lista de `categoria` en `.pages.yml`.
 
+## El panel (Pages CMS), por grupos
+- **Publicaciones**
+  - **Noticias y columnas:** para las columnas de opinión, elige la sección "Opinión" y completa autor/a, cargo y foto.
+  - **Publicidad:** cada aviso lleva imagen, link, dónde se muestra, fechas y la opción de activarlo o pausarlo.
+- **El canal**
+  - **Programas:** nombre, sección, descripción y palabras que identifican sus videos.
+  - **Secciones:** nombre, descripción y palabras para ubicar videos.
+- **Textos del sitio:** imagen del lema, textos, "Cómo vernos", "Quiénes somos", contacto y pie de página.
+
+Para agregar personas al equipo sin cuenta de GitHub: en Pages CMS → Settings → Collaborators, invítalas por correo. Pueden editar contenido, pero no la configuración.
+
 ## Editar los textos del sitio (administrador)
 En Pages CMS → **Textos del sitio** se pueden cambiar sin tocar código:
 - el lema y la descripción del canal

@@ -12,9 +12,18 @@ const root = new URL('..', import.meta.url);
 const out = new URL('public/', root);
 const cfg = JSON.parse(await readFile(new URL('config.json', root), 'utf8'));
 const raw = JSON.parse(await readFile(new URL('data/videos.json', root), 'utf8'));
+// Secciones, programas y publicidad se editan desde el administrador (carpeta content/)
+const leerJSON = async (archivo) => JSON.parse((await readFile(new URL(archivo, root), 'utf8')).replace(/^﻿/, ''));
+const leerLista = async (archivo) => {
+  try { const l = await leerJSON(archivo); return Array.isArray(l) ? l : []; }
+  catch (e) { if (e.code !== 'ENOENT') console.warn(`⚠ No se pudo leer ${archivo}: ${e.message}`); return []; }
+};
+cfg.categorias = (await leerLista('content/secciones.json')).filter((c) => c.id && c.nombre).map((c) => ({ palabras: [], ...c, palabras: (c.palabras || []).filter(Boolean) }));
+cfg.programas = (await leerLista('content/programas.json')).filter((p) => p.id && p.nombre).map((p) => ({ ...p, palabras: (p.palabras || []).filter(Boolean) }));
+const anuncios = await leerLista('content/publicidad.json');
 // Textos editables desde el administrador ("Textos del sitio") → content/textos.json
 let T = {};
-try { T = JSON.parse(await readFile(new URL('content/textos.json', root), 'utf8')); } catch { /* usa config.json */ }
+try { T = await leerJSON('content/textos.json'); } catch (e) { console.warn(`⚠ No se pudo leer content/textos.json: ${e.message}`); }
 const S = {
   ...cfg.sitio,
   ...(T.lema ? { lema: T.lema } : {}),
@@ -108,6 +117,8 @@ for (const f of archivos) {
     proporcion,
     pie: d.pie_imagen || '',
     autor: d.autor || S.nombre,
+    autorFoto: d.autor_foto || '',
+    autorCargo: d.autor_cargo || '',
     destacada: !!d.destacada,
     video: ytId(d.video),
     fuente: d.fuente || '',
@@ -118,7 +129,10 @@ for (const f of archivos) {
 notas.sort((a, b) => b.fecha - a.fecha);
 const notCat = (id) => notas.filter((n) => n.categoria === id);
 // Portada: la última nota marcada como destacada (si es reciente) o la más nueva
-const lead = notas.find((n) => n.destacada && n.fecha > (notas[0]?.fecha || 0) - 7 * 864e5) || notas[0];
+// Las columnas de opinión no compiten por la portada de noticias: tienen su propio bloque.
+const OPINION = 'opinion';
+const informativas = notas.filter((n) => n.categoria !== OPINION);
+const lead = informativas.find((n) => n.destacada && n.fecha > (informativas[0]?.fecha || 0) - 7 * 864e5) || informativas[0];
 
 // ---------- piezas ----------
 const etiqueta = (v) => v.programa ? progs[v.programa].nombre : catNombre(v.categoria);
@@ -296,6 +310,31 @@ ${hls ? `<script>window.STREAM_URL=${JSON.stringify(cfg.envivo.hls)};</script>
 `;
 }
 
+// ---------- publicidad ----------
+// Espacios: portada-superior, portada-media, secciones, nota-lateral, nota-inferior.
+// Si hay varios avisos activos en el mismo espacio, se muestra uno al azar en cada visita.
+const hoy = new Date();
+const vigente = (a) => a.activo !== false && a.imagen && (!a.desde || aFecha(a.desde) <= hoy) && (!a.hasta || aFecha(String(a.hasta).slice(0, 10) + 'T23:59') >= hoy);
+const espacio = (nombre) => {
+  const lista = anuncios.filter((a) => vigente(a) && (a.ubicacion === nombre || (Array.isArray(a.ubicacion) && a.ubicacion.includes(nombre))));
+  if (!lista.length) return '';
+  return `<aside class="ad ad-${nombre}" aria-label="Publicidad"><span class="ad-label">Publicidad</span>${lista.map((a, i) => {
+    const pic = `<picture>${a.imagen_movil ? `<source media="(max-width: 720px)" srcset="${esc(a.imagen_movil)}">` : ''}<img src="${esc(a.imagen)}" alt="${esc(a.nombre || 'Publicidad')}" loading="lazy"></picture>`;
+    return `<div class="ad-item"${i ? ' hidden' : ''}>${a.enlace ? `<a href="${esc(a.enlace)}" target="_blank" rel="sponsored noopener">${pic}</a>` : pic}</div>`;
+  }).join('')}</aside>`;
+};
+
+// ---------- columnas de opinión ----------
+const avatar = (n, cls = 'avatar') => n.autorFoto
+  ? `<img class="${cls}" src="${esc(n.autorFoto)}" alt="" loading="lazy">`
+  : `<span class="${cls} avatar-ini">${esc((n.autor || '?').trim().split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase())}</span>`;
+const colcard = (n) => `
+<a class="colcard" href="${n.url}">
+  ${avatar(n)}
+  <div><span class="col-autor">${esc(n.autor)}${n.autorCargo ? ` <small>· ${esc(n.autorCargo)}</small>` : ''}</span><h3>${esc(n.titulo)}</h3><p>${esc(n.bajada)}</p><time datetime="${n.fecha.toISOString()}">${fecha(n.fecha, 'larga')}</time></div>
+</a>`;
+const colgrid = (lista) => `<div class="colgrid">${lista.map(colcard).join('')}</div>`;
+
 // Texto plano con correos convertidos en enlaces
 const conEnlaces = (s = '') => esc(s).replace(/[\w.+-]+@[\w-]+\.[\w.]+[a-z]/gi, (m) => `<a href="mailto:${m}">${m}</a>`);
 const sintoniaBlock = (clase = 'alt', conRedes = false) => {
@@ -317,9 +356,9 @@ const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
 
 // ---------- Inicio ----------
 {
-  const secundarias = notas.filter((n) => n !== lead).slice(0, 4);
+  const secundarias = informativas.filter((n) => n !== lead).slice(0, 4);
   const usadas = new Set([lead, ...secundarias]);
-  const masNoticias = notas.filter((n) => !usadas.has(n)).slice(0, 5);
+  const masNoticias = informativas.filter((n) => !usadas.has(n)).slice(0, 5);
   masNoticias.forEach((n) => usadas.add(n));
   const insta = cfg.redes.beholdFeedId
     ? `<behold-widget feed-id="${esc(cfg.redes.beholdFeedId)}"></behold-widget><script type="module" src="https://w.behold.so/widget.js"></script>`
@@ -329,6 +368,7 @@ const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
     const ns = notCat(c.id).filter((n) => !usadas.has(n)).slice(0, 5);
     const vs = largos(vidCat(c.id)).slice(0, 4);
     if (!ns.length && !vs.length) return '';
+    if (c.id === OPINION) return seccion({ kicker: 'Columnas', titulo: c.nombre, desc: c.descripcion, link: `/${c.id}`, cuerpo: colgrid(ns.slice(0, 4)), clase: 'alt' });
     return seccion({ kicker: 'Sección', titulo: c.nombre, desc: c.descripcion, link: `/${c.id}`, cuerpo: ns.length ? ngrid(ns) : grid(vs) });
   };
 
@@ -344,10 +384,12 @@ const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
         <button class="unmute" hidden>🔊 Activar sonido</button>
         <div class="live-msg" hidden><strong>Señal en pausa</strong><span>No pudimos cargar la transmisión en este momento. Intenta de nuevo en unos minutos o sintoniza el canal ${esc(S.canalTvd)}.</span><button class="retry">Reintentar</button></div>
       </div>
+      ${T.lema_imagen ? `
+      <h1 class="lema-img"><img src="${esc(T.lema_imagen)}" alt="${esc(S.lema)}" width="2000" height="667"></h1>` : `
       <div class="live-info">
         <div><span class="kicker">${esc(tx('etiqueta_envivo', 'Señal en vivo'))}</span><h1${S.lema.length > 48 ? ' class="largo"' : ''}>${esc(S.lema)}</h1></div>
         <div class="channel-badge"><span>TVD</span><strong>${esc(S.canalTvd)}</strong><small>Temuco</small></div>
-      </div>
+      </div>`}
     </div>
     <aside class="hero-side">
       <h2 class="side-title"><span class="dot red"></span>Últimas noticias</h2>
@@ -358,8 +400,11 @@ const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
 </section>
 
 <div class="guarda" aria-hidden="true"></div>
+${espacio('portada-superior') ? `<div class="wrap ad-wrap">${espacio('portada-superior')}</div>` : ''}
 
 ${seccion({ kicker: 'Portada', titulo: 'Noticias', link: '/noticias', linkTxt: 'Ver todas', clase: 'front-block', cuerpo: leadBlock(lead, secundarias) + (masNoticias.length ? `<div class="more-news">${ngrid(masNoticias)}</div>` : '') })}
+
+${espacio('portada-media') ? `<div class="wrap ad-wrap">${espacio('portada-media')}</div>` : ''}
 
 ${cortos(videos).length ? seccion({ kicker: 'Formato corto', titulo: 'Shorts y reels', link: `${cfg.redes.youtube}/shorts`, linkTxt: 'Ver en YouTube', cuerpo: shelf(cortos(videos).slice(0, 12)), clase: 'alt' }) : ''}
 
@@ -389,8 +434,9 @@ add('noticias.html', {
   desc: `Noticias de Temuco y La Araucanía desde los territorios: ${cfg.categorias.map((c) => c.nombre).join(', ')}.`,
   cuerpo: `
 <section class="page-head"><div class="wrap"><span class="kicker">Noticias</span><h1>Lo que pasa en el territorio</h1><p>Noticias de Temuco y La Araucanía contadas desde las organizaciones, los barrios y las comunidades.</p>${filtros('todas')}</div></section>
-${seccion({ titulo: 'Portada', cuerpo: leadBlock(lead, notas.filter((n) => n !== lead).slice(0, 4)) })}
-${seccion({ titulo: 'Todas las noticias', cuerpo: ngrid(notas.filter((n) => n !== lead).slice(4), { bajada: true }), clase: 'alt' })}`,
+${seccion({ titulo: 'Portada', cuerpo: leadBlock(lead, informativas.filter((n) => n !== lead).slice(0, 4)) })}
+${seccion({ titulo: 'Todas las noticias', cuerpo: ngrid(informativas.filter((n) => n !== lead).slice(4), { bajada: true }), clase: 'alt' })}
+${notCat(OPINION).length ? seccion({ kicker: 'Columnas', titulo: catNombre(OPINION), link: `/${OPINION}`, cuerpo: colgrid(notCat(OPINION).slice(0, 4)) }) : ''}`,
 });
 
 // ---------- Cada nota ----------
@@ -406,13 +452,16 @@ for (const n of notas) {
 <article class="article wrap">
   <div class="article-main">
     <nav class="crumbs"><a href="/noticias">Noticias</a> / <a href="/${n.categoria}">${esc(catNombre(n.categoria))}</a></nav>
-    ${tag(n.categoria)}
+    ${n.categoria === OPINION ? tag(OPINION, 'Columna de opinión') : tag(n.categoria)}
     <h1>${esc(n.titulo)}</h1>
     <p class="lede">${esc(n.bajada)}</p>
-    <div class="byline"><span>Por <strong>${esc(n.autor)}</strong></span><time datetime="${n.fecha.toISOString()}">${fecha(n.fecha, 'larga')}</time><span>${n.minutos} min de lectura</span></div>
+    ${n.categoria === OPINION
+      ? `<div class="byline byline-col">${avatar(n, 'avatar avatar-lg')}<div><strong>${esc(n.autor)}</strong>${n.autorCargo ? `<span>${esc(n.autorCargo)}</span>` : ''}<time datetime="${n.fecha.toISOString()}">${fecha(n.fecha, 'larga')} · ${n.minutos} min de lectura</time></div></div>`
+      : `<div class="byline"><span>Por <strong>${esc(n.autor)}</strong></span><time datetime="${n.fecha.toISOString()}">${fecha(n.fecha, 'larga')}</time><span>${n.minutos} min de lectura</span></div>`}
     ${n.video ? `<div class="article-video"><iframe src="https://www.youtube-nocookie.com/embed/${n.video}?rel=0" title="${esc(n.titulo)}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`
       : n.imagen ? `<figure class="article-img"><img src="${esc(n.imagen)}" alt="${esc(n.pie || '')}">${n.pie ? `<figcaption>${esc(n.pie)}</figcaption>` : ''}</figure>` : ''}
     <div class="prose article-body">${n.html}</div>
+    ${n.categoria === OPINION ? `<p class="source">Las opiniones expresadas en esta columna son responsabilidad de quien la firma y no representan necesariamente la línea editorial de ${esc(S.nombre)}.</p>` : ''}
     ${n.fuente ? `<p class="source">Publicado originalmente en <a href="${esc(n.fuente)}" target="_blank" rel="noopener">${/instagram/.test(n.fuente) ? 'nuestro Instagram' : 'esta fuente'}</a>.</p>` : ''}
     <div class="share"><span>Compartir</span>
       <a href="https://wa.me/?text=${encodeURIComponent(n.titulo + ' ')}${share}" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp">${icon.wa}</a>
@@ -420,9 +469,11 @@ for (const n of notas) {
       <a href="https://twitter.com/intent/tweet?url=${share}&text=${encodeURIComponent(n.titulo)}" target="_blank" rel="noopener" aria-label="Compartir en X">${icon.x}</a>
       <button class="copy" data-url="${S.url + n.url}">Copiar enlace</button>
     </div>
+    ${espacio('nota-inferior')}
   </div>
   <aside class="article-side">
     <a class="side-live" href="/#envivo"><span class="onair"><span class="dot"></span>EN VIVO</span><strong>Mira la señal en vivo</strong><span>Canal ${esc(S.canalTvd)} · TV abierta e internet</span></a>
+    ${espacio('nota-lateral')}
     <h2 class="side-title">Lo más reciente</h2>
     <div class="side-list">${recientes.map(nrow).join('')}</div>
   </aside>
@@ -441,7 +492,10 @@ for (const c of cfg.categorias) {
     cuerpo: `
 <section class="page-head page-${c.id}"><div class="wrap"><span class="kicker">Sección</span><h1>${esc(c.nombre)}</h1><p>${esc(c.descripcion)}</p>
 ${ps.length ? `<div class="chips">${ps.map((p) => `<a class="chip" href="/programa-${p.id}">▶ ${esc(p.nombre)}</a>`).join('')}</div>` : ''}</div></section>
-${ns.length ? seccion({ titulo: 'Noticias', cuerpo: leadBlock(ns[0], ns.slice(1, 5)) + (ns.length > 5 ? `<div class="more-news">${ngrid(ns.slice(5))}</div>` : '') }) : ''}
+${espacio('secciones') ? `<div class="wrap ad-wrap">${espacio('secciones')}</div>` : ''}
+${!ns.length ? '' : c.id === OPINION
+    ? seccion({ titulo: 'Columnas', cuerpo: colgrid(ns) })
+    : seccion({ titulo: 'Noticias', cuerpo: leadBlock(ns[0], ns.slice(1, 5)) + (ns.length > 5 ? `<div class="more-news">${ngrid(ns.slice(5))}</div>` : '') })}
 ${cortos(vs).length ? seccion({ titulo: 'Shorts y reels', cuerpo: shelf(cortos(vs)), clase: 'alt' }) : ''}
 ${largos(vs).length ? seccion({ titulo: 'Videos', cuerpo: grid(largos(vs)) }) : ''}
 ${!ns.length && !vs.length ? seccion({ titulo: 'Pronto', cuerpo: '<p class="empty">Todavía no hay publicaciones en esta sección.</p>' }) : ''}`,

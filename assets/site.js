@@ -8,6 +8,14 @@ menuBtn?.addEventListener('click', () => {
   menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
 });
 
+// Publicidad: si hay varios avisos en el mismo espacio, mostrar uno al azar
+document.querySelectorAll('.ad').forEach((ad) => {
+  const items = ad.querySelectorAll('.ad-item');
+  if (items.length < 2) return;
+  const elegido = Math.floor(Math.random() * items.length);
+  items.forEach((it, i) => { it.hidden = i !== elegido; });
+});
+
 // Copiar enlace de una nota
 document.querySelectorAll('.copy').forEach((b) => b.addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(b.dataset.url); b.textContent = '¡Copiado!'; } catch { prompt('Copia este enlace:', b.dataset.url); }

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "caseta-femenina",
+    "nombre": "Caseta Femenina",
+    "categoria": "deportes",
+    "descripcion": "Fútbol femenino analizado y conversado: desde los clubes de barrio de Temuco hasta el campeonato profesional.",
+    "palabras": [
+      "caseta"
+    ]
+  },
+  {
+    "id": "agora",
+    "nombre": "Ágora",
+    "categoria": "cultura",
+    "descripcion": "Conversaciones con músicos, artistas y gestores culturales que hacen la escena de La Araucanía.",
+    "palabras": [
+      "ágora",
+      "agora"
+    ]
+  },
+  {
+    "id": "cine-club",
+    "nombre": "Cine Club",
+    "categoria": "cultura",
+    "descripcion": "Cartelera, estrenos y conversación sobre cine chileno, independiente y latinoamericano.",
+    "palabras": [
+      "cine club"
+    ]
+  },
+  {
+    "id": "desde-el-pueblo",
+    "nombre": "Desde el Pueblo",
+    "categoria": "comunidad",
+    "descripcion": "Historias de barrios y organizaciones que transforman su territorio con sus propias manos.",
+    "palabras": [
+      "desde el pueblo"
+    ]
+  },
+  {
+    "id": "especiales",
+    "nombre": "Especiales y Transmisiones",
+    "categoria": "cultura",
+    "descripcion": "Festivales, eventos y transmisiones especiales en directo desde distintos puntos de la región.",
+    "palabras": [
+      "en vivo",
+      "kawin",
+      "transmisión especial"
+    ]
+  }
+]

@@ -1,6 +1,5 @@
-# Configuración del administrador de notas (Pages CMS · https://app.pagescms.org)
-# El equipo entra con su cuenta de GitHub, escribe la nota y al guardar
-# la web se publica sola en 1-2 minutos.
+# Panel de administración de la web (Pages CMS · https://app.pagescms.org)
+# Cada vez que alguien guarda, la web se publica sola en 1-2 minutos.
 
 media:
   input: assets/uploads
@@ -8,88 +7,227 @@ media:
   extensions: [jpg, jpeg, png, webp, gif]
 
 content:
-  - name: noticias
-    label: Noticias
-    type: collection
-    path: content/noticias
-    filename: "{year}-{month}-{day}-{primary}.md"
-    view:
-      fields: [titulo, categoria, fecha, destacada]
-      primary: titulo
-      sort: [fecha, titulo]
-      default:
-        sort: fecha
-        order: desc
-      search: [titulo, bajada]
-    fields:
-      - name: titulo
-        label: Título
-        type: string
-        required: true
-      - name: bajada
-        label: Bajada (resumen de 1-2 líneas que aparece bajo el título)
-        type: text
-      - name: categoria
-        label: Sección
-        type: select
-        required: true
-        default: comunidad
-        options:
-          values:
-            - { name: comunidad, label: Comunidad }
-            - { name: deportes, label: Deportes }
-            - { name: cultura, label: Cultura }
-            - { name: pueblo-mapuche, label: Pueblo Mapuche }
-            - { name: opinion, label: Opinión }
-      - name: fecha
-        label: Fecha y hora de publicación
-        type: date
-        required: true
-        options:
-          time: true
-          format: "yyyy-MM-dd'T'HH:mm"
-      - name: imagen
-        label: Foto principal (ideal vertical 4:5, 1080×1350, igual que Instagram)
-        type: image
-      - name: pie_imagen
-        label: Pie de foto
-        type: string
-      - name: video
-        label: Video de YouTube (opcional, pega el link; reemplaza la foto arriba de la nota)
-        type: string
-      - name: autor
-        label: Autor/a
-        type: string
-        default: "Abajo'e la Línea"
-      - name: destacada
-        label: Destacar en portada (nota principal durante una semana)
-        type: boolean
-        default: false
-      - name: borrador
-        label: Borrador (no se publica todavía)
-        type: boolean
-        default: false
-      - name: fuente
-        label: Fuente / link original (opcional)
-        type: string
-      - name: body
-        label: Texto de la nota
-        type: rich-text
+  # ───────────── PUBLICACIONES ─────────────
+  - name: publicaciones
+    label: Publicaciones
+    type: group
+    items:
+      - name: noticias
+        label: Noticias y columnas
+        type: collection
+        path: content/noticias
+        filename: "{year}-{month}-{day}-{primary}.md"
+        view:
+          fields: [titulo, categoria, autor, fecha, destacada]
+          primary: titulo
+          sort: [fecha, titulo]
+          default:
+            sort: fecha
+            order: desc
+          search: [titulo, bajada, autor]
+        fields:
+          - name: titulo
+            label: Título
+            type: string
+            required: true
+          - name: bajada
+            label: Bajada
+            description: Resumen de 1 o 2 líneas que aparece bajo el título y en las tarjetas.
+            type: text
+          - name: categoria
+            label: Sección
+            description: Dónde aparece. Elige "Opinión" para columnas firmadas (se muestran con la foto y el nombre de quien escribe).
+            type: select
+            required: true
+            default: comunidad
+            options:
+              values:
+                - { name: comunidad, label: Comunidad }
+                - { name: deportes, label: Deportes }
+                - { name: cultura, label: Cultura }
+                - { name: pueblo-mapuche, label: Pueblo Mapuche }
+                - { name: opinion, label: Opinión (columna) }
+          - name: fecha
+            label: Fecha y hora de publicación
+            type: date
+            required: true
+            options:
+              time: true
+              format: "yyyy-MM-dd'T'HH:mm"
+          - name: imagen
+            label: Foto principal
+            description: Ideal vertical 4:5 (1080×1350), igual que en Instagram. También sirven 9:16 o fotos horizontales.
+            type: image
+          - name: pie_imagen
+            label: Pie de foto
+            type: string
+          - name: video
+            label: Video de YouTube (opcional)
+            description: Pega el link. Si lo pones, el video reemplaza a la foto arriba de la nota.
+            type: string
+          - name: autor
+            label: Autor/a
+            type: string
+            default: "Abajo'e la Línea"
+          - name: autor_cargo
+            label: Cargo o descripción del autor/a (columnas)
+            description: Ej. "Dirigenta vecinal de Pedro de Valdivia". Se muestra en las columnas de opinión.
+            type: string
+          - name: autor_foto
+            label: Foto del autor/a (columnas)
+            description: Foto cuadrada de la cara. Se muestra redonda en las columnas de opinión.
+            type: image
+          - name: destacada
+            label: Destacar en portada
+            description: Será la nota principal de la portada durante una semana (no aplica a columnas).
+            type: boolean
+            default: false
+          - name: borrador
+            label: Borrador
+            description: Marcado = no se publica todavía.
+            type: boolean
+            default: false
+          - name: fuente
+            label: Fuente / link original (opcional)
+            type: string
+          - name: body
+            label: Texto
+            type: rich-text
 
+      - name: publicidad
+        label: Publicidad
+        type: file
+        path: content/publicidad.json
+        format: json
+        list: true
+        fields:
+          - name: nombre
+            label: Nombre del auspiciador
+            type: string
+            required: true
+          - name: activo
+            label: Activo
+            description: Desmárcalo para pausar el aviso sin borrarlo.
+            type: boolean
+            default: true
+          - name: ubicacion
+            label: Dónde se muestra
+            description: Puedes elegir varios lugares. Si hay varios avisos en el mismo lugar, se muestra uno al azar en cada visita.
+            type: select
+            options:
+              multiple: true
+              values:
+                - { name: portada-superior, label: "Portada · arriba (bajo la señal en vivo) — banner ancho 1200×200" }
+                - { name: portada-media, label: "Portada · al medio (después de las noticias) — banner ancho 1200×200" }
+                - { name: secciones, label: "Páginas de secciones · arriba — banner ancho 1200×200" }
+                - { name: nota-lateral, label: "Notas · columna derecha — cuadrado 600×600 o vertical 600×900" }
+                - { name: nota-inferior, label: "Notas · al final del texto — banner 1200×300" }
+          - name: imagen
+            label: Imagen del aviso
+            type: image
+            required: true
+          - name: imagen_movil
+            label: Imagen para celular (opcional)
+            description: Versión más alta/cuadrada para pantallas chicas. Si no la subes, se usa la misma imagen.
+            type: image
+          - name: enlace
+            label: Link al hacer clic (opcional)
+            description: Web, Instagram o WhatsApp del auspiciador.
+            type: string
+          - name: desde
+            label: Mostrar desde (opcional)
+            type: date
+          - name: hasta
+            label: Mostrar hasta (opcional)
+            description: Después de esta fecha el aviso se oculta solo.
+            type: date
+
+  # ───────────── EL CANAL ─────────────
+  - name: canal
+    label: El canal
+    type: group
+    items:
+      - name: programas
+        label: Programas
+        type: file
+        path: content/programas.json
+        format: json
+        list: true
+        fields:
+          - name: nombre
+            label: Nombre del programa
+            type: string
+            required: true
+          - name: id
+            label: Identificador
+            description: Palabra corta sin espacios ni tildes para la dirección web (ej. caseta-femenina → /programa-caseta-femenina). No la cambies después de crearla.
+            type: string
+            required: true
+          - name: categoria
+            label: Sección
+            type: select
+            options:
+              values:
+                - { name: comunidad, label: Comunidad }
+                - { name: deportes, label: Deportes }
+                - { name: cultura, label: Cultura }
+                - { name: pueblo-mapuche, label: Pueblo Mapuche }
+                - { name: opinion, label: Opinión }
+          - name: descripcion
+            label: Descripción
+            type: text
+          - name: palabras
+            label: Palabras que identifican sus videos en YouTube
+            description: Si el título de un video contiene alguna de estas palabras, se agrega solo a este programa (ej. "caseta").
+            type: string
+            list: true
+
+      - name: secciones
+        label: Secciones
+        type: file
+        path: content/secciones.json
+        format: json
+        list: true
+        fields:
+          - name: nombre
+            label: Nombre de la sección
+            type: string
+            required: true
+          - name: id
+            label: Identificador
+            description: No lo cambies (las notas usan este identificador). Para crear una sección nueva, pide ayuda para agregarla también a la lista de "Sección" de las noticias.
+            type: string
+            required: true
+          - name: descripcion
+            label: Descripción
+            type: text
+          - name: palabras
+            label: Palabras para ubicar videos sin programa
+            description: Si un video de YouTube no pertenece a ningún programa, se ubica en la sección cuyo listado de palabras coincida más con su título.
+            type: string
+            list: true
+
+  # ───────────── TEXTOS ─────────────
   - name: textos
     label: Textos del sitio
     type: file
     path: content/textos.json
     format: json
     fields:
+      - name: lema_imagen
+        label: Imagen del lema (portada)
+        description: Imagen ancha bajo la señal en vivo. Si la borras, se muestra el lema en texto.
+        type: image
       - name: lema
-        label: Lema (título grande bajo la señal en vivo)
+        label: Lema en texto
+        description: Se usa si no hay imagen del lema, y siempre para Google y lectores de pantalla.
         type: string
       - name: etiqueta_envivo
-        label: Etiqueta sobre el lema
+        label: Etiqueta sobre el lema en texto
         type: string
       - name: descripcion
-        label: Descripción del canal (aparece en Google y en "Quiénes somos")
+        label: Descripción del canal
+        description: Aparece en Google, al compartir la web y en "Quiénes somos".
         type: text
       - name: canal_tvd
         label: Canal TV abierta
@@ -98,13 +236,14 @@ content:
         label: Correo de contacto
         type: string
       - name: whatsapp
-        label: WhatsApp para "Envía tu nota" (ej. 56912345678; vacío = usa el correo)
+        label: WhatsApp para "Envía tu nota"
+        description: Solo números con código de país, ej. 56912345678. Vacío = el botón abre el correo.
         type: string
       - name: sintonia_titulo
-        label: Título de la sección "Cómo vernos"
+        label: Título de "Cómo vernos"
         type: string
       - name: sintonia
-        label: Formas de vernos (tarjetas)
+        label: Tarjetas de "Cómo vernos"
         type: object
         list: true
         fields:
