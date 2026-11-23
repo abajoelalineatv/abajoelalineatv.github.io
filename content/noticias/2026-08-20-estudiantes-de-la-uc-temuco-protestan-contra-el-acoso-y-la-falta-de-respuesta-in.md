@@ -4,7 +4,7 @@ bajada: "Estudiantes denuncian acoso en la UC Temuco y cuestionan la respuesta d
 fecha: "2026-08-20T18:35"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/estudiantes-de-la-uc-temuco-protestan-contra-el-acoso-y-la-falta-de-respuesta-in.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcR2PLgDltb/"
 ---

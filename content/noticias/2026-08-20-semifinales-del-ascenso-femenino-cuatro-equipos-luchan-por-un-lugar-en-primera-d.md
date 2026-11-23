@@ -4,7 +4,7 @@ bajada: "Este fin de semana inician las semifinales del ascenso femenino con cua
 fecha: "2026-08-20T19:48"
 categoria: deportes
 imagen: "/assets/uploads/noticias/semifinales-del-ascenso-femenino-cuatro-equipos-luchan-por-un-lugar-en-primera-d.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcR-uUZoEGA/"
 ---

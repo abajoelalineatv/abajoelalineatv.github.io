@@ -4,7 +4,7 @@ bajada: "El documental 'Sonidos del Agua' se puede ver gratis en Retina Latina, 
 fecha: "2026-08-25T11:56"
 categoria: cultura
 imagen: "/assets/uploads/noticias/el-documental-sonidos-del-agua-disponible-en-retina-latina.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DceAmSzILSk/"
 ---

@@ -4,7 +4,7 @@ bajada: "El 25 de agosto se celebra el lanzamiento del primer ramen instantáneo
 fecha: "2026-08-25T15:57"
 categoria: cultura
 imagen: "/assets/uploads/noticias/el-legado-del-ramen-de-china-a-japon-y-su-evolucion-cultural.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcecMwfOdpR/"
 ---

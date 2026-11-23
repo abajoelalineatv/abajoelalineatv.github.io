@@ -4,7 +4,7 @@ bajada: "Los partidos de ida dejaron empates y una victoria clave en la lucha po
 fecha: "2026-08-10T15:10"
 categoria: deportes
 imagen: "/assets/uploads/noticias/resultados-de-los-cuartos-de-final-del-ascenso-femenino.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Db3u32_IE-y/"
 ---

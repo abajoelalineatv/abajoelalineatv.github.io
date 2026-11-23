@@ -4,7 +4,7 @@ bajada: "Deportes Temuco pierde 2-0 en un difícil encuentro contra las líderes
 fecha: "2026-08-15T17:49"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-cae-ante-las-punteras-del-campeonato.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcE5DI_u-kB/"
 ---

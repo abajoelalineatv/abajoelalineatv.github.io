@@ -4,7 +4,7 @@ bajada: "Las albiverdes buscan escapar del descenso en un partido crucial contra
 fecha: "2026-08-07T20:00"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-enfrenta-a-union-espanola-en-duelo-clave-por-la-liga-femenina.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dbwhq9siOTA/"
 ---

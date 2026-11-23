@@ -4,7 +4,7 @@ bajada: "Las albiverdes lograron una victoria crucial en su lucha por mantener l
 fecha: "2026-08-23T18:43"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-se-impone-ante-santiago-wanderers-con-un-3-0.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcZloAdIKCZ/"
 ---

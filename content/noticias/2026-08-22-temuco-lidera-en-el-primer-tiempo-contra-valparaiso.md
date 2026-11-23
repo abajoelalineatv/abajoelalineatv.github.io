@@ -4,7 +4,7 @@ bajada: "Las albiverdes se van al descanso con ventaja tras dos goles en el prim
 fecha: "2026-08-22T11:52"
 categoria: deportes
 imagen: "/assets/uploads/noticias/temuco-lidera-en-el-primer-tiempo-contra-valparaiso.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcWRxFVIPiV/"
 ---

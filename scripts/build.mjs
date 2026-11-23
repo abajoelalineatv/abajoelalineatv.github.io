@@ -179,7 +179,7 @@ const leadBlock = (principal, secundarias) => principal ? `
 <div class="front">
   <a class="front-lead" href="${principal.url}">
     <div class="front-img t45">${img(principal)}</div>
-    <div class="front-txt">${tag(principal.categoria)}<h3>${esc(principal.titulo)}</h3><p>${esc(principal.bajada)}</p><time>${fecha(principal.fecha, 'larga')} · ${esc(principal.autor)}</time><span class="read">Leer nota →</span></div>
+    <div class="front-txt">${tag(principal.categoria)}<h3>${esc(principal.titulo)}</h3><p>${esc(principal.bajada)}</p><time>${fecha(principal.fecha, 'larga')} · ${esc(principal.autor)}</time><span class="read">Leer la nota</span></div>
   </a>
   <div class="front-side">${secundarias.map((n) => `
     <a class="front-sec" href="${n.url}"><div class="front-sec-img t45">${img(n)}</div><div>${tag(n.categoria)}<h4>${esc(n.titulo)}</h4><time>${fecha(n.fecha)}</time></div></a>`).join('')}
@@ -199,8 +199,8 @@ const seccion = ({ kicker, titulo, desc = '', link, linkTxt = 'Ver todo', cuerpo
 <section class="block ${clase}" ${id ? `id="${id}"` : ''}>
   <div class="wrap">
     <header class="block-head">
-      <div>${kicker ? `<span class="kicker">${esc(kicker)}</span>` : ''}<h2>${esc(titulo)}</h2>${desc ? `<p>${esc(desc)}</p>` : ''}</div>
-      ${link ? `<a class="more" href="${link}">${esc(linkTxt)} <span aria-hidden="true">→</span></a>` : ''}
+      <div><h2>${esc(titulo)}</h2>${desc ? `<p>${esc(desc)}</p>` : ''}</div>
+      ${link ? `<a class="more" href="${link}">${esc(linkTxt)}</a>` : ''}
     </header>
     ${cuerpo}
   </div>
@@ -212,7 +212,7 @@ const ngrid = (items, opts) => items.length ? `<div class="grid grid-n${items.le
 const largos = (l) => l.filter((v) => !v.short);
 const cortos = (l) => l.filter((v) => v.short);
 
-const enviaNota = S.whatsapp ? `https://wa.me/${S.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Hola, quiero mandarles una nota:')}` : `mailto:${S.email}?subject=${encodeURIComponent('Nota para Abajo\'e la Línea')}`;
+const enviaNota = S.whatsapp ? `https://wa.me/${S.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Hola, quiero mandarles una nota:')}` : `mailto:${S.email}?subject=${encodeURIComponent('Nota para Abajo’e la Línea')}`;
 
 const icon = {
   yt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.8 31 31 0 0 0-.4-4.8ZM9.7 15.1V8.9L15.5 12l-5.8 3.1Z"/></svg>',
@@ -263,7 +263,7 @@ ${extraHead}
   <div class="wrap topbar-inner">
     <a class="brand" href="/" aria-label="${esc(S.nombre)}, inicio">
       <img src="/assets/img/logo.png" alt="" width="44" height="44">
-      <span><strong>Abajo'e la Línea</strong><small>TV comunitaria · Temuco</small></span>
+      <span><strong>Abajo’e la Línea</strong><small>TV comunitaria · Temuco</small></span>
     </a>
     <nav class="mainnav" id="mainnav" aria-label="Principal">
       ${main.map(([h, t, k]) => `<a href="${h}"${k === activo ? ' aria-current="page"' : ''}>${t}</a>`).join('')}
@@ -352,7 +352,8 @@ const sintoniaBlock = (clase = 'alt', conRedes = false) => {
 };
 
 const paginas = {}; // archivo → html
-const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
+// Sin etiquetas pequeñas sobre los títulos de sección ("eyebrows"): el título ya lo dice.
+const add = (archivo, opts) => { paginas[archivo] = pagina({ ...opts, cuerpo: opts.cuerpo.replace(/<span class="kicker">[^<]*<\/span>/g, '') }); };
 
 // ---------- Inicio ----------
 {
@@ -362,7 +363,7 @@ const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
   masNoticias.forEach((n) => usadas.add(n));
   const insta = cfg.redes.beholdFeedId
     ? `<behold-widget feed-id="${esc(cfg.redes.beholdFeedId)}"></behold-widget><script type="module" src="https://w.behold.so/widget.js"></script>`
-    : `<a class="insta-cta" href="${cfg.redes.instagram}" target="_blank" rel="noopener">${icon.ig}<div><strong>@${esc(cfg.redes.instagramUsuario)}</strong><span>${esc(tx('instagram_texto', 'Síguenos en Instagram.'))}</span></div><span class="more">Ir a Instagram →</span></a>`;
+    : `<a class="insta-cta" href="${cfg.redes.instagram}" target="_blank" rel="noopener">${icon.ig}<div><strong>@${esc(cfg.redes.instagramUsuario)}</strong><span>${esc(tx('instagram_texto', 'Síguenos en Instagram.'))}</span></div><span class="more">Seguir en Instagram</span></a>`;
 
   const bloqueCat = (c) => {
     const ns = notCat(c.id).filter((n) => !usadas.has(n)).slice(0, 5);
@@ -381,7 +382,7 @@ const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
       <div class="live-frame">
         <video id="live" playsinline muted autoplay controls poster="/assets/img/poster.svg"></video>
         <span class="onair"><span class="dot"></span>EN VIVO</span>
-        <button class="unmute" hidden>🔊 Activar sonido</button>
+        <button class="unmute" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Activar sonido</button>
         <div class="live-msg" hidden><strong>Señal en pausa</strong><span>No pudimos cargar la transmisión en este momento. Intenta de nuevo en unos minutos o sintoniza el canal ${esc(S.canalTvd)}.</span><button class="retry">Reintentar</button></div>
       </div>
       ${T.lema_imagen ? `
@@ -392,9 +393,9 @@ const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
       </div>`}
     </div>
     <aside class="hero-side">
-      <h2 class="side-title"><span class="dot red"></span>Últimas noticias</h2>
+      <h2 class="side-title">Últimas noticias</h2>
       <div class="side-list">${notas.slice(0, 6).map(nrow).join('')}</div>
-      <a class="more" href="/noticias">Todas las noticias →</a>
+      <a class="more" href="/noticias">Ver todas las noticias</a>
     </aside>
   </div>
 </section>

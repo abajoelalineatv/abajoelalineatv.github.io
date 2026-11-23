@@ -4,7 +4,7 @@ bajada: "Deportes Temuco se impuso en un partido lleno de tensión y polémica a
 fecha: "2026-08-26T22:31"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-y-recoleta-protagonizan-un-final-intenso-en-la-liga-femenina.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DchuBOQFE3m/"
 ---

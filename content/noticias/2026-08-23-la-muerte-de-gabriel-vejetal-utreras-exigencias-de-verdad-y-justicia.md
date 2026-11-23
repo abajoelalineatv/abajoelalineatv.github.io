@@ -4,7 +4,7 @@ bajada: "La comunidad hip-hop clama por justicia tras la muerte de Gabriel Utrer
 fecha: "2026-08-22T22:04"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/la-muerte-de-gabriel-vejetal-utreras-exigencias-de-verdad-y-justicia.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcXXiqEDKPC/"
 ---

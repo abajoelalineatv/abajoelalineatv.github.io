@@ -4,7 +4,7 @@ bajada: "Roberto Neira se pronunció sobre el Estado de Excepción y la segurida
 fecha: "2026-08-26T09:39"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/alcalde-de-temuco-critica-propuesta-de-seguridad-de-kast.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcgVsSVuq8J/"
 ---

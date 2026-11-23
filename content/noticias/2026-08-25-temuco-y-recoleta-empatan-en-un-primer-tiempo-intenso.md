@@ -4,7 +4,7 @@ bajada: "El primer tiempo culmina sin goles en un partido muy disputado entre Te
 fecha: "2026-08-25T15:51"
 categoria: deportes
 imagen: "/assets/uploads/noticias/temuco-y-recoleta-empatan-en-un-primer-tiempo-intenso.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcebeZyOZT6/"
 ---

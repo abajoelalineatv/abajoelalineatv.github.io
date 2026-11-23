@@ -4,7 +4,7 @@ bajada: "La volante destacó el esfuerzo del equipo en un año complicado tras v
 fecha: "2026-08-26T13:48"
 categoria: deportes
 imagen: "/assets/uploads/noticias/karen-coloma-celebra-triunfo-de-deportes-temuco-en-final-por-la-permanencia.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcgyLksCk0H/"
 ---

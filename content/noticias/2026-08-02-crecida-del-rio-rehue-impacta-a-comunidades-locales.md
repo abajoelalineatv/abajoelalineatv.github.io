@@ -4,7 +4,7 @@ bajada: "La crecida del río Rehue deja familias damnificadas y genera recomenda
 fecha: "2026-08-02T12:44"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/crecida-del-rio-rehue-impacta-a-comunidades-locales.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dbi33JIDltb/"
 ---

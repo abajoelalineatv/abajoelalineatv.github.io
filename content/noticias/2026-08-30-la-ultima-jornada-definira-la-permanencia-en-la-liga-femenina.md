@@ -4,7 +4,7 @@ bajada: "Deportes Temuco y Universidad de Concepción se juegan la permanencia e
 fecha: "2026-08-30T19:40"
 categoria: deportes
 imagen: "/assets/uploads/noticias/la-ultima-jornada-definira-la-permanencia-en-la-liga-femenina.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dcrts5HoAF-/"
 ---

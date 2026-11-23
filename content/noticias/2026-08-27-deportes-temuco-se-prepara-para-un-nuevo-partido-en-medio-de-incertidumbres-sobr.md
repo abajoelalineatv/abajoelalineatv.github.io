@@ -4,7 +4,7 @@ bajada: "El equipo femenino de Deportes Temuco jugará este viernes en el Germá
 fecha: "2026-08-27T13:30"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-se-prepara-para-un-nuevo-partido-en-medio-de-incertidumbres-sobr.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcjU9syiOvS/"
 ---

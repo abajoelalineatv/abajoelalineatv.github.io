@@ -4,7 +4,7 @@ bajada: "Las punteras lograron una contundente victoria de 5-0 sobre Temuco, que
 fecha: "2026-08-15T18:56"
 categoria: deportes
 imagen: "/assets/uploads/noticias/las-punteras-vencen-a-temuco-y-consolidan-su-liderazgo.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcFAuNOvAgo/"
 ---

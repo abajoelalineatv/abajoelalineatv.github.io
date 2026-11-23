@@ -4,7 +4,7 @@ bajada: "El Espacio de Creación Artística Txawün realizará un evento para ni
 fecha: "2026-08-11T14:19"
 categoria: cultura
 imagen: "/assets/uploads/noticias/txawun-invierno-celebra-a-las-nineces-con-actividades-artisticas-en-padre-las-ca.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Db6N1DoID__/"
 ---

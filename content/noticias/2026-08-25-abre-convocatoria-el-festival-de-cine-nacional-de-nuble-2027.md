@@ -4,7 +4,7 @@ bajada: "El Festival de Cine Nacional de Ñuble convoca a cineastas a participar
 fecha: "2026-08-24T22:42"
 categoria: cultura
 imagen: "/assets/uploads/noticias/abre-convocatoria-el-festival-de-cine-nacional-de-nuble-2027.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcclzhoDDuV/"
 ---

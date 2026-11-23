@@ -4,7 +4,7 @@ bajada: "La UC mantiene su segundo lugar, mientras Colo Colo sigue liderando tra
 fecha: "2026-08-10T15:22"
 categoria: deportes
 imagen: "/assets/uploads/noticias/resultados-de-la-fecha-21-de-la-liga-femenina-dominio-y-sorpresas.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Db3wUthoGlV/"
 ---

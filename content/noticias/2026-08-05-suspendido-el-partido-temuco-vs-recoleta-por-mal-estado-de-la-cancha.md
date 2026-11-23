@@ -4,7 +4,7 @@ bajada: "El encuentro entre Deportes Temuco y Recoleta fue suspendido debido a l
 fecha: "2026-08-05T17:00"
 categoria: deportes
 imagen: "/assets/uploads/noticias/suspendido-el-partido-temuco-vs-recoleta-por-mal-estado-de-la-cancha.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DbrDcbdjC85/"
 ---
@@ -17,6 +17,6 @@ fuente: "https://www.instagram.com/reel/DbrDcbdjC85/"
 
 <p>Además, hoy se grabará un nuevo capítulo de Caseta Femenina, donde se abordará este tema y se analizará cómo queda la tabla tras la suspensión. También se discutirá lo que viene para el equipo albiverde en el campeonato.</p>
 
-<p>Los aficionados podrán seguir la transmisión hoy a las 18:30 horas por la señal 35.1 de Abajo'e la Línea TV. Para aquellos que no puedan sintonizar en vivo, el capítulo completo estará disponible en el canal de YouTube del programa.</p>
+<p>Los aficionados podrán seguir la transmisión hoy a las 18:30 horas por la señal 35.1 de Abajo’e la Línea TV. Para aquellos que no puedan sintonizar en vivo, el capítulo completo estará disponible en el canal de YouTube del programa.</p>
 
 <p>Invitamos a todos a acompañarnos, comentar y seguir hablando de fútbol femenino desde La Araucanía, fortaleciendo así la comunidad futbolística local.</p>

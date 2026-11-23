@@ -4,7 +4,7 @@ bajada: "La familia de Gabriel busca revertir la categorización de alto riesgo 
 fecha: "2026-08-20T17:23"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/familia-de-el-vejetal-convoca-a-prensa-tras-controversia-por-funeral.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcRuIakoHb4/"
 ---

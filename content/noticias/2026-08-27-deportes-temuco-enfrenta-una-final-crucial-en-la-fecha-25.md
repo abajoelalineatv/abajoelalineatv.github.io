@@ -4,7 +4,7 @@ bajada: "El equipo albiverde se mide ante D. Iquique en un partido clave para la
 fecha: "2026-08-27T15:00"
 categoria: deportes
 imagen: "/assets/uploads/noticias/deportes-temuco-enfrenta-una-final-crucial-en-la-fecha-25.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcjfPJ6kf4U/"
 ---

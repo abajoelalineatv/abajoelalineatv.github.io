@@ -4,7 +4,7 @@ bajada: "El Cine Club del Centro Cultural de Padre Las Casas proyectará 'La tum
 fecha: "2026-08-05T17:45"
 categoria: cultura
 imagen: "/assets/uploads/noticias/cine-club-presenta-la-tumba-de-las-luciernagas-en-padre-las-casas.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DbrIqbfjVgZ/"
 ---

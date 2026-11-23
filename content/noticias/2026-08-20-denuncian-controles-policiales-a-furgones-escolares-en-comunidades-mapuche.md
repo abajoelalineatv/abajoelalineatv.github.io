@@ -4,7 +4,7 @@ bajada: "Un recurso de amparo busca proteger a estudiantes mapuche de controles 
 fecha: "2026-08-20T19:06"
 categoria: pueblo-mapuche
 imagen: "/assets/uploads/noticias/denuncian-controles-policiales-a-furgones-escolares-en-comunidades-mapuche.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcR5s1cjlCI/"
 ---

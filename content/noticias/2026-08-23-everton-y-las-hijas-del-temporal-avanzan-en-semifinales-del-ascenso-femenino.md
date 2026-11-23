@@ -4,7 +4,7 @@ bajada: "Everton y Las Hijas del Temporal se acercan a la final del Ascenso Feme
 fecha: "2026-08-23T18:33"
 categoria: deportes
 imagen: "/assets/uploads/noticias/everton-y-las-hijas-del-temporal-avanzan-en-semifinales-del-ascenso-femenino.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcZkbx_IMVB/"
 ---

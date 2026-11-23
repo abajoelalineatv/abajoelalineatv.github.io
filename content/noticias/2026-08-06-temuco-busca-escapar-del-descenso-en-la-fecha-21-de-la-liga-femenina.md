@@ -4,7 +4,7 @@ bajada: "Temuco y otros equipos se preparan para una intensa jornada en la Liga 
 fecha: "2026-08-06T18:32"
 categoria: deportes
 imagen: "/assets/uploads/noticias/temuco-busca-escapar-del-descenso-en-la-fecha-21-de-la-liga-femenina.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/Dbty085IN2X/"
 ---

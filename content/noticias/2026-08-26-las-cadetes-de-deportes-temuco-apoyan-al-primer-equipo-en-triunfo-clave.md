@@ -4,7 +4,7 @@ bajada: "Las jóvenes jugadoras alentaron al primer equipo en un partido crucial
 fecha: "2026-08-26T14:01"
 categoria: deportes
 imagen: "/assets/uploads/noticias/las-cadetes-de-deportes-temuco-apoyan-al-primer-equipo-en-triunfo-clave.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/reel/DcgzrJAjk0O/"
 ---

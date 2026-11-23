@@ -4,7 +4,7 @@ bajada: "Hoy se recuerda la lucha por justicia de las familias de víctimas de d
 fecha: "2026-08-30T10:41"
 categoria: comunidad
 imagen: "/assets/uploads/noticias/conmemoracion-del-dia-internacional-de-las-victimas-de-desapariciones-forzadas.jpg"
-autor: "Abajo'e la Línea"
+autor: "Abajo’e la Línea"
 destacada: false
 fuente: "https://www.instagram.com/p/DcqwE1oOGDm/"
 ---

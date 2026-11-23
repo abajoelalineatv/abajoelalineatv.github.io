@@ -68,7 +68,7 @@ content:
           - name: autor
             label: Autor/a
             type: string
-            default: "Abajo'e la Línea"
+            default: "Abajo’e la Línea"
           - name: autor_cargo
             label: Cargo o descripción del autor/a (columnas)
             description: Ej. "Dirigenta vecinal de Pedro de Valdivia". Se muestra en las columnas de opinión.
