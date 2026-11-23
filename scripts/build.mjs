@@ -345,7 +345,7 @@ const add = (archivo, opts) => { paginas[archivo] = pagina(opts); };
         <div class="live-msg" hidden><strong>Señal en pausa</strong><span>No pudimos cargar la transmisión en este momento. Intenta de nuevo en unos minutos o sintoniza el canal ${esc(S.canalTvd)}.</span><button class="retry">Reintentar</button></div>
       </div>
       <div class="live-info">
-        <div><span class="kicker">${esc(tx('etiqueta_envivo', 'Señal en vivo'))}</span><h1>${esc(S.lema)}</h1></div>
+        <div><span class="kicker">${esc(tx('etiqueta_envivo', 'Señal en vivo'))}</span><h1${S.lema.length > 48 ? ' class="largo"' : ''}>${esc(S.lema)}</h1></div>
         <div class="channel-badge"><span>TVD</span><strong>${esc(S.canalTvd)}</strong><small>Temuco</small></div>
       </div>
     </div>
