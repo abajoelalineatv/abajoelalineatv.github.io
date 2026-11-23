@@ -92,10 +92,54 @@ const thumb = (id, q = 'hqdefault') => `https://i.ytimg.com/vi/${id}/${q}.jpg`;
 const ytId = (u = '') => (String(u).match(/(?:youtu\.be\/|v=|embed\/|shorts\/|live\/)([\w-]{11})/) || [])[1];
 
 // ---------- noticias ----------
+// Fuente de las noticias:
+//  - Si existe la variable PANEL_URL (ej. https://panel.abajoelalinea.cl), se leen desde el CMS Payload.
+//  - Si no, desde los archivos content/noticias/*.md (sistema anterior, Pages CMS).
+const notas = [];
+const PANEL = (process.env.PANEL_URL || '').replace(/\/$/, '');
+const textoPlano = (html) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+if (PANEL) {
+  const abs = (u) => (!u ? '' : /^https?:/.test(u) ? u : PANEL + u);
+  const medio = (m) => (m && typeof m === 'object' ? m : null);
+  let pagina = 1, total = 0;
+  do {
+    const r = await fetch(`${PANEL}/api/noticias?limit=100&page=${pagina}&depth=2&sort=-fechaPublicacion&where[_status][equals]=published`);
+    if (!r.ok) throw new Error(`El panel respondió ${r.status} al pedir las noticias (${PANEL}).`);
+    const j = await r.json();
+    total = j.totalPages;
+    for (const n of j.docs) {
+      const img = medio(n.imagen);
+      const sec = typeof n.seccion === 'object' && n.seccion ? n.seccion.slug : '';
+      const html = n.contenidoHTML || '';
+      const texto = textoPlano(html);
+      const autorNombre = n.firma || (typeof n.autor === 'object' && n.autor ? n.autor.nombre : '') || S.nombre;
+      notas.push({
+        slug: n.slug, url: `/noticias/${n.slug}`,
+        titulo: String(n.titulo).trim(),
+        bajada: String(n.bajada || texto.slice(0, 180)).trim(),
+        fecha: new Date(n.fechaPublicacion),
+        categoria: cats[sec] ? sec : n.tipo === 'columna' && cats.opinion ? 'opinion' : cfg.categorias[0].id,
+        imagen: abs(img?.sizes?.ancho?.url || img?.url),
+        proporcion: img?.width && img?.height ? img.height / img.width : null,
+        pie: n.pieImagen || '',
+        autor: autorNombre,
+        autorFoto: abs(medio(n.firmaFoto)?.sizes?.miniatura?.url || medio(n.firmaFoto)?.url),
+        autorCargo: n.firmaCargo || (typeof n.autor === 'object' && n.autor ? n.autor.cargo || '' : ''),
+        destacada: !!n.destacada,
+        video: ytId(n.video),
+        fuente: n.instagram?.enlace || '',
+        galeria: (n.galeria || []).map((g) => abs(medio(g)?.sizes?.ancho?.url || medio(g)?.url)).filter(Boolean),
+        html,
+        minutos: Math.max(1, Math.round(texto.split(' ').length / 200)),
+      });
+    }
+    pagina++;
+  } while (pagina <= total);
+  console.log(`Noticias leídas desde el panel: ${notas.length}`);
+}
 const dirNotas = new URL('content/noticias/', root);
 let archivos = [];
-try { archivos = (await readdir(dirNotas)).filter((f) => f.endsWith('.md')); } catch { /* sin notas aún */ }
-const notas = [];
+if (!PANEL) { try { archivos = (await readdir(dirNotas)).filter((f) => f.endsWith('.md')); } catch { /* sin notas aún */ } }
 for (const f of archivos) {
   const { data: d, content } = matter(await readFile(new URL(f, dirNotas), 'utf8'));
   if (d.borrador || !d.titulo) continue;
@@ -462,6 +506,7 @@ for (const n of notas) {
     ${n.video ? `<div class="article-video"><iframe src="https://www.youtube-nocookie.com/embed/${n.video}?rel=0" title="${esc(n.titulo)}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`
       : n.imagen ? `<figure class="article-img"><img src="${esc(n.imagen)}" alt="${esc(n.pie || '')}">${n.pie ? `<figcaption>${esc(n.pie)}</figcaption>` : ''}</figure>` : ''}
     <div class="prose article-body">${n.html}</div>
+    ${n.galeria?.length ? `<div class="galeria">${n.galeria.map((g) => `<a href="${esc(g)}" target="_blank" rel="noopener"><img src="${esc(g)}" alt="" loading="lazy"></a>`).join('')}</div>` : ''}
     ${n.categoria === OPINION ? `<p class="source">Las opiniones expresadas en esta columna son responsabilidad de quien la firma y no representan necesariamente la línea editorial de ${esc(S.nombre)}.</p>` : ''}
     ${n.fuente ? `<p class="source">Publicado originalmente en <a href="${esc(n.fuente)}" target="_blank" rel="noopener">${/instagram/.test(n.fuente) ? 'nuestro Instagram' : 'esta fuente'}</a>.</p>` : ''}
     <div class="share"><span>Compartir</span>

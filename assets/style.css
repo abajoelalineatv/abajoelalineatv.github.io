@@ -211,6 +211,10 @@ img.fg.vert { width: auto; aspect-ratio: 9 / 16; margin: 0 auto; object-fit: cov
 .player-frame.vertical { aspect-ratio: 9 / 16; height: min(80vh, 760px); margin: 0 auto; }
 .player:has(.player-frame.vertical) { width: auto; }
 
+/* ---------- galería de fotos en las notas ---------- */
+.galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 28px; }
+.galeria img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; }
+
 /* ---------- lema como imagen ---------- */
 /* Tamaño acotado para que la señal en vivo y el lema quepan en la primera pantalla */
 .lema-img { margin: 14px 0 0; }

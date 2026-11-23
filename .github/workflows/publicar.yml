@@ -1,14 +1,21 @@
 # Publica la web en GitHub Pages (gratis).
-# Corre: cada vez que se guarda una nota o un cambio, y cada 2 horas
+# Corre: cuando el panel editorial avisa que hay contenido nuevo (al publicar o
+# importar desde Instagram), con cada cambio del código, y cada 2 horas
 # para traer los videos nuevos de YouTube.
+# Las noticias se leen del panel (PANEL_URL), no de content/noticias.
 name: Publicar web
 
 on:
   push:
     branches: [main]
+  repository_dispatch:
+    types: [contenido-actualizado]
   schedule:
     - cron: '17 */2 * * *'
   workflow_dispatch: {}
+
+env:
+  PANEL_URL: https://panel-abajoelalinea.netlify.app
 
 permissions:
   contents: write
