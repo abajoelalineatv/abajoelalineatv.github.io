@@ -129,6 +129,8 @@ if (PANEL) {
         video: ytId(n.video),
         fuente: n.instagram?.enlace || '',
         galeria: (n.galeria || []).map((g) => abs(medio(g)?.sizes?.ancho?.url || medio(g)?.url)).filter(Boolean),
+        // Etiquetas del panel: ámbito geográfico y temáticas (filtros de Noticias).
+        etiquetas: (n.etiquetas || []).filter((e) => e && typeof e === 'object' && e.slug).map((e) => ({ slug: e.slug, nombre: e.nombre, grupo: e.grupo === 'ambito' ? 'ambito' : 'tema' })),
         html,
         minutos: Math.max(1, Math.round(texto.split(' ').length / 200)),
       });
@@ -492,6 +494,23 @@ const paginacion = (base, actual, total) => {
   const sig = actual < total ? `<a class="chip" href="${rutaPagina(base, actual + 1)}" rel="next">Siguiente →</a>` : '';
   return `<nav class="wrap chips paginacion" aria-label="Páginas de noticias">${ant}${items.join('')}${sig}</nav>`;
 };
+// Filtros por etiqueta (ámbito geográfico y temática), debajo de los de sección. Solo las que tienen noticias.
+const etiquetasUsadas = (() => {
+  const m = new Map();
+  for (const n of notas) for (const e of n.etiquetas || []) m.set(e.slug, { ...e, total: (m.get(e.slug)?.total || 0) + 1 });
+  return [...m.values()].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+})();
+const ORDEN_AMBITO = ['local', 'regional', 'nacional', 'internacional'];
+const filtrosEtiquetas = (activo) => {
+  const fila = (grupo, titulo, lista) => lista.length
+    ? `<div class="chips filtros-etiquetas" aria-label="${titulo}"><span class="filtro-titulo">${titulo}</span>${lista.map((e) => `<a class="chip${activo === e.slug ? ' on' : ''}" href="/noticias/tema/${e.slug}"${activo === e.slug ? ' aria-current="page"' : ''}>${esc(e.nombre)}</a>`).join('')}</div>`
+    : '';
+  const ambitos = etiquetasUsadas.filter((e) => e.grupo === 'ambito').sort((a, b) => (ORDEN_AMBITO.indexOf(a.slug) + 99) % 99 - (ORDEN_AMBITO.indexOf(b.slug) + 99) % 99);
+  return fila('ambito', 'Ámbito', ambitos) + fila('tema', 'Temática', etiquetasUsadas.filter((e) => e.grupo === 'tema'));
+};
+const cabezaNoticias = (activoSeccion, activoEtiqueta, h1 = 'Lo que pasa en el territorio') => `
+<section class="page-head"><div class="wrap"><span class="kicker">Noticias</span><h1>${esc(h1)}</h1><p>Noticias de Temuco y La Araucanía contadas desde las organizaciones, los barrios y las comunidades.</p>${filtros(activoSeccion)}${filtrosEtiquetas(activoEtiqueta)}</div></section>`;
+
 {
   const lista = lead ? [lead, ...informativas.filter((n) => n !== lead)] : informativas;
   const total = Math.max(1, Math.ceil(lista.length / POR_PAGINA));
@@ -506,11 +525,27 @@ ${seccion({ titulo: 'Todas las noticias', cuerpo: ngrid(trozo.slice(5), { bajada
     add(`${ruta.slice(1)}.html`, {
       ruta, titulo: p === 1 ? 'Noticias' : `Noticias · página ${p}`, activo: 'noticias',
       desc: `Noticias de Temuco y La Araucanía desde los territorios: ${cfg.categorias.map((c) => c.nombre).join(', ')}.`,
-      cuerpo: `
-<section class="page-head"><div class="wrap"><span class="kicker">Noticias</span><h1>Lo que pasa en el territorio</h1><p>Noticias de Temuco y La Araucanía contadas desde las organizaciones, los barrios y las comunidades.</p>${filtros('todas')}</div></section>
+      cuerpo: `${cabezaNoticias('todas', '')}
 ${cuerpoNotas}
 ${paginacion('/noticias', p, total)}
 ${p === 1 && notCat(OPINION).length ? seccion({ kicker: 'Columnas', titulo: catNombre(OPINION), link: `/${OPINION}`, cuerpo: colgrid(notCat(OPINION).slice(0, 4)) }) : ''}`,
+    });
+  }
+}
+
+// Una lista paginada por etiqueta: /noticias/tema/politica, /noticias/tema/politica/pagina/2, …
+for (const e of etiquetasUsadas) {
+  const base = `/noticias/tema/${e.slug}`;
+  const lista = notas.filter((n) => n.etiquetas?.some((x) => x.slug === e.slug));
+  const total = Math.max(1, Math.ceil(lista.length / POR_PAGINA));
+  for (let p = 1; p <= total; p++) {
+    const ruta = rutaPagina(base, p);
+    add(`${ruta.slice(1)}.html`, {
+      ruta, titulo: `${e.nombre} · Noticias${p > 1 ? ` · página ${p}` : ''}`, activo: 'noticias',
+      desc: `Noticias de ${e.nombre} en Abajo’e la Línea TV.`,
+      cuerpo: `${cabezaNoticias('', e.slug, e.nombre)}
+${seccion({ titulo: `${lista.length} noticia${lista.length === 1 ? '' : 's'}${total > 1 ? ` · página ${p} de ${total}` : ''}`, cuerpo: ngrid(lista.slice((p - 1) * POR_PAGINA, p * POR_PAGINA), { bajada: true }), clase: 'alt' })}
+${paginacion(base, p, total)}`,
     });
   }
 }
@@ -634,7 +669,11 @@ add('404.html', {
 await rm(out, { recursive: true, force: true });
 await mkdir(new URL('noticias/pagina/', out), { recursive: true });
 await cp(new URL('assets/', root), new URL('assets/', out), { recursive: true });
-for (const [archivo, html] of Object.entries(paginas)) await writeFile(new URL(archivo, out), html);
+for (const [archivo, html] of Object.entries(paginas)) {
+  const destino = new URL(archivo, out);
+  await mkdir(new URL('./', destino), { recursive: true }); // carpetas como noticias/tema/politica/pagina/
+  await writeFile(destino, html);
+}
 
 const urls = Object.keys(paginas).filter((a) => a !== '404.html').map((a) => `${S.url}/${a === 'index.html' ? '' : a.replace(/\.html$/, '')}`);
 await writeFile(new URL('sitemap.xml', out), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
