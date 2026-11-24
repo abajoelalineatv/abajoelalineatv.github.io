@@ -90,6 +90,8 @@ const vidCat = (id) => videos.filter((v) => v.categoria === id);
 const vidProg = (id) => videos.filter((v) => v.programa === id);
 const thumb = (id, q = 'hqdefault') => `https://i.ytimg.com/vi/${id}/${q}.jpg`;
 const ytId = (u = '') => (String(u).match(/(?:youtu\.be\/|v=|embed\/|shorts\/|live\/)([\w-]{11})/) || [])[1];
+// Enlace canónico de un Reel de Instagram (o undefined si la fuente no es un Reel).
+const reelUrl = (u = '') => { const c = (String(u).match(/instagram\.com\/(?:[\w.]+\/)?reels?\/([\w-]+)/) || [])[1]; return c ? `https://www.instagram.com/reel/${c}/` : undefined; };
 
 // ---------- noticias ----------
 // Fuente de las noticias:
@@ -321,6 +323,7 @@ ${extraHead}
     <button class="menu-btn" aria-controls="mainnav" aria-expanded="false" aria-label="Abrir menú"><span></span></button>
   </div>
   <nav class="catbar" aria-label="Secciones"><div class="wrap">
+    <a class="cat" href="/noticias"${activo === 'noticias' ? ' aria-current="page"' : ''}>Noticias</a>
     ${cfg.categorias.map((c) => `<a class="cat cat-${c.id}" href="/${c.id}"${c.id === activo ? ' aria-current="page"' : ''}>${esc(c.nombre)}</a>`).join('')}
     <a class="cat" href="/programas"${activo === 'programas' ? ' aria-current="page"' : ''}>Programas</a>
   </div></nav>
@@ -555,6 +558,13 @@ for (const n of notas) {
   const rel = notCat(n.categoria).filter((x) => x !== n).slice(0, 5);
   const recientes = notas.filter((x) => x !== n).slice(0, 5);
   const share = encodeURIComponent(S.url + n.url);
+  // Reel original: reproductor oficial de Instagram. Sin el script (o si falla), queda el enlace al Reel.
+  const reel = reelUrl(n.fuente);
+  const bloqueReel = reel ? `<section class="article-reel" aria-label="Video original en Instagram">
+      <h2>Video original en Instagram</h2>
+      <blockquote class="instagram-media" data-instgrm-permalink="${esc(reel)}?utm_source=ig_embed" data-instgrm-version="14"><a href="${esc(reel)}" target="_blank" rel="noopener">${icon.ig}<span>Ver el video en Instagram</span></a></blockquote>
+    </section>
+    <script async src="https://www.instagram.com/embed.js"></script>` : '';
   const ld = { '@context': 'https://schema.org', '@type': 'NewsArticle', headline: n.titulo, description: n.bajada, datePublished: n.fecha.toISOString(), author: { '@type': 'Organization', name: n.autor }, publisher: { '@type': 'Organization', name: S.nombre, logo: { '@type': 'ImageObject', url: `${S.url}/assets/img/logo.png` } }, ...(n.imagen ? { image: [S.url + n.imagen] } : {}), mainEntityOfPage: S.url + n.url };
   add(`noticias/${n.slug}.html`, {
     ruta: n.url, titulo: n.titulo, desc: n.bajada, activo: n.categoria, imagen: n.imagen,
@@ -572,6 +582,7 @@ for (const n of notas) {
     ${n.video ? `<div class="article-video"><iframe src="https://www.youtube-nocookie.com/embed/${n.video}?rel=0" title="${esc(n.titulo)}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`
       : n.imagen ? `<figure class="article-img"><img src="${esc(n.imagen)}" alt="${esc(n.pie || '')}">${n.pie ? `<figcaption>${esc(n.pie)}</figcaption>` : ''}</figure>` : ''}
     <div class="prose article-body">${n.html}</div>
+    ${bloqueReel}
     ${n.galeria?.length ? `<div class="galeria">${n.galeria.map((g) => `<a href="${esc(g)}" target="_blank" rel="noopener"><img src="${esc(g)}" alt="" loading="lazy"></a>`).join('')}</div>` : ''}
     ${n.categoria === OPINION ? `<p class="source">Las opiniones expresadas en esta columna son responsabilidad de quien la firma y no representan necesariamente la línea editorial de ${esc(S.nombre)}.</p>` : ''}
     ${n.fuente ? `<p class="source">Publicado originalmente en <a href="${esc(n.fuente)}" target="_blank" rel="noopener">${/instagram/.test(n.fuente) ? 'nuestro Instagram' : 'esta fuente'}</a>.</p>` : ''}
