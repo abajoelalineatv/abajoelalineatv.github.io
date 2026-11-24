@@ -30,9 +30,9 @@
   "instagram_texto": "Notas del día, coberturas y lo que pasa en el territorio. Síguenos en Instagram.",
   "nosotros_titulo": "Un canal hecho desde abajo",
   "nosotros_bajada": "Desde los barrios populares de Temuco, construimos una televisión donde las comunidades son protagonistas de sus propias historias.",
-  "nosotros_portada": "/assets/uploads/nosotros/portada-temuco.webp",
-  "nosotros_portada_pie": "Temuco de noche, con el río Cautín en primer plano. Fotografía del plan de contenidos, 2023.",
-  "nosotros_portada_movil": "/assets/uploads/nosotros/portada-temuco-800.webp",
+  "nosotros_portada": "/assets/uploads/nosotros/portada-rio.webp",
+  "nosotros_portada_pie": "El río Cautín y Temuco al atardecer.",
+  "nosotros_portada_movil": "/assets/uploads/nosotros/portada-rio-800.webp",
   "nosotros_texto": "Abajo ’e la Línea TV es un medio de comunicación comunitario, autogestionado y sin fines de lucro, nacido en el territorio que se extiende entre la antigua línea ferroviaria y las riberas del río Cautín. Hoy transmitimos a través de la señal abierta **35.1 de Temuco** y por internet, llevando a la pantalla las voces, memorias y experiencias de quienes habitan nuestro territorio.",
   "nosotros_datos": [
     {
@@ -147,6 +147,12 @@
     {
       "imagen": "/assets/uploads/nosotros/plan-festival.webp",
       "pie": "Actividad cultural nocturna.",
+      "fecha": "",
+      "fuente": "Plan de contenidos presentado al CNTV, 2023"
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/portada-temuco.webp",
+      "pie": "Temuco de noche, con el río Cautín en primer plano.",
       "fecha": "",
       "fuente": "Plan de contenidos presentado al CNTV, 2023"
     },

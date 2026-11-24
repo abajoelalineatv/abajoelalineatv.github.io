@@ -850,7 +850,7 @@ ${md('nosotros_territorio_texto') ? `
     </div>
     ${tx('nosotros_territorio_imagen', '') ? `<figure class="ab-foto-territorio"><div class="ab-paralaje">${img(tx('nosotros_territorio_imagen', ''), tx('nosotros_territorio_pie', ''))}</div>${tx('nosotros_territorio_pie', '') ? `<figcaption>${esc(tx('nosotros_territorio_pie', ''))}</figcaption>` : ''}</figure>` : ''}
   </div>
-  ${cfg.programas.length ? `<h3 class="ab-h3">Nuestros programas</h3><div class="progs">${cfg.programas.map(progCard).join('')}</div>` : ''}
+  ${cfg.programas.length ? `<div class="ab-territorio-progs"><h3 class="ab-h3">Nuestros programas</h3><div class="progs">${cfg.programas.map(progCard).join('')}</div></div>` : ''}
 </div></section>` : ''}
 
 ${md('nosotros_derecho_texto') ? `
