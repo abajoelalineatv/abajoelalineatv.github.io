@@ -1,0 +1,15 @@
+// Publicación de la web en Cloudflare Workers (solo archivos estáticos, plan gratuito).
+// Es el mismo sitio que genera scripts/build.mjs en public/ (el mismo que va a GitHub Pages).
+// Lo publica .github/workflows/publicar.yml en cada actualización. Dirección de prueba:
+// https://abajoelalinea.<subdominio-de-la-cuenta>.workers.dev (aún sin dominio propio).
+{
+  "name": "abajoelalinea",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./public",
+    // /noticias sirve noticias.html, igual que GitHub Pages.
+    "html_handling": "auto-trailing-slash",
+    // Direcciones inexistentes muestran la página 404 del sitio.
+    "not_found_handling": "404-page"
+  }
+}
