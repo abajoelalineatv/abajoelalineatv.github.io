@@ -1,7 +1,7 @@
 // «Quiénes somos»: índice de capítulos, archivo con visor y movimiento mínimo con GSAP.
 // Lo básico (índice, archivo, visor) funciona sin GSAP. El movimiento solo se agrega si GSAP cargó
 // y la persona no pidió reducir el movimiento. Nada se fija en pantalla salvo el periódico, que acompaña
-// la lectura de su propio capítulo sin alargar el recorrido.
+// la lectura de su propio capítulo sin moverse ni alargar el recorrido.
 (() => {
   const raiz = document.querySelector('.ab-especial');
   if (!raiz) return;
@@ -55,21 +55,26 @@
     const elegir = (i, { enfocar = false } = {}) => {
       actual = (i + piezas.length) % piezas.length;
       const p = piezas[actual];
+      const figura = escena.closest('.ab-escena');
       eImg.style.opacity = '0';
+      figura.classList.add('ab-cambiando');
       const nueva = new Image();
       nueva.onload = nueva.onerror = () => {
         eImg.src = p.src;
         eImg.alt = p.pie;
+        ePie.textContent = p.pie;
+        eMeta.textContent = p.meta;
         eImg.style.opacity = '1';
+        figura.classList.remove('ab-cambiando');
       };
       nueva.src = p.src;
       escena.href = p.src;
-      ePie.textContent = p.pie;
-      eMeta.textContent = p.meta;
       contador.textContent = `${actual + 1} de ${piezas.length}`;
       minis.forEach((m, k) => (k === actual ? m.setAttribute('aria-current', 'true') : m.removeAttribute('aria-current')));
+      // La miniatura elegida queda centrada en la tira.
       const m = minis[actual];
-      m.parentElement.parentElement.scrollTo({ left: m.offsetLeft - 16, behavior: 'smooth' });
+      const tira = m.closest('.ab-miniaturas');
+      tira.scrollTo({ left: m.parentElement.offsetLeft - (tira.clientWidth - m.offsetWidth) / 2, behavior: 'smooth' });
       if (enfocar) m.focus({ preventScroll: true });
       if (visor.open) mostrarVisor();
     };
@@ -135,8 +140,8 @@
   }
 
   const mm = gsap.matchMedia();
-  mm.add({ mov: '(prefers-reduced-motion: no-preference)', compu: '(min-width: 961px)' }, (ctx) => {
-    const { mov, compu } = ctx.conditions;
+  mm.add({ mov: '(prefers-reduced-motion: no-preference)' }, (ctx) => {
+    const { mov } = ctx.conditions;
     if (!mov) {
       $$('.ab-hito', raiz).forEach((h) => h.classList.add('ab-alcanzado'));
       return;
@@ -158,23 +163,6 @@
     $$('.ab-hito', raiz).forEach((h) => {
       ScrollTrigger.create({ trigger: h, start: 'top 68%', onEnter: () => h.classList.add('ab-alcanzado'), onLeaveBack: () => h.classList.remove('ab-alcanzado') });
     });
-
-    // Capítulo 1 (solo computador, donde el periódico acompaña la lectura): enfoque leve en la parte de la
-    // portada de la que habla cada párrafo. Acercamientos moderados para no perder el documento completo.
-    const doc = $('.ab-doc-marco img', raiz);
-    if (doc && compu) {
-      const focos = {
-        todo: { scale: 1, transformOrigin: '50% 50%' },
-        cabecera: { scale: 1.6, transformOrigin: '50% 6%' },
-        linea: { scale: 1.7, transformOrigin: '40% 94%' },
-      };
-      $$('.ab-paso', raiz).forEach((p) => {
-        ScrollTrigger.create({
-          trigger: p, start: 'top 60%', end: 'bottom 40%',
-          onToggle: (st) => { if (st.isActive) gsap.to(doc, { ...(focos[p.dataset.foco] || focos.todo), duration: 0.8, ease: 'power2.inOut', overwrite: true }); },
-        });
-      });
-    }
 
     // Capítulo 2: el esquema se arma en un tramo corto del desplazamiento y la línea roja se dibuja.
     $$('.ab-corte svg', raiz).forEach((svg) => {

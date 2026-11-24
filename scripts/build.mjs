@@ -678,10 +678,7 @@ ${cortos(eps).length ? seccion({ kicker: 'Formato corto', titulo: 'Shorts y reel
   const cierreImg = tx('nosotros_cierre_imagen', '');
   const ultima = informativas[0];
 
-  // Capítulo 1: cada párrafo enfoca una parte de la portada real del periódico de 2002.
-  const focos = ['todo', 'todo', 'cabecera', 'linea', 'todo'];
-  let iFoco = 0;
-  const historia = md('nosotros_historia_texto').replace(/<p>/g, () => `<p class="ab-paso" data-foco="${focos[iFoco++] || 'todo'}">`);
+  const historia = md('nosotros_historia_texto');
 
   const estacion = (n, id, h2) => `<header class="ab-estacion"><span class="ab-parada" aria-hidden="true">${n}</span><h2 id="${id}-t">${esc(h2)}</h2></header>`;
   const riel = '<div class="ab-riel" aria-hidden="true"><span class="ab-riel-luz"></span></div>';
