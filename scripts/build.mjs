@@ -579,10 +579,10 @@ for (const n of notas) {
     ${n.categoria === OPINION
       ? `<div class="byline byline-col">${avatar(n, 'avatar avatar-lg')}<div><strong>${esc(n.autor)}</strong>${n.autorCargo ? `<span>${esc(n.autorCargo)}</span>` : ''}<time datetime="${n.fecha.toISOString()}">${fecha(n.fecha, 'larga')} · ${n.minutos} min de lectura</time></div></div>`
       : `<div class="byline"><span>Por <strong>${esc(n.autor)}</strong></span><time datetime="${n.fecha.toISOString()}">${fecha(n.fecha, 'larga')}</time><span>${n.minutos} min de lectura</span></div>`}
-    ${n.video ? `<div class="article-video"><iframe src="https://www.youtube-nocookie.com/embed/${n.video}?rel=0" title="${esc(n.titulo)}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`
-      : n.imagen ? `<figure class="article-img"><img src="${esc(n.imagen)}" alt="${esc(n.pie || '')}">${n.pie ? `<figcaption>${esc(n.pie)}</figcaption>` : ''}</figure>` : ''}
-    <div class="prose article-body">${n.html}</div>
+    ${n.imagen ? `<figure class="article-img"><img src="${esc(n.imagen)}" alt="${esc(n.pie || '')}">${n.pie ? `<figcaption>${esc(n.pie)}</figcaption>` : ''}</figure>` : ''}
+    ${n.video ? `<div class="article-video"><iframe src="https://www.youtube-nocookie.com/embed/${n.video}?rel=0" title="${esc(n.titulo)}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>` : ''}
     ${bloqueReel}
+    <div class="prose article-body">${n.html}</div>
     ${n.galeria?.length ? `<div class="galeria">${n.galeria.map((g) => `<a href="${esc(g)}" target="_blank" rel="noopener"><img src="${esc(g)}" alt="" loading="lazy"></a>`).join('')}</div>` : ''}
     ${n.categoria === OPINION ? `<p class="source">Las opiniones expresadas en esta columna son responsabilidad de quien la firma y no representan necesariamente la línea editorial de ${esc(S.nombre)}.</p>` : ''}
     ${n.fuente ? `<p class="source">Publicado originalmente en <a href="${esc(n.fuente)}" target="_blank" rel="noopener">${/instagram/.test(n.fuente) ? 'nuestro Instagram' : 'esta fuente'}</a>.</p>` : ''}

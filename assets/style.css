@@ -289,7 +289,7 @@ img.fg.vert { width: auto; aspect-ratio: 9 / 16; margin: 0 auto; object-fit: cov
 .article-video { aspect-ratio: 16 / 9; margin-bottom: 28px; border-radius: var(--radius); overflow: hidden; background: #000; }
 .article-video iframe { width: 100%; height: 100%; border: 0; }
 /* Reel original de Instagram: reproductor oficial; si no carga, queda el enlace. */
-.article-reel { margin: 32px 0; }
+.article-reel { margin: 0 0 28px; }
 .article-reel h2 { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
 .article-reel blockquote.instagram-media { max-width: 540px; width: 100%; margin: 0 auto; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .article-reel blockquote.instagram-media > a { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 22px 16px; color: var(--text); font-weight: 700; text-decoration: none; }
