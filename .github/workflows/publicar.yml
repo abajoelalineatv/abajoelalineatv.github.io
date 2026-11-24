@@ -53,9 +53,11 @@ jobs:
           fi
 
       - run: node scripts/build.mjs
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      # Versiones actuales y compatibles entre sí: la combinación anterior (subir v3 + publicar v4)
+      # fallaba a veces con "No artifacts named github-pages were found".
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: public
       - id: deploy
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
