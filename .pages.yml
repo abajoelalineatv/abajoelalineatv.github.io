@@ -330,11 +330,14 @@ content:
         type: string
       - name: nosotros_galeria
         label: Quiénes somos · archivo de fotos
+        description: La primera foto es la que se muestra en grande al abrir la página.
         type: object
         list: true
         fields:
           - { name: imagen, label: Foto, type: image }
-          - { name: pie, label: Pie de foto, type: string }
+          - { name: pie, label: Qué se ve, type: string }
+          - { name: fecha, label: Fecha (si se conoce), type: string }
+          - { name: fuente, label: Fuente o documento de origen, type: string }
       - name: nosotros_video
         label: Quiénes somos · video institucional o histórico (enlace de YouTube)
         description: Vacío = no se muestra. Usa solo videos reales del canal.

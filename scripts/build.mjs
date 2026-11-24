@@ -788,36 +788,43 @@ ${md('nosotros_senal_texto') || hitos.length ? `
   ${riel}
   ${estacion(3, 'la-senal', tx('nosotros_senal_titulo', ''))}
   <div class="prose ab-col">${md('nosotros_senal_texto')}</div>
-</div>
-${hitos.length ? `
-<div class="ab-crono" role="region" aria-label="Cronología">
-  <div class="ab-crono-barra" aria-hidden="true"><span></span></div>
-  <ol class="ab-crono-pista">${hitos.map((h) => `
+  ${hitos.length ? `
+  <ol class="ab-crono" aria-label="Cronología">${hitos.map((h) => `
     <li class="ab-hito${h.imagen ? '' : ' ab-hito-sinfoto'}">
-      <div class="ab-hito-txt"><span class="ab-hito-etq">${esc(h.etiqueta || '')}</span><h3>${esc(h.titulo || '')}</h3><p>${esc(h.texto || '')}</p></div>
+      <span class="ab-hito-punto" aria-hidden="true"></span>
+      <div class="ab-hito-txt"><p class="ab-hito-etq">${esc(h.etiqueta || '')}</p><h3>${esc(h.titulo || '')}</h3><p>${esc(h.texto || '')}</p></div>
       ${h.imagen ? `<figure>${img(h.imagen, h.pie || '')}${h.pie ? `<figcaption>${esc(h.pie)}</figcaption>` : ''}</figure>` : ''}
     </li>`).join('')}
-  </ol>
-</div>` : ''}
-</section>` : ''}
+  </ol>` : ''}
+</div></section>` : ''}
 
 ${archivo.length ? `
 <section class="ab-cap ab-cap-archivo" id="archivo" aria-labelledby="archivo-t"><div class="wrap">
   ${riel}
-  <header class="ab-archivo-cab">
-    <div><h2 id="archivo-t">${esc(tx('nosotros_galeria_titulo', 'Archivo'))}</h2>${tx('nosotros_galeria_texto', '') ? `<p>${esc(tx('nosotros_galeria_texto', ''))}</p>` : ''}</div>
-    <div class="ab-archivo-ctrl" hidden>
-      <button type="button" class="ab-btn" data-mover="-1" aria-label="Fotos anteriores">‹</button>
-      <span class="ab-contador" aria-live="polite"></span>
-      <button type="button" class="ab-btn" data-mover="1" aria-label="Fotos siguientes">›</button>
-    </div>
+  <header class="ab-estacion ab-archivo-cab">
+    <h2 id="archivo-t">${esc(tx('nosotros_galeria_titulo', 'Archivo'))}</h2>${tx('nosotros_galeria_texto', '') ? `<p>${esc(tx('nosotros_galeria_texto', ''))}</p>` : ''}
   </header>
-  <ul class="ab-carrusel" aria-label="Fotografías del archivo">${archivo.map((g, i) => `
-    <li><figure><button type="button" class="ab-foto-btn" data-i="${i}" aria-label="Ampliar: ${esc(g.pie || 'fotografía')}">${img(g.imagen, g.pie || '')}</button>${g.pie ? `<figcaption>${esc(g.pie)}</figcaption>` : ''}</figure></li>`).join('')}
-  </ul>
+  <div class="ab-archivo">
+    <figure class="ab-escena">
+      <a class="ab-escena-foto" href="${esc(archivo[0].imagen)}" aria-label="Ver en pantalla completa">${img(archivo[0].imagen, archivo[0].pie || '')}</a>
+      <figcaption>
+        <p class="ab-escena-pie">${esc(archivo[0].pie || '')}</p>
+        <p class="ab-escena-meta">${[archivo[0].fecha, archivo[0].fuente].filter(Boolean).map(esc).join('. ')}</p>
+        <div class="ab-escena-ctrl" hidden>
+          <button type="button" class="ab-btn" data-mover="-1" aria-label="Foto anterior">‹</button>
+          <span class="ab-contador" aria-live="polite">1 de ${archivo.length}</span>
+          <button type="button" class="ab-btn" data-mover="1" aria-label="Foto siguiente">›</button>
+        </div>
+      </figcaption>
+    </figure>
+    <ul class="ab-miniaturas" aria-label="Todas las piezas del archivo">${archivo.map((g, i) => `
+      <li><a class="ab-mini" href="${esc(g.imagen)}" data-i="${i}"${i === 0 ? ' aria-current="true"' : ''}>${img(g.imagen, g.pie || '')}</a></li>`).join('')}
+    </ul>
+  </div>
+  <script type="application/json" id="ab-archivo-datos">${JSON.stringify(archivo.map((g) => ({ src: g.imagen, pie: g.pie || '', meta: [g.fecha, g.fuente].filter(Boolean).join('. ') }))).replace(/</g, '\\u003c')}</script>
 </div>
 <dialog class="ab-visor" aria-label="Fotografía ampliada">
-  <figure><img alt=""><figcaption></figcaption></figure>
+  <figure><img alt=""><figcaption><span class="ab-visor-pie"></span><span class="ab-visor-meta"></span></figcaption></figure>
   <button type="button" class="ab-btn ab-visor-ant" aria-label="Foto anterior">‹</button>
   <button type="button" class="ab-btn ab-visor-sig" aria-label="Foto siguiente">›</button>
   <button type="button" class="ab-btn ab-visor-cerrar" aria-label="Cerrar">✕</button>
@@ -848,21 +855,21 @@ ${md('nosotros_territorio_texto') ? `
 
 ${md('nosotros_derecho_texto') ? `
 <section class="ab-manifiesto" aria-labelledby="manifiesto-t"><div class="wrap">
-  <h2 id="manifiesto-t">${tx('nosotros_derecho_titulo', '').split(/\s+/).map((w) => `<span class="ab-pal">${esc(w)}</span>`).join(' ')}</h2>
+  <h2 id="manifiesto-t">${esc(tx('nosotros_derecho_titulo', '')).replace(/\b(derecho)\b/i, '<span class="ab-acento">$1</span>')}</h2>
   <div class="prose ab-col">${md('nosotros_derecho_texto')}</div>
   ${valores.length ? `<ul class="ab-valores">${valores.map((v) => `<li>${esc(v)}</li>`).join('')}</ul>` : ''}
 </div></section>` : ''}
 
-${tx('nosotros_cierre', '') ? `
-<section class="ab-cierre">
-  ${cierreImg ? `<div class="ab-cierre-fondo">${img(cierreImg, '')}</div>` : ''}
-  <div class="wrap">
-    <blockquote><p>${esc(tx('nosotros_cierre', ''))}</p>${tx('nosotros_cierre_texto', '') ? `<footer>${esc(tx('nosotros_cierre_texto', ''))}</footer>` : ''}</blockquote>
-    ${cierreImg && tx('nosotros_cierre_pie', '') ? `<p class="ab-credito-cierre">Foto: ${esc(tx('nosotros_cierre_pie', ''))}</p>` : ''}
-  </div>
-</section>` : ''}
-
-<section class="ab-invitacion" aria-labelledby="invitacion-t"><div class="wrap">
+<section class="ab-final" aria-labelledby="invitacion-t">
+  ${tx('nosotros_cierre', '') ? `
+  <figure class="ab-final-foto">
+    ${cierreImg ? img(cierreImg, tx('nosotros_cierre_pie', '')) : ''}
+    <figcaption class="wrap">
+      <blockquote><p>${esc(tx('nosotros_cierre', ''))}</p>${tx('nosotros_cierre_texto', '') ? `<footer>${esc(tx('nosotros_cierre_texto', ''))}</footer>` : ''}</blockquote>
+      ${cierreImg && tx('nosotros_cierre_pie', '') ? `<p class="ab-credito-cierre">Foto: ${esc(tx('nosotros_cierre_pie', ''))}</p>` : ''}
+    </figcaption>
+  </figure>` : ''}
+  <div class="wrap ab-invitacion">
   <h2 id="invitacion-t">${esc(tx('nosotros_invitacion_titulo', 'Nuestra historia sigue escribiéndose'))}</h2>
   <p>${esc(tx('nosotros_invitacion_texto', 'Conoce lo que estamos contando hoy.'))}</p>
   <ul class="ab-accesos">
@@ -872,7 +879,8 @@ ${tx('nosotros_cierre', '') ? `
     <li><a class="ab-acceso-vivo" href="/#envivo"><strong>Ver señal en vivo</strong><span>Canal ${esc(S.canalTvd)} en TV abierta y por internet</span></a></li>
     <li><a href="${enviaNota}"><strong>${esc(tx('envia_boton', 'Envía tu nota'))}</strong><span>${esc(tx('envia_texto', ''))}</span></a></li>
   </ul>
-</div></section>
+  </div>
+</section>
 </div>
 ${sintoniaBlock('alt', true)}
 <script src="/assets/vendor/gsap/gsap.min.js" defer></script>
