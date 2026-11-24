@@ -658,18 +658,108 @@ ${cortos(eps).length ? seccion({ kicker: 'Formato corto', titulo: 'Shorts y reel
 }
 
 // ---------- Nosotros / 404 ----------
-add('nosotros.html', {
-  ruta: '/nosotros', titulo: 'Nosotros', activo: 'nosotros',
-  cuerpo: `
-<section class="page-head"><div class="wrap"><span class="kicker">Quiénes somos</span><h1>${esc(tx('nosotros_titulo', 'Quiénes somos'))}</h1><p>${esc(S.descripcion)}</p></div></section>
+{
+  // Cada bloque aparece solo si tiene contenido en «Textos del sitio».
+  const lista = (k) => (Array.isArray(T[k]) ? T[k] : []);
+  const md = (k) => (tx(k, '') ? marked.parse(tx(k, '')) : '');
+  const foto = (src, pie, clase = '') => (src ? `<figure class="ab-foto ${clase}"><img src="${esc(src)}" alt="${esc(pie || '')}" loading="lazy">${pie ? `<figcaption>${esc(pie)}</figcaption>` : ''}</figure>` : '');
+  const portada = tx('nosotros_portada', '');
+  const hitos = lista('nosotros_hitos').filter((h) => h.titulo || h.texto);
+  const galeria = lista('nosotros_galeria').filter((g) => g.imagen);
+  const temas = lista('nosotros_temas').filter((t) => t.nombre);
+  const valores = lista('nosotros_valores').filter(Boolean);
+  const cierreImg = tx('nosotros_cierre_imagen', '');
+  // Esquema del territorio (no es un mapa): centro arriba, línea del tren, barrios populares y río Cautín abajo.
+  const corte = `
+<section class="block ab-corte-sec"><div class="wrap">
+  <figure class="ab-corte">
+    <div class="ab-corte-svg"><svg viewBox="0 0 960 300" role="img" aria-labelledby="corte-t corte-d">
+      <title id="corte-t">Por qué «Abajo ’e la Línea»</title>
+      <desc id="corte-d">Corte esquemático de Temuco: el centro de la ciudad en la parte alta, la línea del tren en el borde, y más abajo los barrios populares que crecieron hasta la ribera del río Cautín.</desc>
+      <path class="c-cielo" d="M0 0H960V300H0Z"/>
+      <path class="c-suelo" d="M0 110 H330 C380 110 400 190 450 196 H780 C820 196 830 232 860 236 H960 V300 H0 Z"/>
+      <path class="c-rio" d="M845 232 C870 238 900 238 960 236 V300 H845 Z"/>
+      <g class="c-edif"><rect x="40" y="62" width="34" height="48"/><rect x="82" y="44" width="40" height="66"/><rect x="130" y="70" width="30" height="40"/><rect x="168" y="52" width="38" height="58"/><rect x="214" y="76" width="30" height="34"/><rect x="252" y="60" width="34" height="50"/></g>
+      <g class="c-casas"><path d="M480 196v-20l14-12 14 12v20z"/><path d="M522 196v-16l12-10 12 10v16z"/><path d="M562 196v-22l15-12 15 12v22z"/><path d="M608 196v-16l12-10 12 10v16z"/><path d="M648 196v-20l14-12 14 12v20z"/><path d="M692 196v-16l12-10 12 10v16z"/><path d="M732 196v-18l13-11 13 11v18z"/></g>
+      <g class="c-via"><line x1="300" y1="110" x2="372" y2="110"/><line x1="306" y1="104" x2="306" y2="116"/><line x1="318" y1="104" x2="318" y2="116"/><line x1="330" y1="104" x2="330" y2="116"/><line x1="342" y1="104" x2="342" y2="116"/><line x1="354" y1="104" x2="354" y2="116"/><line x1="366" y1="104" x2="366" y2="116"/></g>
+      <line class="c-frontera" x1="372" y1="20" x2="372" y2="280"/>
+      <text class="c-tit" x="40" y="146">Centro de Temuco</text>
+      <text class="c-tit c-rojo" x="384" y="38">Línea del tren</text>
+      <text class="c-sub" x="384" y="58">frontera simbólica</text>
+      <text class="c-tit" x="480" y="232">Barrios populares</text>
+      <text class="c-sub" x="480" y="252">Santa Rosa · población Paredes</text>
+      <text class="c-tit c-azul" x="855" y="274">Río Cautín</text>
+    </svg>
+    <svg class="c-movil" viewBox="0 0 400 300" aria-hidden="true">
+      <path class="c-cielo" d="M0 0H400V300H0Z"/>
+      <path class="c-suelo" d="M0 120 H140 C165 120 175 196 205 200 H320 C340 200 345 236 360 240 H400 V300 H0 Z"/>
+      <path class="c-rio" d="M352 236 C365 242 380 242 400 240 V300 H352 Z"/>
+      <g class="c-edif"><rect x="14" y="78" width="22" height="42"/><rect x="42" y="62" width="26" height="58"/><rect x="74" y="84" width="20" height="36"/><rect x="100" y="70" width="24" height="50"/></g>
+      <g class="c-casas"><path d="M212 200v-16l11-9 11 9v16z"/><path d="M244 200v-13l9-8 9 8v13z"/><path d="M272 200v-17l11-9 11 9v17z"/><path d="M302 200v-13l9-8 9 8v13z"/></g>
+      <g class="c-via"><line x1="118" y1="120" x2="150" y2="120"/><line x1="122" y1="115" x2="122" y2="125"/><line x1="132" y1="115" x2="132" y2="125"/><line x1="142" y1="115" x2="142" y2="125"/></g>
+      <line class="c-frontera" x1="150" y1="16" x2="150" y2="284"/>
+      <text class="c-tit" x="12" y="150">Centro</text>
+      <text class="c-tit c-rojo" x="158" y="34">Línea del tren</text>
+      <text class="c-sub" x="158" y="52">frontera simbólica</text>
+      <text class="c-tit" x="200" y="232">Barrios populares</text>
+      <text class="c-sub" x="200" y="250">Santa Rosa · Paredes</text>
+      <text class="c-tit c-azul c-fin" x="394" y="286">Río Cautín</text>
+    </svg></div>
+    ${tx('nosotros_corte_pie', '') ? `<figcaption>${esc(tx('nosotros_corte_pie', ''))}</figcaption>` : ''}
+  </figure>
+</div></section>`;
+
+  add('nosotros.html', {
+    ruta: '/nosotros', titulo: 'Nosotros', activo: 'nosotros',
+    cuerpo: `
+<section class="ab-hero"><div class="wrap ab-hero-in">
+  <div class="ab-hero-txt">
+    <h1>${esc(tx('nosotros_titulo', 'Quiénes somos'))}</h1>
+    <p class="ab-bajada">${esc(tx('nosotros_bajada', S.descripcion))}</p>
+  </div>
+  ${foto(portada, tx('nosotros_portada_pie', ''), 'ab-hero-foto')}
+</div></section>
 <section class="block"><div class="wrap about">
-  <div class="prose">${marked.parse(tx('nosotros_texto', ''))}</div>
-  <dl class="facts">${(Array.isArray(T.nosotros_datos) ? T.nosotros_datos : []).map((d) => `
+  <div class="prose ab-intro">${md('nosotros_texto')}</div>
+  <dl class="facts">${lista('nosotros_datos').map((d) => `
     <div><dt>${esc(d.etiqueta || '')}</dt><dd>${esc(d.valor || '')}</dd></div>`).join('')}
   </dl>
 </div></section>
+${md('nosotros_historia_texto') ? `
+<section class="block alt"><div class="wrap ab-split">
+  <div><h2 class="ab-h2">${esc(tx('nosotros_historia_titulo', ''))}</h2><div class="prose">${md('nosotros_historia_texto')}</div></div>
+  ${foto(tx('nosotros_historia_imagen', ''), tx('nosotros_historia_pie', ''), 'ab-papel')}
+</div></section>` : ''}
+${corte}
+${md('nosotros_senal_texto') || hitos.length ? `
+<section class="block alt"><div class="wrap">
+  <h2 class="ab-h2">${esc(tx('nosotros_senal_titulo', ''))}</h2>
+  <div class="prose ab-col">${md('nosotros_senal_texto')}</div>
+  ${hitos.length ? `<ol class="ab-tiempo">${hitos.map((h) => `
+    <li><span class="ab-etq">${esc(h.etiqueta || '')}</span><h3>${esc(h.titulo || '')}</h3><p>${esc(h.texto || '')}</p></li>`).join('')}
+  </ol>` : ''}
+  ${galeria.length ? `<div class="ab-galeria">${galeria.map((g) => foto(g.imagen, g.pie)).join('')}</div>` : ''}
+</div></section>` : ''}
+${md('nosotros_territorio_texto') ? `
+<section class="block"><div class="wrap ab-split ab-inv">
+  ${foto(tx('nosotros_territorio_imagen', ''), tx('nosotros_territorio_pie', ''))}
+  <div><h2 class="ab-h2">${esc(tx('nosotros_territorio_titulo', ''))}</h2><div class="prose">${md('nosotros_territorio_texto')}</div>
+  ${temas.length ? `<ul class="ab-temas">${temas.map((t) => `<li>${t.seccion && cats[t.seccion] ? `<a class="chip chip-${esc(t.seccion)}" href="/${esc(t.seccion)}">${esc(t.nombre)} <span aria-hidden="true">→</span></a>` : `<span class="chip ab-chip-txt">${esc(t.nombre)}</span>`}</li>`).join('')}</ul>` : ''}</div>
+</div></section>` : ''}
+${md('nosotros_derecho_texto') ? `
+<section class="block alt ab-derecho"><div class="wrap">
+  <h2 class="ab-h2">${esc(tx('nosotros_derecho_titulo', ''))}</h2>
+  <div class="prose ab-col">${md('nosotros_derecho_texto')}</div>
+  ${valores.length ? `<ul class="ab-valores">${valores.map((v) => `<li>${esc(v)}</li>`).join('')}</ul>` : ''}
+</div></section>` : ''}
+${tx('nosotros_cierre', '') ? `
+<section class="ab-cierre"${cierreImg ? ` style="--fondo:url('${esc(cierreImg)}')"` : ''}><div class="wrap">
+  <blockquote><p>${esc(tx('nosotros_cierre', ''))}</p>${tx('nosotros_cierre_texto', '') ? `<footer>${esc(tx('nosotros_cierre_texto', ''))}</footer>` : ''}</blockquote>
+  ${cierreImg && tx('nosotros_cierre_pie', '') ? `<small class="ab-cierre-pie">Foto: ${esc(tx('nosotros_cierre_pie', ''))}</small>` : ''}
+</div></section>` : ''}
 ${sintoniaBlock('alt', true)}`,
-});
+  });
+}
 
 add('404.html', {
   ruta: '/404', titulo: 'Página no encontrada',

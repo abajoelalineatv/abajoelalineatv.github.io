@@ -268,8 +268,17 @@ content:
       - name: nosotros_titulo
         label: Quiénes somos · título
         type: string
+      - name: nosotros_bajada
+        label: Quiénes somos · frase destacada
+        type: text
+      - name: nosotros_portada
+        label: Quiénes somos · foto de portada
+        type: image
+      - name: nosotros_portada_pie
+        label: Quiénes somos · pie de la foto de portada
+        type: string
       - name: nosotros_texto
-        label: Quiénes somos · texto
+        label: Quiénes somos · introducción
         type: rich-text
       - name: nosotros_datos
         label: Quiénes somos · datos al costado
@@ -278,6 +287,89 @@ content:
         fields:
           - { name: etiqueta, label: Etiqueta, type: string }
           - { name: valor, label: Valor, type: string }
+      - name: nosotros_historia_titulo
+        label: Quiénes somos · historia · título
+        type: string
+      - name: nosotros_historia_texto
+        label: Quiénes somos · historia · texto
+        type: rich-text
+      - name: nosotros_historia_imagen
+        label: Quiénes somos · historia · foto
+        type: image
+      - name: nosotros_historia_pie
+        label: Quiénes somos · historia · pie de foto
+        type: string
+      - name: nosotros_corte_pie
+        label: Quiénes somos · texto bajo el esquema del territorio
+        type: string
+      - name: nosotros_senal_titulo
+        label: Quiénes somos · señal · título
+        type: string
+      - name: nosotros_senal_texto
+        label: Quiénes somos · señal · texto
+        type: rich-text
+      - name: nosotros_hitos
+        label: Quiénes somos · línea de tiempo
+        description: Cada hito lleva un año o una palabra corta (ej. «Hoy»), un título y una frase.
+        type: object
+        list: true
+        fields:
+          - { name: etiqueta, label: "Año o palabra corta", type: string }
+          - { name: titulo, label: Título, type: string }
+          - { name: texto, label: Texto, type: text }
+      - name: nosotros_galeria
+        label: Quiénes somos · galería de fotos
+        type: object
+        list: true
+        fields:
+          - { name: imagen, label: Foto, type: image }
+          - { name: pie, label: Pie de foto, type: string }
+      - name: nosotros_territorio_titulo
+        label: Quiénes somos · territorio · título
+        type: string
+      - name: nosotros_territorio_texto
+        label: Quiénes somos · territorio · texto
+        type: rich-text
+      - name: nosotros_territorio_imagen
+        label: Quiénes somos · territorio · foto
+        type: image
+      - name: nosotros_territorio_pie
+        label: Quiénes somos · territorio · pie de foto
+        type: string
+      - name: nosotros_temas
+        label: Quiénes somos · temas
+        description: Si eliges una sección, el tema enlaza a sus noticias. Sin sección, se muestra solo como texto.
+        type: object
+        list: true
+        fields:
+          - { name: nombre, label: Tema, type: string }
+          - name: seccion
+            label: Sección de noticias (opcional)
+            type: select
+            options:
+              values: ['', comunidad, deportes, cultura, pueblo-mapuche, opinion]
+      - name: nosotros_derecho_titulo
+        label: Quiénes somos · principios · título
+        type: string
+      - name: nosotros_derecho_texto
+        label: Quiénes somos · principios · texto
+        type: rich-text
+      - name: nosotros_valores
+        label: Quiénes somos · principios · palabras clave
+        type: string
+        list: true
+      - name: nosotros_cierre
+        label: Quiénes somos · frase de cierre
+        type: text
+      - name: nosotros_cierre_texto
+        label: Quiénes somos · texto bajo la frase de cierre
+        type: string
+      - name: nosotros_cierre_imagen
+        label: Quiénes somos · foto de fondo del cierre
+        type: image
+      - name: nosotros_cierre_pie
+        label: Quiénes somos · pie de la foto del cierre
+        type: string
       - name: pie_texto
         label: Texto del pie de página
         type: text

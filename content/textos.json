@@ -29,24 +29,117 @@
   "envia_boton": "Envía tu nota",
   "instagram_texto": "Notas del día, coberturas y lo que pasa en el territorio. Síguenos en Instagram.",
   "nosotros_titulo": "Un canal hecho desde abajo",
-  "nosotros_texto": "**Abajo’e la Línea TV** es un canal de televisión comunitaria que transmite en señal abierta desde Temuco.\n\nNacimos para dar voz a las organizaciones sociales, culturales y territoriales que rara vez aparecen en la pantalla de los canales tradicionales. Cubrimos deporte local, movilizaciones, cultura mapuche y la vida cotidiana del Wallmapu desde una mirada propia.\n\nSomos parte de la red de televisión comunitaria digital de Chile: proyectos autogestionados, con concesión del CNTV, que defienden el derecho de los barrios y territorios a contarse a sí mismos.",
+  "nosotros_bajada": "Desde los barrios populares de Temuco, construimos una televisión donde las comunidades son protagonistas de sus propias historias.",
+  "nosotros_portada": "/assets/uploads/nosotros/torre-nielol.webp",
+  "nosotros_portada_pie": "Torre de transmisión en el cerro Ñielol, desde donde emitimos la señal 35.1.",
+  "nosotros_texto": "Abajo ’e la Línea TV es un medio de comunicación comunitario, autogestionado y sin fines de lucro, nacido en el territorio que se extiende entre la antigua línea ferroviaria y las riberas del río Cautín. Hoy transmitimos a través de la señal abierta **35.1 de Temuco** y por internet, llevando a la pantalla las voces, memorias y experiencias de quienes habitan nuestro territorio.",
   "nosotros_datos": [
     {
-      "etiqueta": "Sede",
-      "valor": "Temuco, Región de La Araucanía"
+      "etiqueta": "Origen",
+      "valor": "Temuco, 2002"
     },
     {
-      "etiqueta": "Señal",
-      "valor": "TV digital abierta · canal 35.1 · 24 horas"
+      "etiqueta": "Televisión comunitaria",
+      "valor": "Desde 2017"
     },
     {
-      "etiqueta": "Enfoque",
-      "valor": "Noticias locales, deporte, cultura y organizaciones sociales"
+      "etiqueta": "Señal abierta",
+      "valor": "35.1 · Temuco"
     },
     {
-      "etiqueta": "Modelo",
-      "valor": "Medio autogestionado y comunitario"
+      "etiqueta": "Concesión",
+      "valor": "Local comunitaria · 20 años"
+    },
+    {
+      "etiqueta": "Territorio",
+      "valor": "Santa Rosa y población Paredes, Temuco"
+    },
+    {
+      "etiqueta": "Redes",
+      "valor": "Asociación de TV Comunitarias de Chile · Puntos de Cultura Comunitaria"
+    },
+    {
+      "etiqueta": "Organización",
+      "valor": "Autogestionada y sin fines de lucro"
     }
   ],
+  "nosotros_historia_titulo": "Nuestra historia comienza en el barrio",
+  "nosotros_historia_texto": "Mucho antes de llegar a la televisión, nuestra historia comenzó en el papel.\n\nEn 2002, desde la Junta de Vecinos A-28 Paredes, en el macrosector Santa Rosa, y junto a agrupaciones culturales de Temuco, nació un periódico vecinal que buscaba comunicar lo que ocurría en los barrios, visibilizar sus problemáticas y fortalecer la organización comunitaria.\n\nSu nombre, **Abajo ’e la Línea**, no fue casualidad.\n\nLa línea del ferrocarril representó durante décadas una frontera simbólica en la configuración urbana de Temuco. Hacia el río Cautín crecieron barrios populares habitados por familias provenientes del campo y de distintos territorios de La Araucanía, entre ellas numerosas familias mapuche atravesadas por procesos históricos de despojo y desplazamiento.\n\nDesde ese espacio, marcado por la segregación socioespacial, surgió una manera de comprender la comunicación: **contar nuestra propia realidad, desde el lugar que habitamos y con las voces de quienes la construyen.**",
+  "nosotros_historia_imagen": "/assets/uploads/nosotros/periodico-2002.webp",
+  "nosotros_historia_pie": "Portada del periódico vecinal Abajo ’e la Línea, marzo de 2002.",
+  "nosotros_corte_pie": "Esquema del territorio (no está a escala): los barrios populares crecieron bajo el nivel del centro, entre la línea del tren y el río Cautín.",
+  "nosotros_senal_titulo": "Del periódico vecinal a la señal abierta",
+  "nosotros_senal_texto": "En 2017 dimos un nuevo paso. Gracias a la colaboración con Señal 3 La Victoria, histórica experiencia de televisión comunitaria de Santiago, instalamos nuestra primera antena analógica y comenzamos a desarrollar capacidades de producción y transmisión audiovisual. Ese mismo año, nuestra agrupación obtuvo personalidad jurídica.\n\nLo que había comenzado como una experiencia de prensa barrial empezó a convertirse en un proyecto televisivo.\n\nEl siguiente desafío fue conquistar un espacio en el espectro radioeléctrico, un bien público cuyo acceso ha estado históricamente limitado para los medios comunitarios.\n\nTras un proceso de postulación iniciado en 2023, y mediante el trabajo colaborativo con otros canales de la Asociación de Televisiones Comunitarias de Chile, obtuvimos una **concesión de televisión digital abierta por 20 años** para operar la señal 35.1 en Temuco.\n\nPosteriormente, mediante el Fondo de Desarrollo de las Telecomunicaciones de SUBTEL, conseguimos financiar la infraestructura necesaria para transmitir desde el cerro Ñielol.\n\nNo fue solamente un avance tecnológico. Fue el resultado de años de organización, aprendizaje colectivo y colaboración entre medios que comparten una convicción: las comunidades también tienen derecho a producir y transmitir sus propios contenidos.",
+  "nosotros_hitos": [
+    {
+      "etiqueta": "2002",
+      "titulo": "Periódico vecinal",
+      "texto": "Nace Abajo ’e la Línea en la Junta de Vecinos A-28 Paredes, junto a agrupaciones culturales de Temuco."
+    },
+    {
+      "etiqueta": "2017",
+      "titulo": "Primera antena",
+      "texto": "Con Señal 3 La Victoria instalamos una antena analógica. La agrupación obtiene personalidad jurídica."
+    },
+    {
+      "etiqueta": "2023",
+      "titulo": "Postulación",
+      "texto": "Junto a otros canales comunitarios iniciamos la postulación a una concesión de TV digital abierta."
+    },
+    {
+      "etiqueta": "20 años",
+      "titulo": "Concesión",
+      "texto": "Obtenemos una concesión local comunitaria por 20 años para operar la señal 35.1 en Temuco."
+    },
+    {
+      "etiqueta": "Ñielol",
+      "titulo": "Infraestructura",
+      "texto": "Con el Fondo de Desarrollo de las Telecomunicaciones de SUBTEL financiamos la transmisión desde el cerro Ñielol."
+    },
+    {
+      "etiqueta": "Hoy",
+      "titulo": "Señal 35.1",
+      "texto": "Transmitimos en señal abierta en Temuco y en vivo por internet."
+    }
+  ],
+  "nosotros_galeria": [
+    {
+      "imagen": "/assets/uploads/nosotros/instalacion-antena.webp",
+      "pie": "Instalación de la antena en el cerro Ñielol."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/equipos-transmision.webp",
+      "pie": "Equipos de transmisión de la señal digital."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/control-master.webp",
+      "pie": "Control de emisión del canal."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/medidor-senal-35.webp",
+      "pie": "Medición de la señal del canal 35."
+    }
+  ],
+  "nosotros_territorio_titulo": "Una televisión construida con el territorio",
+  "nosotros_territorio_texto": "Nuestra programación nace del encuentro con organizaciones sociales, comunidades, artistas, deportistas, realizadores audiovisuales y habitantes de Temuco y La Araucanía.\n\nAbordamos las realidades de nuestros barrios, la memoria y los derechos humanos, las expresiones artísticas y culturales, las problemáticas ambientales, la participación ciudadana y el deporte local. Damos especial importancia a la revitalización del mapuzungun, las experiencias del pueblo mapuche, el fútbol femenino y las historias que habitualmente encuentran poco espacio en los grandes medios de comunicación.\n\nTambién abrimos nuestras pantallas a contenidos infantiles, producciones audiovisuales independientes, información regional y ciclos de cine y memoria, mediante colaboraciones con organizaciones e instituciones como ARCATEL y el Museo de la Memoria y los Derechos Humanos.\n\nCreemos en una comunicación cercana, pluralista y participativa, que no se limite a informar sobre las comunidades, sino que contribuya a fortalecer sus vínculos, reconocer sus experiencias y ampliar sus posibilidades de expresión.",
+  "nosotros_territorio_imagen": "/assets/uploads/nosotros/cobertura-camara.webp",
+  "nosotros_territorio_pie": "En cobertura, junto a la comunidad.",
+  "nosotros_temas": [
+    { "nombre": "Barrios y comunidad", "seccion": "comunidad" },
+    { "nombre": "Memoria y derechos humanos", "seccion": "comunidad" },
+    { "nombre": "Arte y cultura", "seccion": "cultura" },
+    { "nombre": "Pueblo mapuche y mapuzungun", "seccion": "pueblo-mapuche" },
+    { "nombre": "Deporte local y fútbol femenino", "seccion": "deportes" },
+    { "nombre": "Medioambiente", "seccion": "" },
+    { "nombre": "Participación ciudadana", "seccion": "" },
+    { "nombre": "Infancia", "seccion": "" }
+  ],
+  "nosotros_derecho_titulo": "La comunicación es un derecho, no un privilegio",
+  "nosotros_derecho_texto": "Nuestra labor se sustenta en el respeto a los derechos humanos, la solidaridad, la inclusión, la diversidad, la defensa del patrimonio y el cuidado de la naturaleza.\n\nEntendemos la televisión comunitaria como una herramienta para democratizar la palabra, fortalecer la memoria colectiva y abrir espacios de participación a quienes históricamente han tenido menos oportunidades de hacerse escuchar.",
+  "nosotros_valores": ["Derechos humanos", "Solidaridad", "Inclusión", "Diversidad", "Patrimonio", "Naturaleza"],
+  "nosotros_cierre": "Nacimos abajo de la línea del tren. Hoy tenemos una señal abierta para que nuestras historias lleguen mucho más lejos.",
+  "nosotros_cierre_texto": "Y seguimos construyéndola desde el mismo lugar: junto a nuestras comunidades.",
+  "nosotros_cierre_imagen": "/assets/uploads/nosotros/encuentro-canales.webp",
+  "nosotros_cierre_pie": "Encuentro de canales comunitarios de Chile.",
   "pie_texto": "Televisión comunitaria desde Temuco, Región de La Araucanía. Señal abierta TVD 35.1 y en vivo por internet."
 }
