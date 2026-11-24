@@ -659,105 +659,225 @@ ${cortos(eps).length ? seccion({ kicker: 'Formato corto', titulo: 'Shorts y reel
 
 // ---------- Nosotros / 404 ----------
 {
-  // Cada bloque aparece solo si tiene contenido en «Textos del sitio».
+  // «Quiénes somos»: especial documental. Cada bloque aparece solo si tiene contenido en «Textos del sitio».
+  // GSAP (local, solo en esta página) agrega el movimiento; sin JavaScript o con movimiento reducido, todo se lee igual.
   const lista = (k) => (Array.isArray(T[k]) ? T[k] : []);
   const md = (k) => (tx(k, '') ? marked.parse(tx(k, '')) : '');
-  const foto = (src, pie, clase = '') => (src ? `<figure class="ab-foto ${clase}"><img src="${esc(src)}" alt="${esc(pie || '')}" loading="lazy">${pie ? `<figcaption>${esc(pie)}</figcaption>` : ''}</figure>` : '');
+  const img = (src, alt = '', extra = '') => `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"${extra}>`;
+  const titulo = tx('nosotros_titulo', 'Quiénes somos');
+  const palabras = titulo.split(/\s+/);
+  const corteTit = Math.ceil(palabras.length / 2);
+  const lineasTitulo = [palabras.slice(0, corteTit).join(' '), palabras.slice(corteTit).join(' ')].filter(Boolean);
   const portada = tx('nosotros_portada', '');
+  const portadaMovil = tx('nosotros_portada_movil', '');
   const hitos = lista('nosotros_hitos').filter((h) => h.titulo || h.texto);
-  const galeria = lista('nosotros_galeria').filter((g) => g.imagen);
+  const archivo = lista('nosotros_galeria').filter((g) => g.imagen);
   const temas = lista('nosotros_temas').filter((t) => t.nombre);
   const valores = lista('nosotros_valores').filter(Boolean);
+  const video = ytId(tx('nosotros_video', ''));
   const cierreImg = tx('nosotros_cierre_imagen', '');
+  const ultima = informativas[0];
+
+  // Capítulo 1: cada párrafo enfoca una parte de la portada real del periódico de 2002.
+  const focos = ['todo', 'todo', 'cabecera', 'linea', 'todo'];
+  let iFoco = 0;
+  const historia = md('nosotros_historia_texto').replace(/<p>/g, () => `<p class="ab-paso" data-foco="${focos[iFoco++] || 'todo'}">`);
+
+  const estacion = (n, id, h2) => `<header class="ab-estacion"><span class="ab-parada" aria-hidden="true">${n}</span><h2 id="${id}-t">${esc(h2)}</h2></header>`;
+  const riel = '<div class="ab-riel" aria-hidden="true"><span class="ab-riel-luz"></span></div>';
+  const capitulos = [
+    ['el-barrio', 'El barrio'], ['la-linea', 'La línea'], ['la-senal', 'La señal'], ['archivo', 'Archivo'], ['el-territorio', 'El territorio'],
+  ];
+
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'TelevisionStation', name: S.nombre, url: S.url, logo: `${S.url}/assets/img/logo.png`,
+    description: tx('nosotros_bajada', S.descripcion), foundingDate: '2002',
+    address: { '@type': 'PostalAddress', addressLocality: 'Temuco', addressRegion: 'La Araucanía', addressCountry: 'CL' },
+    sameAs: [cfg.redes.instagram, cfg.redes.facebook, cfg.redes.youtube].filter(Boolean),
+  };
+
   // Esquema del territorio (no es un mapa): centro arriba, línea del tren, barrios populares y río Cautín abajo.
-  const corte = `
-<section class="block ab-corte-sec"><div class="wrap">
+  const esquema = `
   <figure class="ab-corte">
-    <div class="ab-corte-svg"><svg viewBox="0 0 960 300" role="img" aria-labelledby="corte-t corte-d">
+    <div class="ab-corte-svg">
+    <svg class="c-ancho" viewBox="0 14 960 286" role="img" aria-labelledby="corte-t corte-d">
       <title id="corte-t">Por qué «Abajo ’e la Línea»</title>
       <desc id="corte-d">Corte esquemático de Temuco: el centro de la ciudad en la parte alta, la línea del tren en el borde, y más abajo los barrios populares que crecieron hasta la ribera del río Cautín.</desc>
-      <path class="c-cielo" d="M0 0H960V300H0Z"/>
       <path class="c-suelo" d="M0 110 H330 C380 110 400 190 450 196 H780 C820 196 830 232 860 236 H960 V300 H0 Z"/>
       <path class="c-rio" d="M845 232 C870 238 900 238 960 236 V300 H845 Z"/>
       <g class="c-edif"><rect x="40" y="62" width="34" height="48"/><rect x="82" y="44" width="40" height="66"/><rect x="130" y="70" width="30" height="40"/><rect x="168" y="52" width="38" height="58"/><rect x="214" y="76" width="30" height="34"/><rect x="252" y="60" width="34" height="50"/></g>
       <g class="c-casas"><path d="M480 196v-20l14-12 14 12v20z"/><path d="M522 196v-16l12-10 12 10v16z"/><path d="M562 196v-22l15-12 15 12v22z"/><path d="M608 196v-16l12-10 12 10v16z"/><path d="M648 196v-20l14-12 14 12v20z"/><path d="M692 196v-16l12-10 12 10v16z"/><path d="M732 196v-18l13-11 13 11v18z"/></g>
       <g class="c-via"><line x1="300" y1="110" x2="372" y2="110"/><line x1="306" y1="104" x2="306" y2="116"/><line x1="318" y1="104" x2="318" y2="116"/><line x1="330" y1="104" x2="330" y2="116"/><line x1="342" y1="104" x2="342" y2="116"/><line x1="354" y1="104" x2="354" y2="116"/><line x1="366" y1="104" x2="366" y2="116"/></g>
-      <line class="c-frontera" x1="372" y1="20" x2="372" y2="280"/>
+      <line class="c-frontera" x1="372" y1="20" x2="372" y2="290" pathLength="1"/>
       <text class="c-tit" x="40" y="146">Centro de Temuco</text>
       <text class="c-tit c-rojo" x="384" y="38">Línea del tren</text>
       <text class="c-sub" x="384" y="58">frontera simbólica</text>
       <text class="c-tit" x="480" y="232">Barrios populares</text>
-      <text class="c-sub" x="480" y="252">Santa Rosa · población Paredes</text>
+      <text class="c-sub" x="480" y="252">Santa Rosa, población Paredes</text>
       <text class="c-tit c-azul" x="855" y="274">Río Cautín</text>
     </svg>
     <svg class="c-movil" viewBox="0 0 400 300" aria-hidden="true">
-      <path class="c-cielo" d="M0 0H400V300H0Z"/>
       <path class="c-suelo" d="M0 120 H140 C165 120 175 196 205 200 H320 C340 200 345 236 360 240 H400 V300 H0 Z"/>
       <path class="c-rio" d="M352 236 C365 242 380 242 400 240 V300 H352 Z"/>
       <g class="c-edif"><rect x="14" y="78" width="22" height="42"/><rect x="42" y="62" width="26" height="58"/><rect x="74" y="84" width="20" height="36"/><rect x="100" y="70" width="24" height="50"/></g>
       <g class="c-casas"><path d="M212 200v-16l11-9 11 9v16z"/><path d="M244 200v-13l9-8 9 8v13z"/><path d="M272 200v-17l11-9 11 9v17z"/><path d="M302 200v-13l9-8 9 8v13z"/></g>
       <g class="c-via"><line x1="118" y1="120" x2="150" y2="120"/><line x1="122" y1="115" x2="122" y2="125"/><line x1="132" y1="115" x2="132" y2="125"/><line x1="142" y1="115" x2="142" y2="125"/></g>
-      <line class="c-frontera" x1="150" y1="16" x2="150" y2="284"/>
+      <line class="c-frontera" x1="150" y1="16" x2="150" y2="284" pathLength="1"/>
       <text class="c-tit" x="12" y="150">Centro</text>
       <text class="c-tit c-rojo" x="158" y="34">Línea del tren</text>
       <text class="c-sub" x="158" y="52">frontera simbólica</text>
       <text class="c-tit" x="200" y="232">Barrios populares</text>
-      <text class="c-sub" x="200" y="250">Santa Rosa · Paredes</text>
+      <text class="c-sub" x="200" y="250">Santa Rosa, Paredes</text>
       <text class="c-tit c-azul c-fin" x="394" y="286">Río Cautín</text>
-    </svg></div>
+    </svg>
+    </div>
     ${tx('nosotros_corte_pie', '') ? `<figcaption>${esc(tx('nosotros_corte_pie', ''))}</figcaption>` : ''}
-  </figure>
-</div></section>`;
+  </figure>`;
 
   add('nosotros.html', {
-    ruta: '/nosotros', titulo: 'Nosotros', activo: 'nosotros',
+    ruta: '/nosotros', titulo: 'Quiénes somos', activo: 'nosotros',
+    desc: tx('nosotros_bajada', S.descripcion),
+    imagen: portada || undefined,
+    extraHead: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('ab-mov')</script>
+${portada ? `<link rel="preload" as="image" href="${esc(portada)}"${portadaMovil ? ` imagesrcset="${esc(portadaMovil)} 800w, ${esc(portada)} 1280w" imagesizes="100vw"` : ''}>` : ''}`,
     cuerpo: `
-<section class="ab-hero"><div class="wrap ab-hero-in">
-  <div class="ab-hero-txt">
-    <h1>${esc(tx('nosotros_titulo', 'Quiénes somos'))}</h1>
+<div class="ab-especial">
+<section class="ab-portada" aria-labelledby="ab-titulo">
+  ${portada ? `<img class="ab-portada-img" src="${esc(portada)}"${portadaMovil ? ` srcset="${esc(portadaMovil)} 800w, ${esc(portada)} 1280w" sizes="100vw"` : ''} width="1280" height="720" alt="${esc(tx('nosotros_portada_pie', ''))}" fetchpriority="high">` : ''}
+  <div class="wrap ab-portada-txt">
+    <h1 id="ab-titulo">${lineasTitulo.map((l) => `<span class="ab-lin"><span>${esc(l)}</span></span>`).join(' ')}</h1>
     <p class="ab-bajada">${esc(tx('nosotros_bajada', S.descripcion))}</p>
   </div>
-  ${foto(portada, tx('nosotros_portada_pie', ''), 'ab-hero-foto')}
-</div></section>
-<section class="block"><div class="wrap about">
-  <div class="prose ab-intro">${md('nosotros_texto')}</div>
-  <dl class="facts">${lista('nosotros_datos').map((d) => `
+  ${tx('nosotros_portada_pie', '') ? `<p class="ab-credito">${esc(tx('nosotros_portada_pie', ''))}</p>` : ''}
+</section>
+
+<nav class="ab-indice" aria-label="Capítulos de esta página"><div class="wrap">
+  <ol>${capitulos.map(([id, nom]) => `<li><a href="#${id}">${esc(nom)}</a></li>`).join('')}</ol>
+  <span class="ab-avance" aria-hidden="true"></span>
+</div></nav>
+
+<section class="ab-intro"><div class="wrap">
+  <div class="ab-intro-txt">${md('nosotros_texto')}</div>
+  <dl class="ab-ficha">${lista('nosotros_datos').map((d) => `
     <div><dt>${esc(d.etiqueta || '')}</dt><dd>${esc(d.valor || '')}</dd></div>`).join('')}
   </dl>
 </div></section>
-${md('nosotros_historia_texto') ? `
-<section class="block alt"><div class="wrap ab-split">
-  <div><h2 class="ab-h2">${esc(tx('nosotros_historia_titulo', ''))}</h2><div class="prose">${md('nosotros_historia_texto')}</div></div>
-  ${foto(tx('nosotros_historia_imagen', ''), tx('nosotros_historia_pie', ''), 'ab-papel')}
+
+${historia ? `
+<section class="ab-cap ab-cap-papel" id="el-barrio" aria-labelledby="el-barrio-t"><div class="wrap">
+  ${riel}
+  ${estacion(1, 'el-barrio', tx('nosotros_historia_titulo', ''))}
+  <div class="ab-barrio">
+    <div class="ab-barrio-txt prose">${historia}</div>
+    <figure class="ab-doc">
+      <div class="ab-doc-marco">${img(tx('nosotros_historia_imagen', ''), tx('nosotros_historia_pie', ''), ' width="720" height="1010"')}</div>
+      ${tx('nosotros_historia_pie', '') ? `<figcaption>${esc(tx('nosotros_historia_pie', ''))}</figcaption>` : ''}
+    </figure>
+  </div>
 </div></section>` : ''}
-${corte}
+
+<section class="ab-cap ab-cap-linea" id="la-linea" aria-labelledby="la-linea-t"><div class="wrap">
+  ${riel}
+  ${estacion(2, 'la-linea', 'Por qué «Abajo ’e la Línea»')}
+  ${esquema}
+</div></section>
+
 ${md('nosotros_senal_texto') || hitos.length ? `
-<section class="block alt"><div class="wrap">
-  <h2 class="ab-h2">${esc(tx('nosotros_senal_titulo', ''))}</h2>
+<section class="ab-cap" id="la-senal" aria-labelledby="la-senal-t"><div class="wrap">
+  ${riel}
+  ${estacion(3, 'la-senal', tx('nosotros_senal_titulo', ''))}
   <div class="prose ab-col">${md('nosotros_senal_texto')}</div>
-  ${hitos.length ? `<ol class="ab-tiempo">${hitos.map((h) => `
-    <li><span class="ab-etq">${esc(h.etiqueta || '')}</span><h3>${esc(h.titulo || '')}</h3><p>${esc(h.texto || '')}</p></li>`).join('')}
-  </ol>` : ''}
-  ${galeria.length ? `<div class="ab-galeria">${galeria.map((g) => foto(g.imagen, g.pie)).join('')}</div>` : ''}
+</div>
+${hitos.length ? `
+<div class="ab-crono" role="region" aria-label="Cronología">
+  <div class="ab-crono-barra" aria-hidden="true"><span></span></div>
+  <ol class="ab-crono-pista">${hitos.map((h) => `
+    <li class="ab-hito${h.imagen ? '' : ' ab-hito-sinfoto'}">
+      <div class="ab-hito-txt"><span class="ab-hito-etq">${esc(h.etiqueta || '')}</span><h3>${esc(h.titulo || '')}</h3><p>${esc(h.texto || '')}</p></div>
+      ${h.imagen ? `<figure>${img(h.imagen, h.pie || '')}${h.pie ? `<figcaption>${esc(h.pie)}</figcaption>` : ''}</figure>` : ''}
+    </li>`).join('')}
+  </ol>
+</div>` : ''}
+</section>` : ''}
+
+${archivo.length ? `
+<section class="ab-cap ab-cap-archivo" id="archivo" aria-labelledby="archivo-t"><div class="wrap">
+  ${riel}
+  <header class="ab-archivo-cab">
+    <div><h2 id="archivo-t">${esc(tx('nosotros_galeria_titulo', 'Archivo'))}</h2>${tx('nosotros_galeria_texto', '') ? `<p>${esc(tx('nosotros_galeria_texto', ''))}</p>` : ''}</div>
+    <div class="ab-archivo-ctrl" hidden>
+      <button type="button" class="ab-btn" data-mover="-1" aria-label="Fotos anteriores">‹</button>
+      <span class="ab-contador" aria-live="polite"></span>
+      <button type="button" class="ab-btn" data-mover="1" aria-label="Fotos siguientes">›</button>
+    </div>
+  </header>
+  <ul class="ab-carrusel" aria-label="Fotografías del archivo">${archivo.map((g, i) => `
+    <li><figure><button type="button" class="ab-foto-btn" data-i="${i}" aria-label="Ampliar: ${esc(g.pie || 'fotografía')}">${img(g.imagen, g.pie || '')}</button>${g.pie ? `<figcaption>${esc(g.pie)}</figcaption>` : ''}</figure></li>`).join('')}
+  </ul>
+</div>
+<dialog class="ab-visor" aria-label="Fotografía ampliada">
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <button type="button" class="ab-btn ab-visor-ant" aria-label="Foto anterior">‹</button>
+  <button type="button" class="ab-btn ab-visor-sig" aria-label="Foto siguiente">›</button>
+  <button type="button" class="ab-btn ab-visor-cerrar" aria-label="Cerrar">✕</button>
+</dialog>
+</section>` : ''}
+
+${video ? `
+<section class="ab-video"><div class="wrap">
+  <a class="ab-video-card" href="https://www.youtube.com/watch?v=${video}" data-yt="${video}" data-title="${esc(tx('nosotros_video_titulo', 'Video'))}">
+    <img src="${thumb(video, 'maxresdefault')}" alt="" loading="lazy" width="1280" height="720">
+    <span class="ab-video-play" aria-hidden="true">▶</span>
+    <span class="ab-video-tit">${esc(tx('nosotros_video_titulo', 'Ver video'))}</span>
+  </a>
 </div></section>` : ''}
+
 ${md('nosotros_territorio_texto') ? `
-<section class="block"><div class="wrap ab-split ab-inv">
-  ${foto(tx('nosotros_territorio_imagen', ''), tx('nosotros_territorio_pie', ''))}
-  <div><h2 class="ab-h2">${esc(tx('nosotros_territorio_titulo', ''))}</h2><div class="prose">${md('nosotros_territorio_texto')}</div>
-  ${temas.length ? `<ul class="ab-temas">${temas.map((t) => `<li>${t.seccion && cats[t.seccion] ? `<a class="chip chip-${esc(t.seccion)}" href="/${esc(t.seccion)}">${esc(t.nombre)} <span aria-hidden="true">→</span></a>` : `<span class="chip ab-chip-txt">${esc(t.nombre)}</span>`}</li>`).join('')}</ul>` : ''}</div>
+<section class="ab-cap" id="el-territorio" aria-labelledby="el-territorio-t"><div class="wrap">
+  ${riel}
+  ${estacion(4, 'el-territorio', tx('nosotros_territorio_titulo', ''))}
+  <div class="ab-territorio">
+    <div class="prose">${md('nosotros_territorio_texto')}
+      ${temas.length ? `<ul class="ab-temas" aria-label="Temas">${temas.map((t) => `<li>${t.seccion && cats[t.seccion] ? `<a class="chip chip-${esc(t.seccion)}" href="/${esc(t.seccion)}">${esc(t.nombre)}</a>` : `<span class="chip ab-chip-txt">${esc(t.nombre)}</span>`}</li>`).join('')}</ul>` : ''}
+    </div>
+    ${tx('nosotros_territorio_imagen', '') ? `<figure class="ab-foto-territorio"><div class="ab-paralaje">${img(tx('nosotros_territorio_imagen', ''), tx('nosotros_territorio_pie', ''))}</div>${tx('nosotros_territorio_pie', '') ? `<figcaption>${esc(tx('nosotros_territorio_pie', ''))}</figcaption>` : ''}</figure>` : ''}
+  </div>
+  ${cfg.programas.length ? `<h3 class="ab-h3">Nuestros programas</h3><div class="progs">${cfg.programas.map(progCard).join('')}</div>` : ''}
 </div></section>` : ''}
+
 ${md('nosotros_derecho_texto') ? `
-<section class="block alt ab-derecho"><div class="wrap">
-  <h2 class="ab-h2">${esc(tx('nosotros_derecho_titulo', ''))}</h2>
+<section class="ab-manifiesto" aria-labelledby="manifiesto-t"><div class="wrap">
+  <h2 id="manifiesto-t">${tx('nosotros_derecho_titulo', '').split(/\s+/).map((w) => `<span class="ab-pal">${esc(w)}</span>`).join(' ')}</h2>
   <div class="prose ab-col">${md('nosotros_derecho_texto')}</div>
   ${valores.length ? `<ul class="ab-valores">${valores.map((v) => `<li>${esc(v)}</li>`).join('')}</ul>` : ''}
 </div></section>` : ''}
+
 ${tx('nosotros_cierre', '') ? `
-<section class="ab-cierre"${cierreImg ? ` style="--fondo:url('${esc(cierreImg)}')"` : ''}><div class="wrap">
-  <blockquote><p>${esc(tx('nosotros_cierre', ''))}</p>${tx('nosotros_cierre_texto', '') ? `<footer>${esc(tx('nosotros_cierre_texto', ''))}</footer>` : ''}</blockquote>
-  ${cierreImg && tx('nosotros_cierre_pie', '') ? `<small class="ab-cierre-pie">Foto: ${esc(tx('nosotros_cierre_pie', ''))}</small>` : ''}
-</div></section>` : ''}
-${sintoniaBlock('alt', true)}`,
+<section class="ab-cierre">
+  ${cierreImg ? `<div class="ab-cierre-fondo">${img(cierreImg, '')}</div>` : ''}
+  <div class="wrap">
+    <blockquote><p>${esc(tx('nosotros_cierre', ''))}</p>${tx('nosotros_cierre_texto', '') ? `<footer>${esc(tx('nosotros_cierre_texto', ''))}</footer>` : ''}</blockquote>
+    ${cierreImg && tx('nosotros_cierre_pie', '') ? `<p class="ab-credito-cierre">Foto: ${esc(tx('nosotros_cierre_pie', ''))}</p>` : ''}
+  </div>
+</section>` : ''}
+
+<section class="ab-invitacion" aria-labelledby="invitacion-t"><div class="wrap">
+  <h2 id="invitacion-t">${esc(tx('nosotros_invitacion_titulo', 'Nuestra historia sigue escribiéndose'))}</h2>
+  <p>${esc(tx('nosotros_invitacion_texto', 'Conoce lo que estamos contando hoy.'))}</p>
+  <ul class="ab-accesos">
+    <li><a href="/noticias"><strong>Ver noticias</strong>${ultima ? `<span>Lo último: ${esc(ultima.titulo)}</span>` : ''}</a></li>
+    ${cats.comunidad ? `<li><a href="/comunidad"><strong>Comunidad</strong><span>${esc(cats.comunidad.descripcion || '')}</span></a></li>` : ''}
+    <li><a href="/programas"><strong>Conocer nuestros programas</strong><span>${cfg.programas.map((p) => esc(p.nombre)).join(', ')}</span></a></li>
+    <li><a class="ab-acceso-vivo" href="/#envivo"><strong>Ver señal en vivo</strong><span>Canal ${esc(S.canalTvd)} en TV abierta y por internet</span></a></li>
+    <li><a href="${enviaNota}"><strong>${esc(tx('envia_boton', 'Envía tu nota'))}</strong><span>${esc(tx('envia_texto', ''))}</span></a></li>
+  </ul>
+</div></section>
+</div>
+${sintoniaBlock('alt', true)}
+<script src="/assets/vendor/gsap/gsap.min.js" defer></script>
+<script src="/assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
+<script src="/assets/nosotros.js" defer></script>`,
   });
 }
 

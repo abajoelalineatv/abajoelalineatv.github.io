@@ -274,6 +274,9 @@ content:
       - name: nosotros_portada
         label: Quiénes somos · foto de portada
         type: image
+      - name: nosotros_portada_movil
+        label: Quiénes somos · foto de portada en celular (más liviana)
+        type: image
       - name: nosotros_portada_pie
         label: Quiénes somos · pie de la foto de portada
         type: string
@@ -317,13 +320,28 @@ content:
           - { name: etiqueta, label: "Año o palabra corta", type: string }
           - { name: titulo, label: Título, type: string }
           - { name: texto, label: Texto, type: text }
+          - { name: imagen, label: Foto (opcional), type: image }
+          - { name: pie, label: Pie de foto, type: string }
+      - name: nosotros_galeria_titulo
+        label: Quiénes somos · archivo · título
+        type: string
+      - name: nosotros_galeria_texto
+        label: Quiénes somos · archivo · texto
+        type: string
       - name: nosotros_galeria
-        label: Quiénes somos · galería de fotos
+        label: Quiénes somos · archivo de fotos
         type: object
         list: true
         fields:
           - { name: imagen, label: Foto, type: image }
           - { name: pie, label: Pie de foto, type: string }
+      - name: nosotros_video
+        label: Quiénes somos · video institucional o histórico (enlace de YouTube)
+        description: Vacío = no se muestra. Usa solo videos reales del canal.
+        type: string
+      - name: nosotros_video_titulo
+        label: Quiénes somos · título del video
+        type: string
       - name: nosotros_territorio_titulo
         label: Quiénes somos · territorio · título
         type: string
@@ -369,6 +387,12 @@ content:
         type: image
       - name: nosotros_cierre_pie
         label: Quiénes somos · pie de la foto del cierre
+        type: string
+      - name: nosotros_invitacion_titulo
+        label: Quiénes somos · invitación final · título
+        type: string
+      - name: nosotros_invitacion_texto
+        label: Quiénes somos · invitación final · texto
         type: string
       - name: pie_texto
         label: Texto del pie de página

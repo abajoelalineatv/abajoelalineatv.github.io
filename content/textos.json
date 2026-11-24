@@ -30,8 +30,9 @@
   "instagram_texto": "Notas del día, coberturas y lo que pasa en el territorio. Síguenos en Instagram.",
   "nosotros_titulo": "Un canal hecho desde abajo",
   "nosotros_bajada": "Desde los barrios populares de Temuco, construimos una televisión donde las comunidades son protagonistas de sus propias historias.",
-  "nosotros_portada": "/assets/uploads/nosotros/torre-nielol.webp",
-  "nosotros_portada_pie": "Torre de transmisión en el cerro Ñielol, desde donde emitimos la señal 35.1.",
+  "nosotros_portada": "/assets/uploads/nosotros/portada-camara.webp",
+  "nosotros_portada_pie": "Registro en terreno con la cámara del canal.",
+  "nosotros_portada_movil": "/assets/uploads/nosotros/portada-camara-800.webp",
   "nosotros_texto": "Abajo ’e la Línea TV es un medio de comunicación comunitario, autogestionado y sin fines de lucro, nacido en el territorio que se extiende entre la antigua línea ferroviaria y las riberas del río Cautín. Hoy transmitimos a través de la señal abierta **35.1 de Temuco** y por internet, llevando a la pantalla las voces, memorias y experiencias de quienes habitan nuestro territorio.",
   "nosotros_datos": [
     {
@@ -74,72 +75,155 @@
     {
       "etiqueta": "2002",
       "titulo": "Periódico vecinal",
-      "texto": "Nace Abajo ’e la Línea en la Junta de Vecinos A-28 Paredes, junto a agrupaciones culturales de Temuco."
+      "texto": "Nace Abajo ’e la Línea en la Junta de Vecinos A-28 Paredes, junto a agrupaciones culturales de Temuco.",
+      "imagen": "/assets/uploads/nosotros/periodico-2002.webp",
+      "pie": "Portada del periódico vecinal, marzo de 2002."
     },
     {
       "etiqueta": "2017",
       "titulo": "Primera antena",
-      "texto": "Con Señal 3 La Victoria instalamos una antena analógica. La agrupación obtiene personalidad jurídica."
-    },
-    {
-      "etiqueta": "2023",
-      "titulo": "Postulación",
-      "texto": "Junto a otros canales comunitarios iniciamos la postulación a una concesión de TV digital abierta."
+      "texto": "Con Señal 3 La Victoria instalamos una antena analógica. La agrupación obtiene personalidad jurídica.",
+      "imagen": "/assets/uploads/nosotros/lienzo-senal-3.webp",
+      "pie": "El equipo con el lienzo de Abajo e’ la Línea, Señal 3, Temuko TV."
     },
     {
       "etiqueta": "20 años",
       "titulo": "Concesión",
-      "texto": "Obtenemos una concesión local comunitaria por 20 años para operar la señal 35.1 en Temuco."
+      "texto": "Tras un proceso de postulación iniciado en 2023 junto a otros canales comunitarios, obtenemos una concesión de televisión digital abierta por 20 años para operar la señal 35.1 en Temuco.",
+      "imagen": "",
+      "pie": ""
     },
     {
-      "etiqueta": "Ñielol",
-      "titulo": "Infraestructura",
-      "texto": "Con el Fondo de Desarrollo de las Telecomunicaciones de SUBTEL financiamos la transmisión desde el cerro Ñielol."
-    },
-    {
-      "etiqueta": "Hoy",
-      "titulo": "Señal 35.1",
-      "texto": "Transmitimos en señal abierta en Temuco y en vivo por internet."
+      "etiqueta": "35.1",
+      "titulo": "Señal abierta",
+      "texto": "Con el Fondo de Desarrollo de las Telecomunicaciones de SUBTEL financiamos la transmisión desde el cerro Ñielol. Hoy transmitimos en señal abierta en Temuco y en vivo por internet.",
+      "imagen": "/assets/uploads/nosotros/torre-nielol.webp",
+      "pie": "Torre de transmisión en el cerro Ñielol."
     }
   ],
   "nosotros_galeria": [
     {
+      "imagen": "/assets/uploads/nosotros/periodico-2002.webp",
+      "pie": "Portada del periódico vecinal Abajo ’e la Línea, marzo de 2002."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/editorial-2002.webp",
+      "pie": "Editorial del periódico vecinal, 2002: «Si el río no suena… es porque lo secaron»."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/lienzo-senal-3.webp",
+      "pie": "El equipo con el lienzo de Abajo e’ la Línea, Señal 3, Temuko TV."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/plan-cobertura-terreno.webp",
+      "pie": "Cobertura en terreno. Fotografía del plan de contenidos presentado en 2023."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/plan-marcha.webp",
+      "pie": "Registro de una movilización. Fotografía del plan de contenidos presentado en 2023."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/plan-musica.webp",
+      "pie": "Música en vivo. Fotografía del plan de contenidos presentado en 2023."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/plan-deporte.webp",
+      "pie": "Deporte local. Fotografía del plan de contenidos presentado en 2023."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/plan-festival.webp",
+      "pie": "Actividad cultural nocturna. Fotografía del plan de contenidos presentado en 2023."
+    },
+    {
       "imagen": "/assets/uploads/nosotros/instalacion-antena.webp",
       "pie": "Instalación de la antena en el cerro Ñielol."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/torre-nielol.webp",
+      "pie": "Torre de transmisión en el cerro Ñielol."
     },
     {
       "imagen": "/assets/uploads/nosotros/equipos-transmision.webp",
       "pie": "Equipos de transmisión de la señal digital."
     },
     {
+      "imagen": "/assets/uploads/nosotros/medidor-senal-35.webp",
+      "pie": "Medición de la señal del canal 35."
+    },
+    {
       "imagen": "/assets/uploads/nosotros/control-master.webp",
       "pie": "Control de emisión del canal."
     },
     {
-      "imagen": "/assets/uploads/nosotros/medidor-senal-35.webp",
-      "pie": "Medición de la señal del canal 35."
+      "imagen": "/assets/uploads/nosotros/caseta-estudio.webp",
+      "pie": "Caseta Femenina en el estudio del canal, 2026."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/caseta-pantalla.webp",
+      "pie": "Caseta Femenina al aire por la señal 35.1, 2026."
+    },
+    {
+      "imagen": "/assets/uploads/nosotros/encuentro-canales.webp",
+      "pie": "Encuentro de canales comunitarios de Chile."
     }
   ],
   "nosotros_territorio_titulo": "Una televisión construida con el territorio",
   "nosotros_territorio_texto": "Nuestra programación nace del encuentro con organizaciones sociales, comunidades, artistas, deportistas, realizadores audiovisuales y habitantes de Temuco y La Araucanía.\n\nAbordamos las realidades de nuestros barrios, la memoria y los derechos humanos, las expresiones artísticas y culturales, las problemáticas ambientales, la participación ciudadana y el deporte local. Damos especial importancia a la revitalización del mapuzungun, las experiencias del pueblo mapuche, el fútbol femenino y las historias que habitualmente encuentran poco espacio en los grandes medios de comunicación.\n\nTambién abrimos nuestras pantallas a contenidos infantiles, producciones audiovisuales independientes, información regional y ciclos de cine y memoria, mediante colaboraciones con organizaciones e instituciones como ARCATEL y el Museo de la Memoria y los Derechos Humanos.\n\nCreemos en una comunicación cercana, pluralista y participativa, que no se limite a informar sobre las comunidades, sino que contribuya a fortalecer sus vínculos, reconocer sus experiencias y ampliar sus posibilidades de expresión.",
-  "nosotros_territorio_imagen": "/assets/uploads/nosotros/cobertura-camara.webp",
-  "nosotros_territorio_pie": "En cobertura, junto a la comunidad.",
+  "nosotros_territorio_imagen": "/assets/uploads/nosotros/caseta-estudio.webp",
+  "nosotros_territorio_pie": "Caseta Femenina en el estudio del canal, 2026.",
   "nosotros_temas": [
-    { "nombre": "Barrios y comunidad", "seccion": "comunidad" },
-    { "nombre": "Memoria y derechos humanos", "seccion": "comunidad" },
-    { "nombre": "Arte y cultura", "seccion": "cultura" },
-    { "nombre": "Pueblo mapuche y mapuzungun", "seccion": "pueblo-mapuche" },
-    { "nombre": "Deporte local y fútbol femenino", "seccion": "deportes" },
-    { "nombre": "Medioambiente", "seccion": "" },
-    { "nombre": "Participación ciudadana", "seccion": "" },
-    { "nombre": "Infancia", "seccion": "" }
+    {
+      "nombre": "Barrios y comunidad",
+      "seccion": "comunidad"
+    },
+    {
+      "nombre": "Memoria y derechos humanos",
+      "seccion": "comunidad"
+    },
+    {
+      "nombre": "Arte y cultura",
+      "seccion": "cultura"
+    },
+    {
+      "nombre": "Pueblo mapuche y mapuzungun",
+      "seccion": "pueblo-mapuche"
+    },
+    {
+      "nombre": "Deporte local y fútbol femenino",
+      "seccion": "deportes"
+    },
+    {
+      "nombre": "Medioambiente",
+      "seccion": ""
+    },
+    {
+      "nombre": "Participación ciudadana",
+      "seccion": ""
+    },
+    {
+      "nombre": "Infancia",
+      "seccion": ""
+    }
   ],
   "nosotros_derecho_titulo": "La comunicación es un derecho, no un privilegio",
   "nosotros_derecho_texto": "Nuestra labor se sustenta en el respeto a los derechos humanos, la solidaridad, la inclusión, la diversidad, la defensa del patrimonio y el cuidado de la naturaleza.\n\nEntendemos la televisión comunitaria como una herramienta para democratizar la palabra, fortalecer la memoria colectiva y abrir espacios de participación a quienes históricamente han tenido menos oportunidades de hacerse escuchar.",
-  "nosotros_valores": ["Derechos humanos", "Solidaridad", "Inclusión", "Diversidad", "Patrimonio", "Naturaleza"],
+  "nosotros_valores": [
+    "Derechos humanos",
+    "Solidaridad",
+    "Inclusión",
+    "Diversidad",
+    "Patrimonio",
+    "Naturaleza"
+  ],
   "nosotros_cierre": "Nacimos abajo de la línea del tren. Hoy tenemos una señal abierta para que nuestras historias lleguen mucho más lejos.",
   "nosotros_cierre_texto": "Y seguimos construyéndola desde el mismo lugar: junto a nuestras comunidades.",
   "nosotros_cierre_imagen": "/assets/uploads/nosotros/encuentro-canales.webp",
   "nosotros_cierre_pie": "Encuentro de canales comunitarios de Chile.",
-  "pie_texto": "Televisión comunitaria desde Temuco, Región de La Araucanía. Señal abierta TVD 35.1 y en vivo por internet."
+  "pie_texto": "Televisión comunitaria desde Temuco, Región de La Araucanía. Señal abierta TVD 35.1 y en vivo por internet.",
+  "nosotros_galeria_titulo": "Archivo",
+  "nosotros_galeria_texto": "Fotografías y documentos del canal, desde el periódico vecinal hasta la señal abierta.",
+  "nosotros_video": "",
+  "nosotros_video_titulo": "",
+  "nosotros_invitacion_titulo": "Nuestra historia sigue escribiéndose",
+  "nosotros_invitacion_texto": "Conoce lo que estamos contando hoy."
 }
