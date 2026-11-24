@@ -80,7 +80,41 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url || steps.reintento.outputs.page_url }}
     steps:
       - id: deploy
         uses: actions/deploy-pages@v5
+        continue-on-error: true
+      # Si GitHub falla de forma pasajera, un segundo intento tras una pausa.
+      - if: steps.deploy.outcome == 'failure'
+        run: sleep 30
+      - id: reintento
+        if: steps.deploy.outcome == 'failure'
+        uses: actions/deploy-pages@v5
+
+  # Comprueba que Cloudflare y GitHub Pages quedaron con el mismo sitio. Si no, la ejecución
+  # queda marcada como fallida y GitHub avisa por correo.
+  comprobar:
+    needs: publicar
+    runs-on: ubuntu-latest
+    env:
+      HAY_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+      CLOUDFLARE_URL: https://abajoelalinea.abajoelalinea-tv.workers.dev
+      PAGES_URL: https://abajoelalineatv.github.io
+    steps:
+      - name: Comparar Cloudflare y GitHub Pages
+        if: env.HAY_CLOUDFLARE == 'true'
+        run: |
+          # GitHub Pages guarda copias hasta 10 minutos: se reintenta antes de dar por fallido.
+          for intento in 1 2 3 4 5 6 7 8; do
+            iguales=1
+            for ruta in /sitemap.xml / /noticias; do
+              a=$(curl -fsSL "$CLOUDFLARE_URL$ruta?v=$GITHUB_RUN_ID-$intento" | sha256sum | cut -c1-64)
+              b=$(curl -fsSL "$PAGES_URL$ruta?v=$GITHUB_RUN_ID-$intento" | sha256sum | cut -c1-64)
+              [ "$a" = "$b" ] || iguales=0
+            done
+            if [ "$iguales" = 1 ]; then echo "Cloudflare y GitHub Pages publican el mismo sitio."; exit 0; fi
+            echo "Intento $intento: todavía distintos, se espera 45 s."; sleep 45
+          done
+          echo "::error::Cloudflare y GitHub Pages quedaron distintos. Volver a ejecutar este flujo."
+          exit 1

@@ -474,15 +474,46 @@ ${sintoniaBlock()}`,
 
 // ---------- Noticias (todas) ----------
 const filtros = (activo) => `<div class="chips"><a class="chip${activo === 'todas' ? ' on' : ''}" href="/noticias">Todas</a>${cfg.categorias.filter((c) => notCat(c.id).length).map((c) => `<a class="chip chip-${c.id}${activo === c.id ? ' on' : ''}" href="/${c.id}">${esc(c.nombre)}</a>`).join('')}</div>`;
-add('noticias.html', {
-  ruta: '/noticias', titulo: 'Noticias', activo: 'noticias',
-  desc: `Noticias de Temuco y La Araucanía desde los territorios: ${cfg.categorias.map((c) => c.nombre).join(', ')}.`,
-  cuerpo: `
+// Paginación: 12 noticias por página (/noticias, /noticias/pagina/2, …). Cada página trae solo sus 12.
+const POR_PAGINA = 12;
+const rutaPagina = (base, n) => (n === 1 ? base : `${base}/pagina/${n}`);
+/** Botones Anterior · 1 2 3 … · Siguiente, con los mismos chips del sitio. */
+const paginacion = (base, actual, total) => {
+  if (total <= 1) return '';
+  const nums = [...new Set([1, actual - 1, actual, actual + 1, total])].filter((n) => n >= 1 && n <= total).sort((a, b) => a - b);
+  const items = [];
+  nums.forEach((n, i) => {
+    if (i && n - nums[i - 1] > 1) items.push('<span class="chip" aria-hidden="true">…</span>');
+    items.push(n === actual
+      ? `<a class="chip on" href="${rutaPagina(base, n)}" aria-current="page">${n}</a>`
+      : `<a class="chip" href="${rutaPagina(base, n)}">${n}</a>`);
+  });
+  const ant = actual > 1 ? `<a class="chip" href="${rutaPagina(base, actual - 1)}" rel="prev">← Anterior</a>` : '';
+  const sig = actual < total ? `<a class="chip" href="${rutaPagina(base, actual + 1)}" rel="next">Siguiente →</a>` : '';
+  return `<nav class="wrap chips paginacion" aria-label="Páginas de noticias">${ant}${items.join('')}${sig}</nav>`;
+};
+{
+  const lista = lead ? [lead, ...informativas.filter((n) => n !== lead)] : informativas;
+  const total = Math.max(1, Math.ceil(lista.length / POR_PAGINA));
+  for (let p = 1; p <= total; p++) {
+    const trozo = lista.slice((p - 1) * POR_PAGINA, p * POR_PAGINA);
+    const ruta = rutaPagina('/noticias', p);
+    // Página 1: igual que antes (nota principal + 4 secundarias), y el resto de sus 12 en la grilla.
+    const cuerpoNotas = p === 1
+      ? `${seccion({ titulo: 'Portada', cuerpo: leadBlock(trozo[0], trozo.slice(1, 5)) })}
+${seccion({ titulo: 'Todas las noticias', cuerpo: ngrid(trozo.slice(5), { bajada: true }), clase: 'alt' })}`
+      : seccion({ titulo: `Todas las noticias · página ${p} de ${total}`, cuerpo: ngrid(trozo, { bajada: true }), clase: 'alt' });
+    add(`${ruta.slice(1)}.html`, {
+      ruta, titulo: p === 1 ? 'Noticias' : `Noticias · página ${p}`, activo: 'noticias',
+      desc: `Noticias de Temuco y La Araucanía desde los territorios: ${cfg.categorias.map((c) => c.nombre).join(', ')}.`,
+      cuerpo: `
 <section class="page-head"><div class="wrap"><span class="kicker">Noticias</span><h1>Lo que pasa en el territorio</h1><p>Noticias de Temuco y La Araucanía contadas desde las organizaciones, los barrios y las comunidades.</p>${filtros('todas')}</div></section>
-${seccion({ titulo: 'Portada', cuerpo: leadBlock(lead, informativas.filter((n) => n !== lead).slice(0, 4)) })}
-${seccion({ titulo: 'Todas las noticias', cuerpo: ngrid(informativas.filter((n) => n !== lead).slice(4), { bajada: true }), clase: 'alt' })}
-${notCat(OPINION).length ? seccion({ kicker: 'Columnas', titulo: catNombre(OPINION), link: `/${OPINION}`, cuerpo: colgrid(notCat(OPINION).slice(0, 4)) }) : ''}`,
-});
+${cuerpoNotas}
+${paginacion('/noticias', p, total)}
+${p === 1 && notCat(OPINION).length ? seccion({ kicker: 'Columnas', titulo: catNombre(OPINION), link: `/${OPINION}`, cuerpo: colgrid(notCat(OPINION).slice(0, 4)) }) : ''}`,
+    });
+  }
+}
 
 // ---------- Cada nota ----------
 for (const n of notas) {
@@ -601,7 +632,7 @@ add('404.html', {
 
 // ---------- escribir ----------
 await rm(out, { recursive: true, force: true });
-await mkdir(new URL('noticias/', out), { recursive: true });
+await mkdir(new URL('noticias/pagina/', out), { recursive: true });
 await cp(new URL('assets/', root), new URL('assets/', out), { recursive: true });
 for (const [archivo, html] of Object.entries(paginas)) await writeFile(new URL(archivo, out), html);
 

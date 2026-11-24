@@ -122,6 +122,7 @@ a.btn:active, .live-btn:active, .send-btn:active, .chip:active, .copy:active, .r
 .chip-deportes { border-color: var(--green); }
 .chip-cultura { border-color: var(--gold); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.paginacion { justify-content: center; margin: 8px auto 48px; }
 
 /* ---------- blocks ---------- */
 .block { padding: 56px 0; }
