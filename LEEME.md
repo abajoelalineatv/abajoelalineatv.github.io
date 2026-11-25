@@ -46,7 +46,7 @@ Se guardan en `content/textos.json`.
 - **Videos de YouTube**: cada 2 horas GitHub revisa el canal y agrega los nuevos a `data/videos.json`. Cada video se ubica en su programa y su sección según su título.
 - **Señal en vivo**: la portada muestra la señal HLS (`envivo.hls` en `config.json`). Si la señal se cae, aparece un aviso en vez de una pantalla negra.
 - **Instagram**: crea una cuenta gratis en behold.so, conecta @abajoelalinea.tv y pega el "Feed ID" en `redes.beholdFeedId`.
-- **Botón "Envía tu nota"**: abre un correo. Si pones un número en `sitio.whatsapp` (ej. `56912345678`), abre WhatsApp en su lugar.
+- **Botón "Envía tu nota"**: lleva a `/colabora`, que explica cómo pedir una cuenta de colaborador/a en el panel y enlaza al correo para avisos urgentes. Las notas de colaboradores llevan el sello «Nota de colaborador/a» (campo `colaboracion` del panel) y pueden firmarse como anónimas (`firmaAnonima`).
 
 ## Otros cambios (en `config.json`)
 - **Programa nuevo**: agrega un bloque en `programas`. Las `palabras` son textos que aparecen en el título de sus videos en YouTube (ej. `"caseta"`).

@@ -269,5 +269,9 @@
   "nosotros_galeria_titulo": "Archivo",
   "nosotros_galeria_texto": "Documentos y fotografías del canal, desde el periódico vecinal de 2002 hasta la señal abierta. Toca una imagen para verla completa.",
   "nosotros_video": "",
-  "nosotros_video_titulo": ""
+  "nosotros_video_titulo": "",
+  "colabora_titulo": "Envía tu nota",
+  "colabora_bajada": "Las organizaciones, vecinas y vecinos son nuestras principales fuentes. Escribe tu nota como colaborador/a del canal y la publicamos después de revisarla.",
+  "colabora_que": "## ¿Qué puedes enviar?\n\n- Notas sobre lo que pasa en tu barrio, tu organización o tu comunidad.\n- Convocatorias y actividades: marchas, ferias, talleres, encuentros.\n- Denuncias de interés público.\n- Columnas de opinión, firmadas o anónimas.",
+  "colabora_criterios": "## Antes de enviar\n\nEl equipo de Abajo ’e la Línea revisa cada nota antes de decidir si la publica. Podemos editar el texto, publicarlo en otra sección o contactarte si necesitamos más información.\n\nSi eliges publicar sin tu nombre, tu nombre quedará fuera de la publicación. El equipo del canal sabrá quién envió la nota."
 }

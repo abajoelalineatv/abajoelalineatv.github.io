@@ -237,10 +237,6 @@ content:
       - name: email
         label: Correo de contacto
         type: string
-      - name: whatsapp
-        label: WhatsApp para "Envía tu nota"
-        description: Solo números con código de país, ej. 56912345678. Vacío = el botón abre el correo.
-        type: string
       - name: sintonia_titulo
         label: Título de "Cómo vernos"
         type: string
@@ -264,6 +260,18 @@ content:
       - name: envia_boton
         label: '"Envía tu nota" · botón'
         type: string
+      - name: colabora_titulo
+        label: 'Página "Envía tu nota" (/colabora) · título'
+        type: string
+      - name: colabora_bajada
+        label: 'Página "Envía tu nota" · bajada'
+        type: text
+      - name: colabora_que
+        label: 'Página "Envía tu nota" · qué se puede enviar'
+        type: rich-text
+      - name: colabora_criterios
+        label: 'Página "Envía tu nota" · antes de enviar'
+        type: rich-text
       - name: instagram_texto
         label: Texto de la invitación a Instagram
         type: text

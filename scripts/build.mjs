@@ -116,7 +116,8 @@ if (PANEL) {
       const sec = typeof n.seccion === 'object' && n.seccion ? n.seccion.slug : '';
       const html = n.contenidoHTML || '';
       const texto = textoPlano(html);
-      const autorNombre = n.firma || (typeof n.autor === 'object' && n.autor ? n.autor.nombre : '') || S.nombre;
+      const anonima = !!n.firmaAnonima;
+      const autorNombre = anonima ? 'Colaborador/a anónimo/a' : n.firma || (typeof n.autor === 'object' && n.autor ? n.autor.nombre : '') || S.nombre;
       notas.push({
         slug: n.slug, url: `/noticias/${n.slug}`,
         titulo: String(n.titulo).trim(),
@@ -127,8 +128,9 @@ if (PANEL) {
         proporcion: img?.width && img?.height ? img.height / img.width : null,
         pie: n.pieImagen || '',
         autor: autorNombre,
-        autorFoto: abs(medio(n.firmaFoto)?.sizes?.miniatura?.url || medio(n.firmaFoto)?.url),
-        autorCargo: n.firmaCargo || (typeof n.autor === 'object' && n.autor ? n.autor.cargo || '' : ''),
+        autorFoto: anonima ? '' : abs(medio(n.firmaFoto)?.sizes?.miniatura?.url || medio(n.firmaFoto)?.url),
+        autorCargo: anonima ? '' : n.firmaCargo || (typeof n.autor === 'object' && n.autor ? n.autor.cargo || '' : ''),
+        colaboracion: !!n.colaboracion,
         destacada: !!n.destacada,
         video: ytId(n.video),
         fuente: n.instagram?.enlace || '',
@@ -187,6 +189,9 @@ const lead = informativas.find((n) => n.destacada && n.fecha > (informativas[0]?
 // ---------- piezas ----------
 const etiqueta = (v) => v.programa ? progs[v.programa].nombre : catNombre(v.categoria);
 const tag = (c, txt = catNombre(c)) => `<span class="tag tag-${c}">${esc(txt)}</span>`;
+// Sección + sello de las notas enviadas por colaboradores.
+const SELLO_COLAB = '<span class="sello-colab">Nota de colaborador/a</span>';
+const tagsNota = (n, primero = tag(n.categoria)) => (n.colaboracion ? `<span class="tags">${primero}${SELLO_COLAB}</span>` : primero);
 // Imagen completa sobre un fondo difuminado de sí misma: así las gráficas
 // verticales de Instagram y los Shorts no se cortan ni dejan franjas negras.
 const marco = (src, vertical = false) =>
@@ -216,7 +221,7 @@ const shelf = (lista) => `<div class="shelf">${lista.map(scard).join('')}</div>`
 const ncard = (n, { bajada = false } = {}) => `
 <a class="card ncard" href="${n.url}">
   <div class="thumb t45">${img(n)}${n.video ? '<span class="play" aria-hidden="true"></span>' : ''}</div>
-  <div class="card-body">${tag(n.categoria)}<h3>${esc(n.titulo)}</h3>${bajada ? `<p>${esc(n.bajada)}</p>` : ''}<time datetime="${n.fecha.toISOString()}">${fecha(n.fecha)}</time></div>
+  <div class="card-body">${tagsNota(n)}<h3>${esc(n.titulo)}</h3>${bajada ? `<p>${esc(n.bajada)}</p>` : ''}<time datetime="${n.fecha.toISOString()}">${fecha(n.fecha)}</time></div>
 </a>`;
 
 const nrow = (n) => `
@@ -229,10 +234,10 @@ const leadBlock = (principal, secundarias) => principal ? `
 <div class="front">
   <a class="front-lead" href="${principal.url}">
     <div class="front-img t45">${img(principal)}</div>
-    <div class="front-txt">${tag(principal.categoria)}<h3>${esc(principal.titulo)}</h3><p>${esc(principal.bajada)}</p><time>${fecha(principal.fecha, 'larga')} · ${esc(principal.autor)}</time><span class="read">Leer la nota</span></div>
+    <div class="front-txt">${tagsNota(principal)}<h3>${esc(principal.titulo)}</h3><p>${esc(principal.bajada)}</p><time>${fecha(principal.fecha, 'larga')} · ${esc(principal.autor)}</time><span class="read">Leer la nota</span></div>
   </a>
   <div class="front-side">${secundarias.map((n) => `
-    <a class="front-sec" href="${n.url}"><div class="front-sec-img t45">${img(n)}</div><div>${tag(n.categoria)}<h4>${esc(n.titulo)}</h4><time>${fecha(n.fecha)}</time></div></a>`).join('')}
+    <a class="front-sec" href="${n.url}"><div class="front-sec-img t45">${img(n)}</div><div>${tagsNota(n)}<h4>${esc(n.titulo)}</h4><time>${fecha(n.fecha)}</time></div></a>`).join('')}
   </div>
 </div>` : '<p class="empty">Todavía no hay noticias publicadas.</p>';
 
@@ -262,7 +267,11 @@ const ngrid = (items, opts) => items.length ? `<div class="grid grid-n${items.le
 const largos = (l) => l.filter((v) => !v.short);
 const cortos = (l) => l.filter((v) => v.short);
 
-const enviaNota = S.whatsapp ? `https://wa.me/${S.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Hola, quiero mandarles una nota:')}` : `mailto:${S.email}?subject=${encodeURIComponent('Nota para Abajo’e la Línea')}`;
+// "Envía tu nota" lleva a la página para colaboradores; el correo queda para avisos urgentes.
+const enviaNota = '/colabora';
+const correoNota = `mailto:${S.email}?subject=${encodeURIComponent('Nota para Abajo’e la Línea')}`;
+const PANEL_BASE = (process.env.PANEL_URL || 'https://panel-abajoelalinea.netlify.app').replace(/\/$/, '');
+const PANEL_ADMIN = `${PANEL_BASE}/admin`;
 
 const icon = {
   yt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.8 31 31 0 0 0-.4-4.8ZM9.7 15.1V8.9L15.5 12l-5.8 3.1Z"/></svg>',
@@ -320,7 +329,7 @@ ${extraHead}
       <span class="nav-sep">Secciones</span>
       ${cfg.categorias.map((c) => `<a class="nav-cat" href="/${c.id}"${c.id === activo ? ' aria-current="page"' : ''}>${esc(c.nombre)}</a>`).join('')}
     </nav>
-    <a class="send-btn" href="${enviaNota}">${S.whatsapp ? icon.wa : '✉'}<span>Envía tu nota</span></a>
+    <a class="send-btn" href="${enviaNota}">✉<span>Envía tu nota</span></a>
     <a class="live-btn" href="/#envivo"><span class="dot"></span>En vivo</a>
     <button class="menu-btn" aria-controls="mainnav" aria-expanded="false" aria-label="Abrir menú"><span></span></button>
   </div>
@@ -575,7 +584,7 @@ for (const n of notas) {
 <article class="article wrap">
   <div class="article-main">
     <nav class="crumbs"><a href="/noticias">Noticias</a> / <a href="/${n.categoria}">${esc(catNombre(n.categoria))}</a></nav>
-    ${n.categoria === OPINION ? tag(OPINION, 'Columna de opinión') : tag(n.categoria)}
+    ${tagsNota(n, n.categoria === OPINION ? tag(OPINION, 'Columna de opinión') : tag(n.categoria))}
     <h1>${esc(n.titulo)}</h1>
     <p class="lede">${esc(n.bajada)}</p>
     ${n.categoria === OPINION
@@ -586,6 +595,7 @@ for (const n of notas) {
     ${bloqueReel}
     <div class="prose article-body">${n.html}</div>
     ${n.galeria?.length ? `<div class="galeria">${n.galeria.map((g) => `<a href="${esc(g)}" target="_blank" rel="noopener"><img src="${esc(g)}" alt="" loading="lazy"></a>`).join('')}</div>` : ''}
+    ${n.colaboracion ? `<p class="source">Nota enviada a ${esc(S.nombre)} por un/a <a href="/colabora">colaborador/a</a> y revisada por el equipo editorial.</p>` : ''}
     ${n.categoria === OPINION ? `<p class="source">Las opiniones expresadas en esta columna son responsabilidad de quien la firma y no representan necesariamente la línea editorial de ${esc(S.nombre)}.</p>` : ''}
     ${n.fuente ? `<p class="source">Publicado originalmente en <a href="${esc(n.fuente)}" target="_blank" rel="noopener">${/instagram/.test(n.fuente) ? 'nuestro Instagram' : 'esta fuente'}</a>.</p>` : ''}
     <div class="share"><span>Compartir</span>
@@ -876,6 +886,36 @@ ${md('nosotros_derecho_texto') ? `
 <script src="/assets/vendor/gsap/gsap.min.js" defer></script>
 <script src="/assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
 <script src="/assets/nosotros.js" defer></script>`,
+  });
+}
+
+// ---------- Colabora (Envía tu nota) ----------
+{
+  const pedirCuenta = `${PANEL_BASE}/registro`;
+  const bloque = (k) => (tx(k, '') ? marked.parse(tx(k, '')) : '');
+  add('colabora.html', {
+    ruta: '/colabora', titulo: tx('colabora_titulo', 'Envía tu nota'),
+    desc: tx('colabora_bajada', ''),
+    cuerpo: `
+<section class="page-head"><div class="wrap"><span class="kicker">Colabora</span><h1>${esc(tx('colabora_titulo', 'Envía tu nota'))}</h1><p>${esc(tx('colabora_bajada', ''))}</p></div></section>
+<section class="block colabora"><div class="wrap colabora-grid">
+  <div class="prose colabora-texto">
+    ${bloque('colabora_que')}
+    <h2>Cómo funciona</h2>
+    <ol class="colabora-pasos">
+      <li><strong>Crea tu cuenta de colaborador/a</strong> con tu nombre, tu correo y una contraseña. Tu solicitud queda pendiente hasta que el equipo la revise.</li>
+      <li><strong>Te avisamos por correo</strong> cuando la aprobemos. Desde ese momento entras al panel con tu correo y tu contraseña.</li>
+      <li><strong>Escribe tu nota.</strong> Puedes subir fotos, pegar un video de YouTube, elegir si es una nota informativa o una columna de opinión, y firmar con tu nombre o de forma anónima.</li>
+      <li><strong>Envíala a revisión.</strong> El equipo editorial la revisa y la publica con el sello «Nota de colaborador/a».</li>
+    </ol>
+    ${bloque('colabora_criterios')}
+  </div>
+  <aside class="colabora-acciones">
+    <a class="btn" href="${pedirCuenta}" rel="nofollow">Quiero ser colaborador/a</a>
+    <a class="send-btn" href="${PANEL_ADMIN}" rel="nofollow">Ya tengo cuenta: entrar al panel</a>
+    <p>¿Es algo urgente o prefieres no crear una cuenta? Escríbenos a <a href="${correoNota}">${esc(S.email)}</a>.</p>
+  </aside>
+</div></section>`,
   });
 }
 
