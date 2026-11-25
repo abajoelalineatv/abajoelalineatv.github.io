@@ -386,7 +386,7 @@ img.fg.vert { width: auto; aspect-ratio: 9 / 16; margin: 0 auto; object-fit: cov
 
 /* Portada: el territorio (río, barrios, ciudad) */
 .ab-portada { position: relative; display: grid; align-items: end; min-height: min(74svh, 700px); overflow: hidden; background: #08090b; isolation: isolate; }
-.ab-portada-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+.ab-portada-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
 .ab-portada::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, var(--bg) 0, rgba(12, 12, 14, .45) 16%, rgba(12, 12, 14, .1) 45%, rgba(12, 12, 14, .2) 100%), linear-gradient(90deg, rgba(12, 12, 14, .55) 0, rgba(12, 12, 14, 0) 60%); }
 .ab-portada-txt { padding-top: 140px; padding-bottom: 64px; }
 .ab-portada h1 { margin: 0; font: 400 clamp(54px, 9.6vw, 140px)/.88 var(--display); text-transform: uppercase; }
@@ -588,7 +588,7 @@ img.fg.vert { width: auto; aspect-ratio: 9 / 16; margin: 0 auto; object-fit: cov
 }
 @media (max-width: 720px) {
   .ab-portada { min-height: 70svh; }
-  .ab-portada-img { object-position: 42% 82%; }
+  .ab-portada-img { object-position: 36% 62%; }
   .ab-portada::after { background: linear-gradient(0deg, var(--bg) 0, rgba(12, 12, 14, .72) 22%, rgba(12, 12, 14, .3) 62%, rgba(12, 12, 14, .5) 100%); }
   .ab-portada-txt { padding-top: 150px; padding-bottom: 28px; }
   .ab-credito { position: static; padding: 0 16px 12px; text-align: left; }

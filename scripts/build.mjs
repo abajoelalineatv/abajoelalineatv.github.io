@@ -741,7 +741,7 @@ ${portada ? `<link rel="preload" as="image" href="${esc(portada)}"${portadaMovil
     cuerpo: `
 <div class="ab-especial">
 <section class="ab-portada" aria-labelledby="ab-titulo">
-  ${portada ? `<img class="ab-portada-img" src="${esc(portada)}"${portadaMovil ? ` srcset="${esc(portadaMovil)} 800w, ${esc(portada)} 1280w" sizes="100vw"` : ''} width="1280" height="720" alt="${esc(tx('nosotros_portada_pie', ''))}" fetchpriority="high">` : ''}
+  ${portada ? `<img class="ab-portada-img" src="${esc(portada)}"${portadaMovil ? ` srcset="${esc(portadaMovil)} 800w, ${esc(portada)} 1600w" sizes="100vw"` : ''} width="1600" height="1065" alt="${esc(tx('nosotros_portada_pie', ''))}" fetchpriority="high">` : ''}
   <div class="wrap ab-portada-txt">
     <h1 id="ab-titulo">${lineasTitulo.map((l) => `<span class="ab-lin"><span>${esc(l)}</span></span>`).join(' ')}</h1>
     <p class="ab-bajada">${esc(tx('nosotros_bajada', S.descripcion))}</p>
