@@ -105,6 +105,7 @@ a.btn:active, .live-btn:active, .send-btn:active, .chip:active, .copy:active, .r
 .cat { flex-shrink: 0; text-decoration: none; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 11px 14px; border-bottom: 2px solid transparent; white-space: nowrap; }
 .cat:first-child { padding-left: 0; }
 .cat:hover, .cat[aria-current="page"] { color: var(--text); }
+.cat-actualidad:hover, .cat-actualidad[aria-current="page"] { border-color: var(--text); }
 .cat-comunidad:hover, .cat-comunidad[aria-current="page"] { border-color: var(--red); }
 .cat-deportes:hover, .cat-deportes[aria-current="page"] { border-color: var(--green); }
 .cat-cultura:hover, .cat-cultura[aria-current="page"] { border-color: var(--gold); }
@@ -117,7 +118,8 @@ a.btn:active, .live-btn:active, .send-btn:active, .chip:active, .copy:active, .r
 .chip.on { background: var(--text); color: var(--bg); border-color: var(--text); }
 .chip { flex-shrink: 0; text-decoration: none; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
 .chip:hover { color: var(--text); border-color: rgba(255, 255, 255, .3); }
-.chip-comunidad, .chip-deportes, .chip-cultura { color: var(--text); font-weight: 700; }
+.chip-actualidad, .chip-comunidad, .chip-deportes, .chip-cultura { color: var(--text); font-weight: 700; }
+.chip-actualidad { border-color: rgba(255, 255, 255, .45); }
 .chip-comunidad { border-color: var(--red); }
 .chip-deportes { border-color: var(--green); }
 .chip-cultura { border-color: var(--gold); }
@@ -152,6 +154,7 @@ a.btn:active, .live-btn:active, .send-btn:active, .chip:active, .copy:active, .r
 .card:hover h3 { color: var(--red-ink); }
 .card time { font-size: 13px; color: var(--muted); }
 .tag { align-self: flex-start; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.tag-actualidad { color: var(--text); }
 .tag-comunidad { color: var(--red-ink); }
 .tag-deportes { color: var(--green-ink); }
 .tag-cultura { color: var(--gold); }

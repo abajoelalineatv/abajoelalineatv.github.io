@@ -62,6 +62,8 @@ function limpiarTitulo(t) {
 const cats = Object.fromEntries(cfg.categorias.map((c) => [c.id, c]));
 const progs = Object.fromEntries(cfg.programas.map((p) => [p.id, p]));
 const catNombre = (id) => cats[id]?.nombre || id;
+// Sección para lo que no calza en ninguna otra (antes caía en la primera de la lista, Comunidad).
+const POR_DEFECTO = cats.actualidad ? 'actualidad' : cfg.categorias[0].id;
 
 // ---------- videos ----------
 function clasificar(v) {
@@ -75,7 +77,7 @@ function clasificar(v) {
       const n = c.palabras.filter((w) => t.includes(norm(w))).length;
       if (n > max) { max = n; mejor = c.id; }
     }
-    categoria = mejor || cfg.categorias[0].id;
+    categoria = mejor || POR_DEFECTO;
   }
   let titulo = limpiarTitulo(v.titulo);
   if (programa) {
@@ -120,7 +122,7 @@ if (PANEL) {
         titulo: String(n.titulo).trim(),
         bajada: String(n.bajada || texto.slice(0, 180)).trim(),
         fecha: new Date(n.fechaPublicacion),
-        categoria: cats[sec] ? sec : n.tipo === 'columna' && cats.opinion ? 'opinion' : cfg.categorias[0].id,
+        categoria: cats[sec] ? sec : n.tipo === 'columna' && cats.opinion ? 'opinion' : POR_DEFECTO,
         imagen: abs(img?.sizes?.ancho?.url || img?.url),
         proporcion: img?.width && img?.height ? img.height / img.width : null,
         pie: n.pieImagen || '',
@@ -160,7 +162,7 @@ for (const f of archivos) {
     titulo: String(d.titulo).trim(),
     bajada: String(d.bajada || texto.slice(0, 180)).trim(),
     fecha: aFecha(d.fecha),
-    categoria: cats[d.categoria] ? d.categoria : cfg.categorias[0].id,
+    categoria: cats[d.categoria] ? d.categoria : POR_DEFECTO,
     imagen: d.imagen || '',
     proporcion,
     pie: d.pie_imagen || '',

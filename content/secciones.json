@@ -1,5 +1,11 @@
 [
   {
+    "id": "actualidad",
+    "nombre": "Actualidad",
+    "descripcion": "Lo que pasa en Temuco, La Araucanía, Chile y el mundo: instituciones, autoridades, clima, servicios y hechos policiales y judiciales.",
+    "palabras": []
+  },
+  {
     "id": "comunidad",
     "nombre": "Comunidad",
     "descripcion": "Movilizaciones, audiencias, organizaciones sociales y la actualidad de la región, contada desde los territorios.",

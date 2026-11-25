@@ -39,9 +39,10 @@ content:
             description: Dónde aparece. Elige "Opinión" para columnas firmadas (se muestran con la foto y el nombre de quien escribe).
             type: select
             required: true
-            default: comunidad
+            default: actualidad
             options:
               values:
+                - { name: actualidad, label: Actualidad }
                 - { name: comunidad, label: Comunidad }
                 - { name: deportes, label: Deportes }
                 - { name: cultura, label: Cultura }
@@ -168,6 +169,7 @@ content:
             type: select
             options:
               values:
+                - { name: actualidad, label: Actualidad }
                 - { name: comunidad, label: Comunidad }
                 - { name: deportes, label: Deportes }
                 - { name: cultura, label: Cultura }
@@ -368,7 +370,7 @@ content:
             label: Sección de noticias (opcional)
             type: select
             options:
-              values: ['', comunidad, deportes, cultura, pueblo-mapuche, opinion]
+              values: ['', actualidad, comunidad, deportes, cultura, pueblo-mapuche, opinion]
       - name: nosotros_derecho_titulo
         label: Quiénes somos · principios · título
         type: string
