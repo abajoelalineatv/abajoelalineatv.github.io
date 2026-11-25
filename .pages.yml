@@ -379,6 +379,12 @@ content:
         label: Quiénes somos · principios · palabras clave
         type: string
         list: true
+      - name: nosotros_mision
+        label: Quiénes somos · Misión
+        type: text
+      - name: nosotros_vision
+        label: Quiénes somos · Visión
+        type: text
       - name: nosotros_cierre
         label: Quiénes somos · frase de cierre
         type: text
@@ -390,12 +396,6 @@ content:
         type: image
       - name: nosotros_cierre_pie
         label: Quiénes somos · pie de la foto del cierre
-        type: string
-      - name: nosotros_invitacion_titulo
-        label: Quiénes somos · invitación final · título
-        type: string
-      - name: nosotros_invitacion_texto
-        label: Quiénes somos · invitación final · texto
         type: string
       - name: pie_texto
         label: Texto del pie de página

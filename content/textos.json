@@ -259,6 +259,8 @@
     "Patrimonio",
     "Naturaleza"
   ],
+  "nosotros_mision": "Generar y difundir contenidos desde y para la comunidad, promoviendo la participación, el pensamiento crítico, la memoria, la cultura local y el acceso libre a la información. Lo hacemos a través de televisión comunitaria y medios digitales accesibles, con una mirada comprometida, plural y territorial.",
+  "nosotros_vision": "Contribuir, desde la comunicación comunitaria, a la construcción de una sociedad más participativa, crítica y consciente de su realidad, solidaria, respetuosa con el medio ambiente natural, social y emocional, identificada con sus territorios, protagonista y partícipe de sus expresiones culturales y artísticas.",
   "nosotros_cierre": "Nacimos abajo de la línea del tren. Hoy tenemos una señal abierta para que nuestras historias lleguen mucho más lejos.",
   "nosotros_cierre_texto": "Y seguimos construyéndola desde el mismo lugar: junto a nuestras comunidades.",
   "nosotros_cierre_imagen": "/assets/uploads/nosotros/encuentro-canales.webp",
@@ -267,7 +269,5 @@
   "nosotros_galeria_titulo": "Archivo",
   "nosotros_galeria_texto": "Documentos y fotografías del canal, desde el periódico vecinal de 2002 hasta la señal abierta. Toca una imagen para verla completa.",
   "nosotros_video": "",
-  "nosotros_video_titulo": "",
-  "nosotros_invitacion_titulo": "Nuestra historia sigue escribiéndose",
-  "nosotros_invitacion_texto": "Conoce lo que estamos contando hoy."
+  "nosotros_video_titulo": ""
 }

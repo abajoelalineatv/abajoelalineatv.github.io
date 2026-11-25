@@ -341,7 +341,7 @@ ${cuerpo}
     </div>
     <div><h4>Noticias</h4><ul>${cfg.categorias.map((c) => `<li><a href="/${c.id}">${esc(c.nombre)}</a></li>`).join('')}</ul></div>
     <div><h4>Programas</h4><ul>${cfg.programas.map((p) => `<li><a href="/programa-${p.id}">${esc(p.nombre)}</a></li>`).join('')}</ul></div>
-    <div><h4>El canal</h4><ul><li><a href="/#envivo">Señal en vivo</a></li><li><a href="/nosotros">Quiénes somos</a></li><li><a href="/nosotros#sintonia">Cómo sintonizarnos</a></li><li><a href="${enviaNota}">Envía tu nota</a></li><li><a href="mailto:${S.email}">${esc(S.email)}</a></li></ul></div>
+    <div><h4>El canal</h4><ul><li><a href="/#envivo">Señal en vivo</a></li><li><a href="/nosotros">Quiénes somos</a></li><li><a href="/#sintonia">Cómo sintonizarnos</a></li><li><a href="${enviaNota}">Envía tu nota</a></li><li><a href="mailto:${S.email}">${esc(S.email)}</a></li></ul></div>
   </div>
   <div class="wrap footer-legal"><span>© ${new Date().getFullYear()} ${esc(S.nombre)}</span><span>Medio comunitario autogestionado</span></div>
 </footer>
@@ -855,9 +855,12 @@ ${md('nosotros_derecho_texto') ? `
   <h2 id="manifiesto-t">${esc(tx('nosotros_derecho_titulo', '')).replace(/\b(derecho)\b/i, '<span class="ab-acento">$1</span>')}</h2>
   <div class="prose ab-col">${md('nosotros_derecho_texto')}</div>
   ${valores.length ? `<ul class="ab-valores">${valores.map((v) => `<li>${esc(v)}</li>`).join('')}</ul>` : ''}
+  ${tx('nosotros_mision', '') || tx('nosotros_vision', '') ? `<div class="ab-mision">${[['mision', 'Misión'], ['vision', 'Visión']].filter(([k]) => tx(`nosotros_${k}`, '')).map(([k, t]) => `
+    <div id="${k}"><h3>${t}</h3><p>${esc(tx(`nosotros_${k}`, ''))}</p></div>`).join('')}
+  </div>` : ''}
 </div></section>` : ''}
 
-<section class="ab-final" aria-labelledby="invitacion-t">
+<section class="ab-final" aria-label="Cierre">
   ${tx('nosotros_cierre', '') ? `
   <figure class="ab-final-foto">
     ${cierreImg ? img(cierreImg, tx('nosotros_cierre_pie', '')) : ''}
@@ -866,20 +869,8 @@ ${md('nosotros_derecho_texto') ? `
       ${cierreImg && tx('nosotros_cierre_pie', '') ? `<p class="ab-credito-cierre">Foto: ${esc(tx('nosotros_cierre_pie', ''))}</p>` : ''}
     </figcaption>
   </figure>` : ''}
-  <div class="wrap ab-invitacion">
-  <h2 id="invitacion-t">${esc(tx('nosotros_invitacion_titulo', 'Nuestra historia sigue escribiéndose'))}</h2>
-  <p>${esc(tx('nosotros_invitacion_texto', 'Conoce lo que estamos contando hoy.'))}</p>
-  <ul class="ab-accesos">
-    <li><a href="/noticias"><strong>Ver noticias</strong>${ultima ? `<span>Lo último: ${esc(ultima.titulo)}</span>` : ''}</a></li>
-    ${cats.comunidad ? `<li><a href="/comunidad"><strong>Comunidad</strong><span>${esc(cats.comunidad.descripcion || '')}</span></a></li>` : ''}
-    <li><a href="/programas"><strong>Conocer nuestros programas</strong><span>${cfg.programas.map((p) => esc(p.nombre)).join(', ')}</span></a></li>
-    <li><a class="ab-acceso-vivo" href="/#envivo"><strong>Ver señal en vivo</strong><span>Canal ${esc(S.canalTvd)} en TV abierta y por internet</span></a></li>
-    <li><a href="${enviaNota}"><strong>${esc(tx('envia_boton', 'Envía tu nota'))}</strong><span>${esc(tx('envia_texto', ''))}</span></a></li>
-  </ul>
-  </div>
 </section>
 </div>
-${sintoniaBlock('alt', true)}
 <script src="/assets/vendor/gsap/gsap.min.js" defer></script>
 <script src="/assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
 <script src="/assets/nosotros.js" defer></script>`,
