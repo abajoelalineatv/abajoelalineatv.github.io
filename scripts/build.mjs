@@ -102,6 +102,11 @@ const reelUrl = (u = '') => { const c = (String(u).match(/instagram\.com\/(?:[\w
 const notas = [];
 const PANEL = (process.env.PANEL_URL || '').replace(/\/$/, '');
 const textoPlano = (html) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+// Crédito de una foto. Las importadas del Instagram del propio canal no lo muestran (se repetiría en todas).
+// Misma regla que panel/src/editor/credito.ts.
+const creditoVisible = (c) => { const t = String(c || '').trim(); return !t || /abajoelalinea/i.test(t.replace(/[\s'’]/g, '')) ? '' : t; };
+// Texto alternativo: una frase; los de Instagram traen el texto completo de la publicación.
+const altCorto = (s) => { const t = String(s || '').replace(/\s+/g, ' ').trim(); return t.length > 160 ? t.slice(0, 157).replace(/\s+\S*$/, '') + '…' : t; };
 if (PANEL) {
   const abs = (u) => (!u ? '' : /^https?:/.test(u) ? u : PANEL + u);
   const medio = (m) => (m && typeof m === 'object' ? m : null);
@@ -114,7 +119,8 @@ if (PANEL) {
     for (const n of j.docs) {
       const img = medio(n.imagen);
       const sec = typeof n.seccion === 'object' && n.seccion ? n.seccion.slug : '';
-      const html = n.contenidoHTML || '';
+      // Fotos dentro del texto: si el panel entrega rutas relativas (en local), se completan con su dirección.
+      const html = (n.contenidoHTML || '').replace(/(\ssrc=")\/(?!\/)/g, `$1${PANEL}/`);
       const texto = textoPlano(html);
       const anonima = !!n.firmaAnonima;
       const autorNombre = anonima ? 'Colaborador/a anónimo/a' : n.firma || (typeof n.autor === 'object' && n.autor ? n.autor.nombre : '') || S.nombre;
@@ -127,6 +133,8 @@ if (PANEL) {
         imagen: abs(img?.sizes?.ancho?.url || img?.url),
         proporcion: img?.width && img?.height ? img.height / img.width : null,
         pie: n.pieImagen || '',
+        credito: creditoVisible(img?.credito),
+        alt: altCorto(img?.alt || n.pieImagen),
         autor: autorNombre,
         autorFoto: anonima ? '' : abs(medio(n.firmaFoto)?.sizes?.miniatura?.url || medio(n.firmaFoto)?.url),
         autorCargo: anonima ? '' : n.firmaCargo || (typeof n.autor === 'object' && n.autor ? n.autor.cargo || '' : ''),
@@ -590,7 +598,7 @@ for (const n of notas) {
     ${n.categoria === OPINION
       ? `<div class="byline byline-col">${avatar(n, 'avatar avatar-lg')}<div><strong>${esc(n.autor)}</strong>${n.autorCargo ? `<span>${esc(n.autorCargo)}</span>` : ''}<time datetime="${n.fecha.toISOString()}">${fecha(n.fecha, 'larga')} · ${n.minutos} min de lectura</time></div></div>`
       : `<div class="byline"><span>Por <strong>${esc(n.autor)}</strong></span><time datetime="${n.fecha.toISOString()}">${fecha(n.fecha, 'larga')}</time><span>${n.minutos} min de lectura</span></div>`}
-    ${n.imagen ? `<figure class="article-img"><img src="${esc(n.imagen)}" alt="${esc(n.pie || '')}">${n.pie ? `<figcaption>${esc(n.pie)}</figcaption>` : ''}</figure>` : ''}
+    ${n.imagen ? `<figure class="article-img"><img src="${esc(n.imagen)}" alt="${esc(n.alt ?? n.pie ?? '')}">${n.pie || n.credito ? `<figcaption>${esc(n.pie || '')}${n.credito ? `${n.pie ? ' ' : ''}<span class="credito">Foto: ${esc(n.credito)}</span>` : ''}</figcaption>` : ''}</figure>` : ''}
     ${n.video ? `<div class="article-video"><iframe src="https://www.youtube-nocookie.com/embed/${n.video}?rel=0" title="${esc(n.titulo)}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>` : ''}
     ${bloqueReel}
     <div class="prose article-body">${n.html}</div>
